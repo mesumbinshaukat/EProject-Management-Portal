@@ -33,4 +33,4 @@ The project utilizes a SQL database model comprising entities such as Course, St
 
 1. **Clone the Repository:**
    ```bash
-   git clone [https://github.com/mesumbinshaukat/EProject-Management-Portal.git](https://github.com/mesumbinshaukat/EProject-Management-Portal.git)
+   git clone https://github.com/mesumbinshaukat/EProject-Management-Portal.git
