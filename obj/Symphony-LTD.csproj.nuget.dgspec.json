@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\.Net MVC Practice\\eProject-Aptech\\EProject-Management-Portal\\Symphony-LTD\\Symphony-LTD\\Symphony-LTD.csproj": {}
+    "C:\\.Net MVC Practice\\eProject-Aptech\\EProject-Management-Portal\\Symphony-LTD\\Symphony-LTD.csproj": {}
   },
   "projects": {
-    "C:\\.Net MVC Practice\\eProject-Aptech\\EProject-Management-Portal\\Symphony-LTD\\Symphony-LTD\\Symphony-LTD.csproj": {
+    "C:\\.Net MVC Practice\\eProject-Aptech\\EProject-Management-Portal\\Symphony-LTD\\Symphony-LTD.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\.Net MVC Practice\\eProject-Aptech\\EProject-Management-Portal\\Symphony-LTD\\Symphony-LTD\\Symphony-LTD.csproj",
+        "projectUniqueName": "C:\\.Net MVC Practice\\eProject-Aptech\\EProject-Management-Portal\\Symphony-LTD\\Symphony-LTD.csproj",
         "projectName": "Symphony-LTD",
-        "projectPath": "C:\\.Net MVC Practice\\eProject-Aptech\\EProject-Management-Portal\\Symphony-LTD\\Symphony-LTD\\Symphony-LTD.csproj",
+        "projectPath": "C:\\.Net MVC Practice\\eProject-Aptech\\EProject-Management-Portal\\Symphony-LTD\\Symphony-LTD.csproj",
         "packagesPath": "C:\\Users\\masum\\.nuget\\packages\\",
-        "outputPath": "C:\\.Net MVC Practice\\eProject-Aptech\\EProject-Management-Portal\\Symphony-LTD\\Symphony-LTD\\obj\\",
+        "outputPath": "C:\\.Net MVC Practice\\eProject-Aptech\\EProject-Management-Portal\\Symphony-LTD\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
