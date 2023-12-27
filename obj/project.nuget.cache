@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7e6eXuD2eYxWUDY0rcUW93XAGuToI8FQQ29bLXs7/Q8N1siuOe4slHzDgjqAW+b1IXjwRtO/Vqu9UNichvTUHQ==",
+  "dgSpecHash": "BUlniLCQg36BXZMWJftmFazicXjq0Q1trsbuDhqOyviyD+lREYZbjvOhbEKwKg5Gr0QREzdgLyFDCzArrnr98A==",
   "success": true,
-  "projectFilePath": "C:\\.Net MVC Practice\\eProject-Aptech\\EProject-Management-Portal\\Symphony-LTD\\Symphony-LTD.csproj",
+  "projectFilePath": "C:\\.Net MVC Practice\\eProject-Aptech\\EProject-Management-Portal\\Symphony-LTD.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\masum\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "C:\\Users\\masum\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",

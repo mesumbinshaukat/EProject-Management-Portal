@@ -6,7 +6,7 @@ namespace Symphony_LTD.Models
     {
         [Key]
         [Required]
-        public int CourseId { get; set; }
+        public int Id { get; set; }
         [Required]
         public string CourseName { get; set; }
         [Required]

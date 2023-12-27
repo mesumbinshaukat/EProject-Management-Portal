@@ -7,12 +7,7 @@
 @{
     Layout = "_AdminLayout"; // Set the layout for this view
 }
-@* @if (User.Identity.IsAuthenticated)
-{
-    Response.Redirect("/Admin/Index");
-}
-else
-{ *@
+
     <div class="loading authentication-bg authentication-bg-pattern">
 
         <div class="account-pages my-5">
@@ -35,6 +30,8 @@ else
                                 </div>
 
                                 <form method="post" action="@Url.Action("LogIn")">
+                                @Html.AntiForgeryToken()
+                                
                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                     <div class="mb-3">
                                         <label for="emailaddress" class="form-label">Email address</label>
@@ -43,16 +40,17 @@ else
 
                                     <div class="mb-3">
                                         <label for="password" class="form-label">Password</label>
-                                        <input class="form-control" type="text" name="password" required placeholder="Enter your password">
+                                        <input class="form-control" type="password" name="password" required placeholder="Enter your password" id="password">
 
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="checkbox-signin" checked>
-                                            <label class="form-check-label" for="checkbox-signin">Remember me</label>
+                                        <div class="mt-2">
+                                        <input type="checkbox" id="show"> <label>Show Password</label>
+                                        </div>
+                                    <div class="mt-2" style="display:none;">
+                                        <input type="checkbox" id="hide" > <label>Hide Password</label>
                                         </div>
                                     </div>
+
+                                   
 
                                     <div class="mb-3 d-grid text-center">
                                         <button class="btn btn-primary" type="submit"> Log In </button>
@@ -80,9 +78,36 @@ else
         <!-- end page -->
     </div>
 
+    <script>
+    const passwordField = document.querySelector("#password")
+    const show = document.querySelector("#show") 
+    const hide = document.querySelector("#hide")
+        let check = true;
+        console.log(check)
+        if (show.value !== null) {
+            show.addEventListener("click", () => {
+                if (check) {
+                    check = false
+                    passwordField.setAttribute("type", "text")
+                    console.log("Show Password")
+                    console.log(check)
+                } else {
+                    check = true
+                    passwordField.setAttribute("type", "password")
+                    console.log("Hide Password")
+                    console.log(check)
+                }
+
+               
+
+            })
+        } 
+        
+    </script>
+
     @section Scripts {
     @{
-            <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
         }
                 }
 @* } *@

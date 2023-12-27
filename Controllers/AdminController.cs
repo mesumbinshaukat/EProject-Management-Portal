@@ -47,6 +47,7 @@ namespace Symphony_LTD.Controllers
 
 
         [HttpPost]
+        //[ValidateAntiForgeryToken]
         public IActionResult LogIn(Admin data, string emailaddress, string password)
         {
             var check_user = _db._Admin.Where(i => i.Email == emailaddress).FirstOrDefault();
@@ -95,6 +96,15 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("LogIn", "Admin");
         }
 
+        
+        public IActionResult Courses () {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                IEnumerable<Course> courses = _db.Courses;
+                return View(courses);
 
+            }
+            return View("LogIn");
+        }
     }
 }

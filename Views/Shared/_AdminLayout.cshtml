@@ -329,7 +329,7 @@
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class="fe-log-out me-1"></i>
-                                <span>Logout</span>
+                                <span>LogoLogout</span>
                             </a>
 
                         </div>
@@ -360,7 +360,7 @@
                         <li class="menu-title">Navigation</li>
 
                         <li>
-                            <a href="index.html">
+                            <a asp-controller="Admin" asp-action="Index">
                                 <i class="mdi mdi-view-dashboard-outline"></i>
                                 <span class="badge bg-success rounded-pill float-end">9+</span>
                                 <span> Dashboard </span>
@@ -370,9 +370,9 @@
                         <li class="menu-title mt-2">Apps</li>
 
                         <li>
-                            <a href="apps-calendar.html">
+                                <a asp-controller="Admin" asp-action="Courses">
                                 <i class="mdi mdi-calendar-blank-outline"></i>
-                                <span> Calendar </span>
+                                <span> Courses </span>
                             </a>
                         </li>
 
@@ -1012,7 +1012,14 @@
     <script src="~/assets/libs/morris.js06/morris.min.js"></script>
     <script src="~/assets/libs/raphael/raphael.min.js"></script>
 
-    <!-- Dashboar init js-->
+    <!-- plugin js -->
+    <script src="assets/libs/moment/min/moment.min.js"></script>
+    <script src="assets/libs/fullcalendar/main.min.js"></script>
+
+    <!-- Calendar init -->
+    <script src="assets/js/pages/calendar.init.js"></script>
+
+    <!-- Dashboard init js-->
     <script src="~/assets/js/pages/dashboard.init.js"></script>
 
     <!-- App js -->
