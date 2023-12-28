@@ -21,7 +21,7 @@
         <!-- icons -->
         <link href="~/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
    
-
+      
 </head>
 <body class="loading" data-layout-color="light" data-layout-mode="default" data-layout-size="fluid" data-topbar-color="light" data-leftbar-position="fixed" data-leftbar-color="light" data-leftbar-size='default' data-sidebar-user='true'>
     <!-- Begin page -->
@@ -210,9 +210,9 @@
 
                     <li class="dropdown notification-list topbar-dropdown">
                         <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="~/assets/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
+                            <img src="~/landing_page_images/Black and White Monogram Business Logo.png" alt="user-image" class="rounded-circle">
                             <span class="pro-user-name ms-1">
-                                Nowak <i class="mdi mdi-chevron-down"></i>
+                                Symphony <i class="mdi mdi-chevron-down"></i>
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
@@ -240,7 +240,7 @@
                                     <form method="post" asp-action="LogOut" class="dropdown-item notify-item" asp-controller="Admin">
                                         @Html.AntiForgeryToken()
                                 <i class="fe-log-out"></i>
-                                        <input type="submit" class="btn btn-light" value="Submit">
+                                        <input type="submit" class="btn btn-light" value="Logout">
 
                                 </form>
                            
@@ -303,9 +303,9 @@
                 <!-- User box -->
                 <div class="user-box text-center">
 
-                    <img src="~/assets/images/users/user-1.jpg" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
+                    <img src="~/landing_page_images/Black and White Monogram Business Logo.png" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
                     <div class="dropdown">
-                        <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown" aria-expanded="false">Nowak Helme</a>
+                        <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown" ar ia-expanded="false">Symphony LTD</a>
                         <div class="dropdown-menu user-pro-dropdown">
 
                             <!-- item-->
@@ -335,7 +335,7 @@
                         </div>
                     </div>
 
-                    <p class="text-muted left-user-info">Admin Head</p>
+                    <p class="text-muted left-user-info">Only Admin</p>
 
                     <ul class="list-inline">
                         <li class="list-inline-item">
@@ -367,7 +367,7 @@
                             </a>
                         </li>
 
-                        <li class="menu-title mt-2">Apps</li>
+                       
 
                         <li>
                                 <a asp-controller="Admin" asp-action="Courses">
@@ -995,6 +995,28 @@
 
     </div>
     <!-- END wrapper -->
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
+
+    <!-- Vendor -->
+    <!-- footer start -->
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <script>document.write(new date().getfullyear())</script> &copy; Developed by <a href="https://mesum.online" target="_blank">Mesum Bin Shaukat</a>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-md-end footer-links d-none d-sm-block">
+                        <a href="javascript:void(0);">about us</a>
+                        <a href="javascript:void(0);">help</a>
+                        <a href="javascript:void(0);">contact us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
 
     <!-- Vendor -->
     <script src="~/assets/libs/jquery/jquery.min.js"></script>
@@ -1013,11 +1035,11 @@
     <script src="~/assets/libs/raphael/raphael.min.js"></script>
 
     <!-- plugin js -->
-    <script src="assets/libs/moment/min/moment.min.js"></script>
-    <script src="assets/libs/fullcalendar/main.min.js"></script>
+    <script src="~/assets/libs/moment/min/moment.min.js"></script>
+    <script src="~/assets/libs/fullcalendar/main.min.js"></script>
 
     <!-- Calendar init -->
-    <script src="assets/js/pages/calendar.init.js"></script>
+    <script src="~/assets/js/pages/calendar.init.js"></script>
 
     <!-- Dashboard init js-->
     <script src="~/assets/js/pages/dashboard.init.js"></script>

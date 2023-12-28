@@ -16,8 +16,16 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = C:\.Net MVC Practice\eProject-Aptech\EProject-Management-Portal
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/.Net MVC Practice/eProject-Aptech/EProject-Management-Portal/Views/Admin/AddCourse.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkQ291cnNlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/.Net MVC Practice/eProject-Aptech/EProject-Management-Portal/Views/Admin/Courses.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ291cnNlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/.Net MVC Practice/eProject-Aptech/EProject-Management-Portal/Views/Admin/EditCourse.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdENvdXJzZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/.Net MVC Practice/eProject-Aptech/EProject-Management-Portal/Views/Admin/Index.cshtml]

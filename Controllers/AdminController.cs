@@ -10,12 +10,12 @@ namespace Symphony_LTD.Controllers
     {
         private readonly DbSymphonyContext _db;
 
-        public AdminController (DbSymphonyContext db)
+        public AdminController(DbSymphonyContext db)
         {
             _db = db;
         }
 
-     
+
         public IActionResult Index()
         {
             if (HttpContext.Session.GetString("s_email") != null)
@@ -33,15 +33,15 @@ namespace Symphony_LTD.Controllers
         [AllowAnonymous]
         public IActionResult LogIn()
         {
-            if (HttpContext.Session.GetString("s_email") != null) 
+            if (HttpContext.Session.GetString("s_email") != null)
             {
-                
-                return RedirectToAction("Index", "Admin"); 
+
+                return RedirectToAction("Index", "Admin");
             }
-                IEnumerable<Admin> objAdmin = _db._Admin;
+            IEnumerable<Admin> objAdmin = _db._Admin;
 
             return View();
-          
+
         }
 
 
@@ -86,7 +86,7 @@ namespace Symphony_LTD.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken] 
+        [ValidateAntiForgeryToken]
         public IActionResult LogOut()
         {
             HttpContext.Session.Remove("s_email"); // Remove email from session
@@ -96,15 +96,103 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("LogIn", "Admin");
         }
 
-        
-        public IActionResult Courses () {
+
+        public IActionResult Courses() {
             if (HttpContext.Session.GetString("s_email") != null)
             {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
                 IEnumerable<Course> courses = _db.Courses;
                 return View(courses);
 
             }
             return View("LogIn");
         }
+
+        public IActionResult AddCourse()
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+
+                return View();
+
+            }
+            return View("LogIn");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddCourse(Course obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Courses.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Courses");
+            }
+            else
+            {
+                return View(obj);
+            }
+            //return View("LogIn");
+        }
+
+        public IActionResult EditCourse(int? id)
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                if (id == null || id == 0)
+                {
+                    return NotFound();
+                }
+                var studentFromDb = _db.Courses.Find(id);
+
+                if (studentFromDb == null)
+                {
+                    return NotFound();
+                }
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                ViewBag.Course = _db.Courses.ToList();
+                return View(studentFromDb);
+
+
+
+            }
+            return View("LogIn");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditCourse(Course obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Courses.Update(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Courses");
+            }
+
+            return View();
+        }
+
+        public IActionResult DeleteCourse(int? id)
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                var obj = _db.Courses.Find(id);
+                if (id != null)
+                {
+                    _db.Courses.Remove(obj);
+                    _db.SaveChanges();
+                    return RedirectToAction("Courses");
+                }
+            }
+
+            return BadRequest();
+        }
+
     }
 }

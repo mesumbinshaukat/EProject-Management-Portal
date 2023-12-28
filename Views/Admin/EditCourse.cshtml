@@ -1,0 +1,54 @@
+﻿@model Symphony_LTD.Models.Course
+
+@{
+    ViewData["Title"] = "Edit Course";
+    Layout = "_AdminLayout";
+}
+
+<div class="content-page w-100">
+    <div class="content">
+        <h1>Edit Course</h1>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form method="post" asp-action="EditCourse">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="CourseName" class="control-label"></label>
+                        <input asp-for="CourseName" class="form-control" />
+                        <span asp-validation-for="CourseName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TopicsCovered" class="control-label"></label>
+                        <input asp-for="TopicsCovered" class="form-control" />
+                        <span asp-validation-for="TopicsCovered" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CourseFee" class="control-label"></label>
+                        <input asp-for="CourseFee" class="form-control" />
+                        <span asp-validation-for="CourseFee" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CourseDetails" class="control-label"></label>
+                        <input asp-for="CourseDetails" class="form-control" />
+                        <span asp-validation-for="CourseDetails" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EntranceExamDetails" class="control-label"></label>
+                        <input asp-for="EntranceExamDetails" class="form-control" />
+                        <span asp-validation-for="EntranceExamDetails" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="Courses">Back to Courses</a>
+        </div>
+
+
+    </div>
+</div>
