@@ -1,3 +1,5 @@
-.vs
-bin
-Migrations
+.vs/
+bin/
+Migrations/
+obj/
+bin/

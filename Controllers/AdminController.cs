@@ -85,7 +85,7 @@ namespace Symphony_LTD.Controllers
 
         }
 
-        
+
         public IActionResult LogOut()
         {
             if (HttpContext.Session.GetString("s_email") != null)
@@ -100,7 +100,8 @@ namespace Symphony_LTD.Controllers
         }
 
 
-        public IActionResult Courses() {
+        public IActionResult Courses()
+        {
             if (HttpContext.Session.GetString("s_email") != null)
             {
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
@@ -204,31 +205,31 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Course = _db.Courses.ToList();
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
-            
+
                 return View();
             }
             return View("LogIn");
-            
+
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-         public IActionResult Exam(Exam obj)
+        public IActionResult Exam(Exam obj)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _db.Exams.Add(obj);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-               
-            
-                return View();
-            
-            
+
+
+            return View();
+
+
         }
 
-        public IActionResult AddStudent ()
+        public IActionResult AddStudent()
         {
             if (HttpContext.Session.GetString("s_email") != null)
             {
@@ -237,8 +238,38 @@ namespace Symphony_LTD.Controllers
                 return View();
             }
 
-                return View("LogIn");
+            return View("LogIn");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddStudent(Student obj, IFormFile stdImage)
+        {
+            if (stdImage != null)
+            {
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                string filepath = Path.Combine(path, stdImage.FileName);
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                var stream = new FileStream(filepath, FileMode.Create);
+                stdImage.CopyTo(stream);
+                string? filename = stdImage.FileName;
+                obj.Picture = filename;
+
+            }
+
+
+            if (ModelState.IsValid)
+            {
+                _db.Students.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index", "Admin");
+            }
+            
+            return View();
+
+        }
     }
 }

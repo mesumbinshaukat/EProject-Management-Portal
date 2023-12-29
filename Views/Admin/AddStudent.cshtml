@@ -23,34 +23,34 @@
                                     Please fill this form accurately to avoid any inconvenience for the student in future. Required fields are: <code>First Name</code>, <code>Last Name</code>, <code>Email</code>, <code>Password</code>, <code>Date Of Birth</code>, <code>Roll No#</code>, <code>Picture</code>, <code>Phone Number</code>, <code>Address</code>.
                             </p>
 
-                                    <form method="POST" asp-action="AddStudent" enctype="multipart/form-data">
+                                <form method="POST" asp-controller="Admin" asp-action="AddStudent" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-lg-6">
                                     
 
                                         <div class="mb-3">
                                                 <label asp-for="FirstName" class="form-label"></label><span class="text-danger fw-bold">*</span>
-                                                <input type="text" asp-for="FirstName" class="form-control" placeholder="First Name">
+                                                <input type="text" asp-for="FirstName" class="form-control" placeholder="First Name" required>
                                         </div>
                                          <div class="mb-3">
                                                 <label asp-for="MiddleName" class="form-label"></label>
-                                                <input type="text" asp-for="MiddleName" class="form-control" placeholder="Middle Name">
+                                                <input type="text" asp-for="MiddleName" class="form-control" placeholder="Middle Name" required>
                                         </div>
                                          <div class="mb-3">
                                                 <label asp-for="LastName" class="form-label"></label><span class="text-danger fw-bold">*</span>
-                                                <input type="text" asp-for="LastName" class="form-control" placeholder="Last Name">
+                                                <input type="text" asp-for="LastName" class="form-control" placeholder="Last Name" required>
                                         </div>
 
                                         <div class="mb-3">
                                                 <label asp-for="Email" class="form-label"></label><span class="text-danger fw-bold">*</span>
-                                                <input type="email" asp-for="Email" class="form-control" placeholder="Email">
+                                                <input type="email" asp-for="Email" class="form-control" placeholder="Email" required>
                                         </div>
 
                                       
                                         <div class="mb-3">
                                                 <label asp-for="Password" class="form-label"></label><span class="text-danger fw-bold">*</span>
                                             <div class="input-group input-group-merge">
-                                                    <input type="password" asp-for="Password" class="form-control" placeholder="Enter your password">
+                                                    <input type="password" asp-for="Password" class="form-control" placeholder="Enter your password" required>
                                                 <div class="input-group-text" data-password="false">
                                                     <span class="password-eye"></span>
                                                 </div>
@@ -70,29 +70,29 @@
 
                                             <div class="mb-3">
                                                 <label asp-for="RollNumber" class="form-label"></label><span class="text-danger fw-bold">*</span>
-                                                <input type="text" asp-for="RollNumber" class="form-control" placeholder="Roll Number">
+                                                <input type="number" asp-for="RollNumber" class="form-control" placeholder="Roll Number" required>
                                             </div>
 
                                         <div class="mb-3">
                                                 <label asp-for="Picture" class="form-label"></label><span class="text-danger fw-bold">*</span>
-                                                <input type="file" asp-for="Picture" class="form-control">
+                                                <input type="file" asp-for="Picture" class="form-control" name="stdImage" required>
                                         </div>
 
                                         <div class="mb-3">
                                                 <label asp-for="DateOfBirth" class="form-label"></label><span class="text-danger fw-bold">*</span>
-                                                <input class="form-control" id="DateOfBirth" type="date">
+                                                <input class="form-control" asp-for="DateOfBirth" id="DateOfBirth" type="date" required>
                                         </div>
 
                                         <div class="mb-3">
                                                 <label asp-for="PhoneNumber" class="form-label"></label><span class="text-danger fw-bold">*</span>
-                                                <input class="form-control" asp-for="PhoneNumber" type="tel" placeholder="Phone Number"> 
-                                        </div>
+                                                <input class="form-control" asp-for="PhoneNumber" type="tel" placeholder="Phone Number" required>
+                                            </div>
 
                                        
 
                                         <div class="mb-3">
                                                 <label asp-for="Address" class="form-label"></label><span class="text-danger fw-bold">*</span>
-                                                <input class="form-control" asp-for="Address" type="text" placeholder="Address">
+                                                <input class="form-control" asp-for="Address" type="text" placeholder="Address" required>
                                         </div>
 
                                         
@@ -102,7 +102,7 @@
                                 </div> <!-- end col -->
                                     <div class="mb-3">
 
-                                        <input class="form-control btn btn-success" type="submit"
+                                       <input type="submit" value="Add" class="form-control btn btn-success" />
                                     </div>
                             </div>
                                     </form>
