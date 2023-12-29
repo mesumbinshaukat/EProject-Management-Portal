@@ -1,0 +1,146 @@
+﻿@model Symphony_LTD.Models.Exam
+
+@{
+    ViewData["Title"] = "Exam";
+   
+}
+
+@{
+    Layout = "_AdminLayout"; // Set the layout for this view
+}
+
+<!-- ============================================================== -->
+<!-- Start Page Content here -->
+<!-- ============================================================== -->
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            <h2>Add Exam For Student</h2>
+            <h4>Assigning Exams For Students Individually</h4>
+            <hr />
+            <form method="post" asp-action="Exam">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            
+
+                            <div class="mb-3">
+                                    <label asp-for="ExamName" class="form-label"></label>
+                                    <input type="text" asp-for="ExamName" class="form-control" placeholder="Exam Name">
+                            </div>
+
+                            <div class="mb-3">
+                                    <label class="form-label" asp-for="Score"></label>
+                                    <input type="text" asp-for="Score" class="form-control" placeholder="Score">
+                            </div>
+
+                             <div class="mb-3">
+                                    <label class="form-label" asp-for="StudentId"></label>
+                                    <input type="text" asp-for="StudentId" class="form-control" placeholder="Student Roll Number">
+                            </div>
+                             <div class="mb-3">
+                                    @* <label class="form-label" asp-for="CourseId"></label>
+                                    <input type="text" asp-for="CourseId" class="form-control" placeholder="Course Name"> *@
+                                    <label class="form-label" asp-for="CourseId"></label>
+                                    <select class="form-control" asp-for="CourseId">
+                                        @foreach (var i in ViewBag.Course)
+                                        {
+                                            <option value="@i.Id">@i.CourseName</option>
+                                        }
+                                    </select>
+                            </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label" asp-for="Detail"></label>
+                                    <input type="text" asp-for="Detail" class="form-control" placeholder="Exam Detail">
+                                </div>
+                            
+                        </div>
+                    </div> <!-- end card-->
+                </div> <!-- end col -->
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div>
+                                    <label class="form-label" asp-for="ExamDate"></label>
+                                    <input type="text" id="inline-datepicker" asp-for="ExamDate" class="form-control" placeholder="Exam Date">
+                            </div>
+                                
+                               
+                                <div class="mb-3 mt-4">
+
+                                    <input type="submit" class="form-control btn btn-success" value="Add">
+                                </div>
+
+                        </div>
+
+                            
+                    </div> <!-- end card-->
+
+
+                   
+
+                </div> <!-- end col -->
+            </div>
+            <!-- end row-->
+
+            </form>
+
+          
+
+        </div> <!-- container -->
+
+    </div> <!-- content -->
+   
+
+</div>
+
+<!-- ============================================================== -->
+<!-- End Page content -->
+<!-- ============================================================== -->
+
+@* <h1>Exam</h1>
+
+<h4>Exam</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Exam">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>            
+            <div class="form-group">
+                <label asp-for="ExamDate" class="control-label"></label>
+                <input asp-for="ExamDate" class="form-control" />
+                <span asp-validation-for="ExamDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Score" class="control-label"></label>
+                <input asp-for="Score" class="form-control" />
+                <span asp-validation-for="Score" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StudentId" class="control-label"></label>
+                <input asp-for="StudentId" class="form-control" />
+                <span asp-validation-for="StudentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CourseId" class="control-label"></label>
+                <input asp-for="CourseId" class="form-control" />
+                <span asp-validation-for="CourseId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+ *@

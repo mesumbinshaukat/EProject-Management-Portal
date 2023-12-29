@@ -1,24 +1,45 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Org.BouncyCastle.Utilities;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Symphony_LTD.Models
 {
     public class Student
     {
         [Key]
-        public int StudentId { get; set; }
+        public int? StudentId { get; set; }
         [Required]
-        public string FirstName { get; set; }
+        [DisplayName("Roll Number")]
+        public int? RollNumber { get; set; }
         [Required]
-        public string LastName { get; set; }
+        [DisplayName("First Name")]
+        public string? FirstName { get; set; }
+        [DisplayName("Middle Name (Optional)")]
+        public string? MiddleName {  get; set; }
         [Required]
-        public DateTime DateOfBirth { get; set; }
+        [DisplayName("Last Name")]
+        public string? LastName { get; set; }
         [Required]
-        public string Address { get; set; }
+        [DisplayName("Date Of Birth")]
+        public DateTime? DateOfBirth { get; set; }
         [Required]
-        public string Email { get; set; }
+        [DisplayName("Address")]
+        public string? Address { get; set; }
         [Required]
-        public string PhoneNumber { get; set; }
+        [DisplayName("Email")]
+        public string? Email { get; set; }
         [Required]
-        public string StudentCode { get; set; }
+        [DisplayName("Phone Number")]
+        public string? PhoneNumber { get; set; }
+        [Required]
+        [DisplayName("Picture")]
+        public string? Picture { get; set; }
+        [DisplayName("Accept")]
+        [DefaultValue(null)]
+        public string? Accept { get; set; }
+        [DisplayName("Password")]
+        [DefaultValue(null)]
+        public string? Password { get; set; }
+
     }
 }

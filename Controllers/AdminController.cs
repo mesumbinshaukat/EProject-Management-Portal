@@ -85,15 +85,18 @@ namespace Symphony_LTD.Controllers
 
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        
         public IActionResult LogOut()
         {
-            HttpContext.Session.Remove("s_email"); // Remove email from session
-            HttpContext.Session.Remove("s_pass_verify"); // Remove password verification from session
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                HttpContext.Session.Remove("s_email"); // Remove email from session
+                HttpContext.Session.Remove("s_pass_verify"); // Remove password verification from session
 
-            TempData["success"] = "Logged Out Successfully";
-            return RedirectToAction("LogIn", "Admin");
+                TempData["success"] = "Logged Out Successfully";
+                return RedirectToAction("LogIn", "Admin");
+            }
+            return View("LogIn");
         }
 
 
@@ -192,6 +195,49 @@ namespace Symphony_LTD.Controllers
             }
 
             return BadRequest();
+        }
+
+        public IActionResult Exam()
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Course = _db.Courses.ToList();
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+            
+                return View();
+            }
+            return View("LogIn");
+            
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+         public IActionResult Exam(Exam obj)
+        {
+            if(ModelState.IsValid)
+            {
+                _db.Exams.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+               
+            
+                return View();
+            
+            
+        }
+
+        public IActionResult AddStudent ()
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                return View();
+            }
+
+                return View("LogIn");
         }
 
     }
