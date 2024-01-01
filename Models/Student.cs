@@ -31,7 +31,6 @@ namespace Symphony_LTD.Models
         [Required]
         [DisplayName("Phone Number")]
         public string? PhoneNumber { get; set; }
-        [Required]
         [DisplayName("Picture")]
         public string? Picture { get; set; }
         [DisplayName("Accept")]

@@ -10,19 +10,19 @@ namespace Symphony_LTD.Models
         public int Id { get; set; }
         [Required]
         [DisplayName("Course Name")]
-        public string CourseName { get; set; }
+        public string? CourseName { get; set; }
         [Required]
         [DisplayName("Topics Covered")]
-        public string TopicsCovered { get; set; }
+        public string? TopicsCovered { get; set; }
         [Required]
         [DisplayName("Course Fee")]
-        public decimal CourseFee { get; set; }
+        public decimal? CourseFee { get; set; }
         [Required]
         [DisplayName("Course Details")]
-        public string CourseDetails { get; set; }
+        public string? CourseDetails { get; set; }
         [Required]
         [DisplayName("Entrance Exam")]
-        public string EntranceExamDetails { get; set; }
+        public string? EntranceExamDetails { get; set; }
 
     }
 }

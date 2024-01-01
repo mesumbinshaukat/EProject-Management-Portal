@@ -1,0 +1,198 @@
+﻿@model Symphony_LTD.Models.Student
+
+@{
+    ViewData["Title"] = "Edit/Delete Student";
+    Layout = "_AdminLayout";
+}
+
+
+
+<div class="content-page w-100">
+    <div class="content">
+        <h1>Edit/Delete Student</h1>
+        <hr />
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4">
+                    <form>
+                        <div class="row">
+                            <div class="col-8">
+                                <select id="std_data" class="form-control mb-2">
+                                    @foreach (var i in ViewBag.Student)
+                                    {
+                                        <option value="@i.StudentId">
+                                            Roll No#: @i.RollNumber - Student Name: @i.FirstName @i.MiddleName @i.LastName
+                                        </option>
+                                    }
+                                </select>
+
+                            </div>
+
+
+                            <div class="col-4">
+                                <!-- Button trigger modal -->
+                                <div class="row">
+
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" id="Edit">
+                                            Edit
+                                        </button>
+
+                                    </div>
+
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" id="delete">
+                                            Delete
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                    </form>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post" asp-action="ChangeStudent" asp-controller="Admin" enctype="multipart/form-data">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <div class="form-group d-none">
+                                            <label class="control-label"></label>
+                                            <input type="number" id="id" name="id" class="form-control" disabled required />
+
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            <label asp-for="RollNumber" class="control-label"></label>
+                                            <input type="number" id="roll" name="roll" asp-for="RollNumber" class="form-control" placeholder="Roll No#" required />
+                                            <span asp-validation-for="RollNumber" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="FirstName" class="control-label"></label>
+                                            <input asp-for="FirstName" name="fName" id="fName" class="form-control" placeholder="First Name" required />
+                                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="MiddleName" class="control-label"></label>
+                                            <input asp-for="MiddleName" name="mName" id="mName" class="form-control" placeholder="Middle Name" required />
+                                            <span asp-validation-for="MiddleName" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="LastName" class="control-label"></label>
+                                            <input asp-for="LastName" name="lName" id="lName" class="form-control" placeholder="Last Name" required />
+                                            <span asp-validation-for="LastName" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="DateOfBirth" class="control-label"></label>
+                                            <input type="date" id="dob" name="dob" asp-for="DateOfBirth" class="form-control" placeholder="Date Of Birth" />
+                                            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Address" class="control-label"></label>
+                                            <input asp-for="Address" name="address" id="address" class="form-control" placeholder="Address" />
+                                            <span asp-validation-for="Address" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Email" class="control-label"></label>
+                                            <input type="email" id="email" name="email" asp-for="Email" class="form-control" placeholder="Email" />
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="PhoneNumber" class="control-label"></label>
+                                            <input asp-for="PhoneNumber" name="pNum" id="pNum" class="form-control" placeholder="Phone Number" />
+                                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Picture" class="control-label"></label>
+                                            <input type="file" id="pic" asp-for="Picture" name="stdImage" class="form-control" placeholder="Profile Picture" />
+                                            <p id="img_path"></p>
+                                            <span asp-validation-for="Picture" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Password" class="control-label"></label>
+                                            <input type="password" name="pass" id="pass" asp-for="Password" class="form-control" placeholder="Profile Picture" required />
+                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                        </div>
+
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-outline-success">Save changes</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+            <div>
+                <a asp-action="Courses">Back to Students</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.querySelector("#Edit").addEventListener("click", () => {
+        const std_id = document.getElementById("std_data").value
+
+        const convertIdToNumb = Number(std_id)
+        document.getElementById("id").setAttribute("value", convertIdToNumb)
+
+
+        const obj = @Html.Raw(Json.Serialize(ViewBag.Student))
+
+                for (let i = 0; i <= obj.length; i++) {
+            if (convertIdToNumb == obj[i].studentId) {
+                document.getElementById("roll").setAttribute("value", obj[i].rollNumber)
+                document.getElementById("fName").setAttribute("value", obj[i].firstName)
+                document.getElementById("mName").setAttribute("value", obj[i].middleName)
+                document.getElementById("lName").setAttribute("value", obj[i].lastName)
+                document.getElementById("dob").setAttribute("value", formatDate(obj[i].dateOfBirth))
+                document.getElementById("address").setAttribute("value", obj[i].address)
+                document.getElementById("email").setAttribute("value", obj[i].email)
+                document.getElementById("pNum").setAttribute("value", obj[i].phoneNumber)
+                document.getElementById("img_path").innerHTML = obj[i].picture
+                document.getElementById("pass").setAttribute("value", obj[i].password)
+
+            }
+
+        }
+        // Function to format date (YYYY-MM-DD format)
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const year = date.getFullYear();
+            const month = ('0' + (date.getMonth() + 1)).slice(-2); // Adding leading zero if needed
+            const day = ('0' + date.getDate()).slice(-2); // Adding leading zero if needed
+            return `${year}-${month}-${day}`;
+        }
+
+
+
+    })
+
+    document.querySelector("#pic").addEventListener("click", () => {
+        document.getElementById("img_path").style.display = "none";
+
+    })
+</script>

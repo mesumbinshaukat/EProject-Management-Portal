@@ -8,10 +8,10 @@ namespace Symphony_LTD.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public int StudentId { get; set; }
+        public int? StudentId { get; set; }
         [Required]
-        public int SubjectId { get; set; }
+        public int? SubjectId { get; set; }
         [Required]
-        public decimal MarksObtained { get; set; }
+        public decimal? MarksObtained { get; set; }
     }
 }

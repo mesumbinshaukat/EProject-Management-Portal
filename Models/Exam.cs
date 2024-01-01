@@ -9,22 +9,22 @@ namespace Symphony_LTD.Models
         public int Id { get; set; }
         [Required]
         [DisplayName("Exam Name")]
-        public string ExamName { get; set; }
+        public string? ExamName { get; set; }
         [Required]
         [DisplayName("Date")]
-        public DateTime ExamDate { get; set; }
+        public DateTime? ExamDate { get; set; }
         [Required]
         [DisplayName("Score")]
-        public decimal Score { get; set; }
+        public decimal? Score { get; set; }
         [Required]
         [DisplayName ("Student Roll No")]
-        public int StudentId { get; set; }
+        public int? StudentId { get; set; }
         [Required]
         [DisplayName("Course Name")]
-        public int CourseId { get; set; }
+        public int? CourseId { get; set; }
         [Required]
         [DisplayName("Exam Detail")]
-        public string Detail {  get; set; }
+        public string? Detail {  get; set; }
        
     }
 }

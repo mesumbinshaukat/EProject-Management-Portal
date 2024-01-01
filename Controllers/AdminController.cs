@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Win32;
 using Symphony_LTD.Data;
 using Symphony_LTD.Models;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
 namespace Symphony_LTD.Controllers
 {
@@ -241,6 +243,8 @@ namespace Symphony_LTD.Controllers
             return View("LogIn");
         }
 
+        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AddStudent(Student obj, IFormFile stdImage)
@@ -249,27 +253,123 @@ namespace Symphony_LTD.Controllers
             {
                 string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
                 string filepath = Path.Combine(path, stdImage.FileName);
+
                 if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);
                 }
+
+                
                 var stream = new FileStream(filepath, FileMode.Create);
                 stdImage.CopyTo(stream);
                 string? filename = stdImage.FileName;
                 obj.Picture = filename;
-
             }
-
 
             if (ModelState.IsValid)
             {
-                _db.Students.Add(obj);
+                try
+                {
+                    
+
+                    _db.Students.Add(obj);
+                    _db.SaveChanges();
+
+                    return RedirectToAction("Index", "Admin");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "An error occurred while saving the student details.");
+                    
+                    return View(ex);
+                }
+            }
+
+            
+            return View(obj);
+        }
+
+        public IActionResult ChangeStudent()
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                ViewBag.Student = _db.Students.ToList();
+                return View();
+            }
+
+            return View("LogIn");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ChangeStudent([Bind("Id, RollNumber, FirstName, MiddleName, LastName, DateOfBirth, Address, Email, PhoneNumber, Picture, Password")] Student updatedStudent, IFormFile stdImage)
+        {
+            // Fetch the existing student details from the database
+            var existingStudent = _db.Students.FirstOrDefault(s => s.StudentId == updatedStudent.StudentId);
+
+            if (existingStudent == null)
+            {
+                // Handle if the student is not found
+                return NotFound();
+            }
+
+            if (stdImage != null)
+            {
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                string filepath = Path.Combine(path, stdImage.FileName);
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                using (var stream = new FileStream(filepath, FileMode.Create))
+                {
+                    stdImage.CopyTo(stream);
+                }
+
+                updatedStudent.Picture = stdImage.FileName;
+            }
+
+            // Update only non-empty properties of the existing student with the values from updatedStudent
+            foreach (var property in typeof(Student).GetProperties())
+            {
+                if (property.Name != "Id" && property.Name != "Picture" && property.GetValue(updatedStudent) != null)
+                {
+                    property.SetValue(existingStudent, property.GetValue(updatedStudent));
+                }
+            }
+
+            // Validate the updated student before saving changes
+            var validationContext = new ValidationContext(existingStudent, serviceProvider: null, items: null);
+            var validationResults = new List<ValidationResult>();
+            var isValid = Validator.TryValidateObject(existingStudent, validationContext, validationResults, true);
+
+            if (!isValid)
+            {
+                foreach (var validationResult in validationResults)
+                {
+                    ModelState.AddModelError(validationResult.MemberNames.FirstOrDefault() ?? "", validationResult.ErrorMessage);
+                }
+
+                return View(existingStudent);
+            }
+
+            try
+            {
+                _db.Students.Update(existingStudent);
                 _db.SaveChanges();
+
                 return RedirectToAction("Index", "Admin");
             }
-            
-            return View();
-
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "An error occurred while saving the student details.");            
+                return View(existingStudent);
+            }
         }
+
     }
 }

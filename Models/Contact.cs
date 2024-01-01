@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Symphony_LTD.Models
 {
@@ -7,18 +8,27 @@ namespace Symphony_LTD.Models
         [Key]
         public int ContactId { get; set; }
         [Required]
-        public string FirstName { get; set; }
+        [DisplayName("First Name")]
+        public string? FirstName { get; set; }
+        [DisplayName("Middle Name (Optional)")]
+        public string? MiddleName { get; set; }
         [Required]
-        public string LastName { get; set; }
+        [DisplayName("Last Name")]
+        public string? LastName { get; set; }
         [Required]
-        public string Email { get; set; }
+        [DisplayName("Email")]
+        public string? Email { get; set; }
         [Required]
-        public string PhoneNumber { get; set; }
+        [DisplayName("Phone Number")]
+        public string? PhoneNumber { get; set; }
         [Required]
-        public string CenterName { get; set; }
+        [DisplayName("Center Name")]
+        public string? CenterName { get; set; }
         [Required]
-        public string Address { get; set; }
+        [DisplayName("Address")]
+        public string? Address { get; set; }
         [Required]
-        public string Message { get; set; } 
+        [DisplayName("Message")]
+        public string? Message { get; set; } 
     }
 }
