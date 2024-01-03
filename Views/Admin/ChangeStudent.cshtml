@@ -14,17 +14,23 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-4">
-                    <form>
+                 
                         <div class="row">
                             <div class="col-8">
                                 <select id="std_data" class="form-control mb-2">
-                                    @foreach (var i in ViewBag.Student)
+                                    @if (ViewBag.Student != null)
+{
+                                    foreach (var i in ViewBag.Student)
                                     {
-                                        <option value="@i.StudentId">
+                                        <option value=@i.StudentId>
                                             Roll No#: @i.RollNumber - Student Name: @i.FirstName @i.MiddleName @i.LastName
                                         </option>
                                     }
-                                </select>
+                                }else
+                                {
+                                    <p>No Data Available</p>
+                                }
+                            </select>
 
                             </div>
 
@@ -54,7 +60,7 @@
                             </div>
                         </div>
 
-                    </form>
+                   
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -64,14 +70,14 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form method="post" asp-action="ChangeStudent" asp-controller="Admin" enctype="multipart/form-data">
+                                    <form method="post" asp-action="ChangeStudent" enctype="multipart/form-data">
                                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                        <div class="form-group d-none">
+                                        <div class="form-group">
                                             <label class="control-label"></label>
                                             <input type="number" id="id" name="id" class="form-control" disabled required />
 
                                         </div>
-
+                                        
 
 
                                         <div class="form-group">

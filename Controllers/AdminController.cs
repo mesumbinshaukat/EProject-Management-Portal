@@ -304,16 +304,9 @@ namespace Symphony_LTD.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ChangeStudent([Bind("Id, RollNumber, FirstName, MiddleName, LastName, DateOfBirth, Address, Email, PhoneNumber, Picture, Password")] Student updatedStudent, IFormFile stdImage)
+        public IActionResult ChangeStudent(Student updatedStudent, IFormFile stdImage , int? id)
         {
-            // Fetch the existing student details from the database
-            var existingStudent = _db.Students.FirstOrDefault(s => s.StudentId == updatedStudent.StudentId);
-
-            if (existingStudent == null)
-            {
-                // Handle if the student is not found
-                return NotFound();
-            }
+            var formid = id; 
 
             if (stdImage != null)
             {
@@ -325,50 +318,106 @@ namespace Symphony_LTD.Controllers
                     Directory.CreateDirectory(path);
                 }
 
-                using (var stream = new FileStream(filepath, FileMode.Create))
-                {
-                    stdImage.CopyTo(stream);
-                }
-
-                updatedStudent.Picture = stdImage.FileName;
+                var stream = new FileStream(filepath, FileMode.Create);
+                stdImage.CopyTo(stream);
+                string? filename = stdImage.FileName;
+                updatedStudent.Picture = filename;
             }
 
-            // Update only non-empty properties of the existing student with the values from updatedStudent
-            foreach (var property in typeof(Student).GetProperties())
-            {
-                if (property.Name != "Id" && property.Name != "Picture" && property.GetValue(updatedStudent) != null)
-                {
-                    property.SetValue(existingStudent, property.GetValue(updatedStudent));
-                }
-            }
+            //foreach (var property in typeof(Student).GetProperties())
+            //{
+                //if ( == "Id" || proper == 0)
+                //{
+                //    return NotFound();
+                //}
+                //var studentFromDb = _db.Courses.Find(id);
 
-            // Validate the updated student before saving changes
-            var validationContext = new ValidationContext(existingStudent, serviceProvider: null, items: null);
-            var validationResults = new List<ValidationResult>();
-            var isValid = Validator.TryValidateObject(existingStudent, validationContext, validationResults, true);
+                //if (studentFromDb == null)
+                //{
+                //    return NotFound();
+                //}
+            //}
+            //if (ModelState.IsValid)
+            //{
+            //    try
+            //    {
+            //        _db.Students.Update(updatedStudent);
+            //        _db.SaveChanges();
 
-            if (!isValid)
-            {
-                foreach (var validationResult in validationResults)
-                {
-                    ModelState.AddModelError(validationResult.MemberNames.FirstOrDefault() ?? "", validationResult.ErrorMessage);
-                }
+            //        return RedirectToAction("Index", "Admin");
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        ModelState.AddModelError("", "An error occurred while saving the student details.");
 
-                return View(existingStudent);
-            }
+            //        return View(ex);
+            //    }
+            //}
 
-            try
-            {
-                _db.Students.Update(existingStudent);
-                _db.SaveChanges();
+            return RedirectToAction ("Index");
+            // Fetch the existing student details from the database
+            //var existingStudent = _db.Students.FirstOrDefault(s => s.StudentId == updatedStudent.StudentId);
 
-                return RedirectToAction("Index", "Admin");
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("", "An error occurred while saving the student details.");            
-                return View(existingStudent);
-            }
+            //if (existingStudent == null)
+            //{
+            //    // Handle if the student is not found
+            //    return NotFound();
+            //}
+
+            //if (stdImage != null)
+            //{
+            //    string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+            //    string filepath = Path.Combine(path, stdImage.FileName);
+
+            //    if (!Directory.Exists(path))
+            //    {
+            //        Directory.CreateDirectory(path);
+            //    }
+
+            //    using (var stream = new FileStream(filepath, FileMode.Create))
+            //    {
+            //        stdImage.CopyTo(stream);
+            //    }
+
+            //    updatedStudent.Picture = stdImage.FileName;
+            //}
+
+            //// Update only non-empty properties of the existing student with the values from updatedStudent
+            //foreach (var property in typeof(Student).GetProperties())
+            //{
+            //    if (property.Name != "Id" && property.Name != "Picture" && property.GetValue(updatedStudent) != null)
+            //    {
+            //        property.SetValue(existingStudent, property.GetValue(updatedStudent));
+            //    }
+            //}
+
+            //// Validate the updated student before saving changes
+            //var validationContext = new ValidationContext(existingStudent, serviceProvider: null, items: null);
+            //var validationResults = new List<ValidationResult>();
+            //var isValid = Validator.TryValidateObject(existingStudent, validationContext, validationResults, true);
+
+            //if (!isValid)
+            //{
+            //    foreach (var validationResult in validationResults)
+            //    {
+            //        ModelState.AddModelError(validationResult.MemberNames.FirstOrDefault() ?? "", validationResult.ErrorMessage);
+            //    }
+
+            //    return View(existingStudent);
+            //}
+
+            //try
+            //{
+            //    _db.Students.Update(existingStudent);
+            //    _db.SaveChanges();
+
+            //    return RedirectToAction("Index", "Admin");
+            //}
+            //catch (Exception ex)
+            //{
+            //    ModelState.AddModelError("", "An error occurred while saving the student details.");            
+            //    return View(existingStudent);
+            //}
         }
 
     }
