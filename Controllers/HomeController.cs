@@ -33,38 +33,5 @@ namespace Symphony_LTD.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult Register()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Register(Student data, IFormFile Std_Image)
-        {
-            if (Std_Image != null)
-            {
-                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
-                string filepath = Path.Combine(path, Std_Image.FileName);
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-                var stream = new FileStream(filepath, FileMode.Create);
-                Std_Image.CopyTo(stream);
-                string? filename = Std_Image.FileName;
-                data.Picture = filename;
-
-            }
-
-            if (ModelState.IsValid)
-            {
-                _db.Students.Add(data);
-                _db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(data);
-
-        }
     }
 }
