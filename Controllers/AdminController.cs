@@ -28,7 +28,7 @@ namespace Symphony_LTD.Controllers
                 return View("Index");
 
             }
-            return View("LogIn");
+            return RedirectToAction("LogIn");
         }
 
         [HttpGet]
@@ -289,14 +289,25 @@ namespace Symphony_LTD.Controllers
             return View(obj);
         }
 
-        public IActionResult ChangeStudent()
+        public IActionResult ChangeStudent(int? id)
         {
             if (HttpContext.Session.GetString("s_email") != null)
             {
+                if (id == null || id == 0)
+                {
+                    return NotFound();
+                }
+                var studentData = _db.Students.Find(id);
+
+                if (studentData == null)
+                {
+                    return NotFound();
+                }
+
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
                 ViewBag.Student = _db.Students.ToList();
-                return View();
+                return View(studentData);
             }
 
             return View("LogIn");
@@ -304,9 +315,9 @@ namespace Symphony_LTD.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ChangeStudent(Student updatedStudent, IFormFile stdImage , int? id)
+        public IActionResult ChangeStudent(Student updatedStudent, IFormFile stdImage)
         {
-            var formid = id; 
+           
 
             if (stdImage != null)
             {
@@ -324,101 +335,29 @@ namespace Symphony_LTD.Controllers
                 updatedStudent.Picture = filename;
             }
 
-            //foreach (var property in typeof(Student).GetProperties())
-            //{
-                //if ( == "Id" || proper == 0)
-                //{
-                //    return NotFound();
-                //}
-                //var studentFromDb = _db.Courses.Find(id);
-
-                //if (studentFromDb == null)
-                //{
-                //    return NotFound();
-                //}
-            //}
-            //if (ModelState.IsValid)
-            //{
-            //    try
-            //    {
-            //        _db.Students.Update(updatedStudent);
-            //        _db.SaveChanges();
-
-            //        return RedirectToAction("Index", "Admin");
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        ModelState.AddModelError("", "An error occurred while saving the student details.");
-
-            //        return View(ex);
-            //    }
-            //}
+            if (ModelState.IsValid)
+            {
+                _db.Students.Update(updatedStudent);
+                _db.SaveChanges();
+                return RedirectToAction("Student");
+            }
 
             return RedirectToAction ("Index");
-            // Fetch the existing student details from the database
-            //var existingStudent = _db.Students.FirstOrDefault(s => s.StudentId == updatedStudent.StudentId);
-
-            //if (existingStudent == null)
-            //{
-            //    // Handle if the student is not found
-            //    return NotFound();
-            //}
-
-            //if (stdImage != null)
-            //{
-            //    string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
-            //    string filepath = Path.Combine(path, stdImage.FileName);
-
-            //    if (!Directory.Exists(path))
-            //    {
-            //        Directory.CreateDirectory(path);
-            //    }
-
-            //    using (var stream = new FileStream(filepath, FileMode.Create))
-            //    {
-            //        stdImage.CopyTo(stream);
-            //    }
-
-            //    updatedStudent.Picture = stdImage.FileName;
-            //}
-
-            //// Update only non-empty properties of the existing student with the values from updatedStudent
-            //foreach (var property in typeof(Student).GetProperties())
-            //{
-            //    if (property.Name != "Id" && property.Name != "Picture" && property.GetValue(updatedStudent) != null)
-            //    {
-            //        property.SetValue(existingStudent, property.GetValue(updatedStudent));
-            //    }
-            //}
-
-            //// Validate the updated student before saving changes
-            //var validationContext = new ValidationContext(existingStudent, serviceProvider: null, items: null);
-            //var validationResults = new List<ValidationResult>();
-            //var isValid = Validator.TryValidateObject(existingStudent, validationContext, validationResults, true);
-
-            //if (!isValid)
-            //{
-            //    foreach (var validationResult in validationResults)
-            //    {
-            //        ModelState.AddModelError(validationResult.MemberNames.FirstOrDefault() ?? "", validationResult.ErrorMessage);
-            //    }
-
-            //    return View(existingStudent);
-            //}
-
-            //try
-            //{
-            //    _db.Students.Update(existingStudent);
-            //    _db.SaveChanges();
-
-            //    return RedirectToAction("Index", "Admin");
-            //}
-            //catch (Exception ex)
-            //{
-            //    ModelState.AddModelError("", "An error occurred while saving the student details.");            
-            //    return View(existingStudent);
-            //}
+            
         }
 
+    
+        public IActionResult Student()
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                IEnumerable<Student> obj = _db.Students;
+                return View(obj);
+            }
+
+            return View("LogIn");
+        }
     }
 }
