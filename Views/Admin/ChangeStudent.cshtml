@@ -13,16 +13,12 @@
         <hr />
         <div class="container-sm">
             <form method="post" asp-action="ChangeStudent" enctype="multipart/form-data">
+
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="row">
+                    <input type="hidden" asp-for="StudentId" value="@Model.StudentId"/>
 
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label asp-for="StudentId" class="control-label"></label>
-                            <input type="number" asp-for="StudentId" class="form-control" placeholder="Roll No#" required disabled/>
-                            <span asp-validation-for="StudentId" class="text-danger"></span>
-                        </div>
-                    </div><div class="col-6">
+<div class="col-6">
                         <div class="form-group">
                             <label asp-for="RollNumber" class="control-label"></label>
                             <input type="number" asp-for="RollNumber" class="form-control" placeholder="Roll No#" required />
@@ -81,7 +77,7 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label asp-for="Picture" class="control-label"></label>
-                            <input type="file" asp-for="Picture" name="stdImage" class="form-control" placeholder="Profile Picture" />
+                            <input type="file" asp-for="Picture" name="stdImage" class="form-control" placeholder="Profile Picture" required/>
                             <p id="img_path"></p>
                             <span asp-validation-for="Picture" class="text-danger"></span>
                         </div>
@@ -93,6 +89,16 @@
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
                     </div>
+                    <div class="d-flex justify-content-center mb-3">
+                        <div class="col-12 form-group">
+                            <label class="control-label">Request Approval</label>
+                            <select asp-for="Accept" class="form-control" required>
+                                <option value="Accepted">Accept</option>
+                                <option value="Rejected">Reject</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="text-center">
                         
                       <div class="form-group">
@@ -111,57 +117,3 @@
         </div>
     </div>
 </div>
-
-@* 
-<script>
-
-    document.querySelector("#Edit").addEventListener("click", () => {
-        const std_id = document.getElementById("std_data").value
-
-        const convertIdToNumb = Number(std_id)
-        document.getElementById("id").setAttribute("value", convertIdToNumb)
-
-
-
-
-
-        const obj = @Html.Raw(Json.Serialize(ViewBag.Student))
-
-                    for (let i = 0; i <= obj.length; i++) {
-            if (convertIdToNumb == obj[i].studentId) {
-                document.getElementById("roll").setAttribute("value", obj[i].rollNumber)
-                document.getElementById("fName").setAttribute("value", obj[i].firstName)
-                document.getElementById("mName").setAttribute("value", obj[i].middleName)
-                document.getElementById("lName").setAttribute("value", obj[i].lastName)
-                document.getElementById("dob").setAttribute("value", formatDate(obj[i].dateOfBirth))
-                document.getElementById("address").setAttribute("value", obj[i].address)
-                document.getElementById("email").setAttribute("value", obj[i].email)
-                document.getElementById("pNum").setAttribute("value", obj[i].phoneNumber)
-                document.getElementById("img_path").innerHTML = obj[i].picture
-                document.getElementById("pass").setAttribute("value", obj[i].password)
-
-            }
-
-
-        }
-        // Function to format date (YYYY-MM-DD format)
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            const year = date.getFullYear();
-            const month = ('0' + (date.getMonth() + 1)).slice(-2); // Adding leading zero if needed
-            const day = ('0' + date.getDate()).slice(-2); // Adding leading zero if needed
-            return `${year}-${month}-${day}`;
-        }
-
-
-
-    })
-
-    document.querySelector("#pic").addEventListener("click", () => {
-        document.getElementById("img_path").style.display = "none";
-
-    })
-
-
-</script>
- *@

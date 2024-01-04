@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
 using Symphony_LTD.Data;
 using Symphony_LTD.Models;
@@ -98,7 +99,7 @@ namespace Symphony_LTD.Controllers
                 TempData["success"] = "Logged Out Successfully";
                 return RedirectToAction("LogIn", "Admin");
             }
-            return View("LogIn");
+            return RedirectToAction("LogIn");
         }
 
 
@@ -112,7 +113,7 @@ namespace Symphony_LTD.Controllers
                 return View(courses);
 
             }
-            return View("LogIn");
+            return RedirectToAction("LogIn");
         }
 
         public IActionResult AddCourse()
@@ -125,7 +126,7 @@ namespace Symphony_LTD.Controllers
                 return View();
 
             }
-            return View("LogIn");
+            return RedirectToAction("LogIn");
         }
 
         [HttpPost]
@@ -167,7 +168,7 @@ namespace Symphony_LTD.Controllers
 
 
             }
-            return View("LogIn");
+            return RedirectToAction("LogIn");
         }
 
         [HttpPost]
@@ -210,7 +211,7 @@ namespace Symphony_LTD.Controllers
 
                 return View();
             }
-            return View("LogIn");
+            return RedirectToAction("LogIn");
 
         }
 
@@ -310,7 +311,7 @@ namespace Symphony_LTD.Controllers
                 return View(studentData);
             }
 
-            return View("LogIn");
+            return RedirectToAction("LogIn");
         }
 
         [HttpPost]
@@ -326,8 +327,10 @@ namespace Symphony_LTD.Controllers
                 return NotFound(); // Handle if the student is not found
             }
 
-            // Update the existing student entity with the changes from updatedStudent
-            existingStudent.RollNumber = updatedStudent.RollNumber;
+            _db.Entry(existingStudent).State = EntityState.Modified;
+
+                // Update the existing student entity with the changes from updatedStudent
+                existingStudent.RollNumber = updatedStudent.RollNumber;
             existingStudent.FirstName = updatedStudent.FirstName;
             existingStudent.MiddleName = updatedStudent.MiddleName;
             existingStudent.LastName = updatedStudent.LastName;
@@ -337,6 +340,7 @@ namespace Symphony_LTD.Controllers
             existingStudent.PhoneNumber = updatedStudent.PhoneNumber;
             existingStudent.Picture = updatedStudent.Picture ?? existingStudent.Picture;
             existingStudent.Password = updatedStudent.Password;
+            existingStudent.Accept = updatedStudent.Accept;
 
             if (stdImage != null)
             {
@@ -351,11 +355,11 @@ namespace Symphony_LTD.Controllers
                 var stream = new FileStream(filepath, FileMode.Create);
                 stdImage.CopyTo(stream);
                 string? filename = stdImage.FileName;
-                updatedStudent.Picture = filename;
+                    existingStudent.Picture = filename;
             }
 
             
-                _db.Students.Update(updatedStudent);
+                _db.Students.Update(existingStudent);
                 _db.SaveChanges();
                 return RedirectToAction("Student");
             }
@@ -375,7 +379,24 @@ namespace Symphony_LTD.Controllers
                 return View(obj);
             }
 
-            return View("LogIn");
+            return RedirectToAction("LogIn");
+        }
+
+        public IActionResult DeleteStudent (int? id)
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                var _id = _db.Students.Find(id);
+
+                if (id != null)
+                {
+                    _db.Students.Remove(_id);
+                    _db.SaveChanges();
+                    return RedirectToAction("Student");
+                }
+            }
+
+            return BadRequest();
         }
     }
 }
