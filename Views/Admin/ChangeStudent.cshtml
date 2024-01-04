@@ -15,7 +15,14 @@
             <form method="post" asp-action="ChangeStudent" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="row">
+
                     <div class="col-6">
+                        <div class="form-group">
+                            <label asp-for="StudentId" class="control-label"></label>
+                            <input type="number" asp-for="StudentId" class="form-control" placeholder="Roll No#" required disabled/>
+                            <span asp-validation-for="StudentId" class="text-danger"></span>
+                        </div>
+                    </div><div class="col-6">
                         <div class="form-group">
                             <label asp-for="RollNumber" class="control-label"></label>
                             <input type="number" asp-for="RollNumber" class="form-control" placeholder="Roll No#" required />
@@ -32,7 +39,7 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label asp-for="MiddleName" class="control-label"></label>
-                            <input asp-for="MiddleName" class="form-control" placeholder="Middle Name" required />
+                            <input asp-for="MiddleName" class="form-control" placeholder="Middle Name"/>
                             <span asp-validation-for="MiddleName" class="text-danger"></span>
                         </div>
                     </div>
@@ -90,7 +97,7 @@
                         
                       <div class="form-group">
 
-                            <button type="submit" class="btn btn-outline-success">Save changes</button>
+                            <input type="submit" class="btn btn-success" value="Update"/>
                       </div>      
                         </div>
                     

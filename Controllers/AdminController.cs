@@ -317,7 +317,26 @@ namespace Symphony_LTD.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult ChangeStudent(Student updatedStudent, IFormFile stdImage)
         {
-           
+            if (ModelState.IsValid)
+            {
+                var existingStudent = _db.Students.FirstOrDefault(s => s.StudentId == updatedStudent.StudentId);
+
+            if (existingStudent == null)
+            {
+                return NotFound(); // Handle if the student is not found
+            }
+
+            // Update the existing student entity with the changes from updatedStudent
+            existingStudent.RollNumber = updatedStudent.RollNumber;
+            existingStudent.FirstName = updatedStudent.FirstName;
+            existingStudent.MiddleName = updatedStudent.MiddleName;
+            existingStudent.LastName = updatedStudent.LastName;
+            existingStudent.DateOfBirth = updatedStudent.DateOfBirth;
+            existingStudent.Address = updatedStudent.Address;
+            existingStudent.Email = updatedStudent.Email;
+            existingStudent.PhoneNumber = updatedStudent.PhoneNumber;
+            existingStudent.Picture = updatedStudent.Picture ?? existingStudent.Picture;
+            existingStudent.Password = updatedStudent.Password;
 
             if (stdImage != null)
             {
@@ -335,8 +354,7 @@ namespace Symphony_LTD.Controllers
                 updatedStudent.Picture = filename;
             }
 
-            if (ModelState.IsValid)
-            {
+            
                 _db.Students.Update(updatedStudent);
                 _db.SaveChanges();
                 return RedirectToAction("Student");
