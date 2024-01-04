@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Symphony_LTD.Data;
+using Symphony_LTD.Models;
 
 namespace Symphony_LTD.Controllers
 {
@@ -15,6 +16,21 @@ namespace Symphony_LTD.Controllers
         public IActionResult Contact()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Contact(Contact obj)
+        {
+            
+                if(ModelState.IsValid)
+                {
+                    _db._Contact.Add(obj);
+                    _db.SaveChanges();
+                    return RedirectToAction("Index", "Home");
+                }
+            
+            return View(obj);
         }
 
 

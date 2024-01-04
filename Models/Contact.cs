@@ -22,15 +22,12 @@ namespace Symphony_LTD.Models
         [DisplayName("Phone Number")]
         public string? PhoneNumber { get; set; }
         [Required]
-        [DisplayName("Center Name")]
-        public string? CenterName { get; set; }
-        [Required]
         [DisplayName("Address")]
         public string? Address { get; set; }
-        [Required]
+       
         [DisplayName("Subject")]
         public string? Subject { get; set; }
-        [Required]
+       
         [DisplayName("Message")]
         public string? Message { get; set; } 
     }
