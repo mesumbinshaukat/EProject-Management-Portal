@@ -1,0 +1,207 @@
+﻿@model Symphony_LTD.Models.Contact
+
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<style>
+    .nav-link{
+        color: black !important;
+    }
+</style>
+
+@* <h1>Contact</h1>
+
+<h4>Contact</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Contact">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MiddleName" class="control-label"></label>
+                <input asp-for="MiddleName" class="form-control" />
+                <span asp-validation-for="MiddleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CenterName" class="control-label"></label>
+                <input asp-for="CenterName" class="form-control" />
+                <span asp-validation-for="CenterName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Message" class="control-label"></label>
+                <input asp-for="Message" class="form-control" />
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+ *@
+<!-- contact start -->
+<section class="section" id="contact">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="title text-center mb-5">
+                    <h6 class="text-primary small-title">Contact</h6>
+                    <h4>Have any Questions ?</h4>
+                    <p class="text-muted">We're here to answer all your queries, feel free to contact us however you like. 😉</p>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="get-in-touch">
+                    <h5>Get in touch</h5>
+                    <p class="text-muted mb-5">Get In Touch With Us For More Details.</p>
+
+                    <div class="mb-3">
+                        <div class="get-touch-icon float-start me-3">
+                        </div>
+                        <div class="overflow-hidden">
+                            <h5 class="font-16 mb-0">E-mail</h5>
+                            <p class="text-muted">info@mesum.online</p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="get-touch-icon float-start me-3">
+                        </div>
+                        <div class="overflow-hidden">
+                            <h5 class="font-16 mb-0">Phone</h5>
+                            <p class="text-muted">03362100225</p>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <div class="get-touch-icon float-start me-3">
+                        </div>
+                        <div class="overflow-hidden">
+                            <h5 class="font-16 mb-0">Address</h5>
+                            <p class="text-muted">Nazimabad No.4, Karachi, 74600</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="custom-form bg-white">
+                    <span id="error-msg"></span>
+                    <form method="post" name="myForm" onsubmit="return validateForm()">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label asp-for="FirstName" class="control-label"></label>
+                                    <input asp-for="FirstName" class="form-control" />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label asp-for="MiddleName" class="control-label"></label>
+                                    <input asp-for="MiddleName" class="form-control" />
+                                    <span asp-validation-for="MiddleName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label asp-for="LastName" class="control-label"></label>
+                                    <input asp-for="LastName" class="form-control" />
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                             <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label asp-for="Email" class="control-label"></label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label asp-for="PhoneNumber" class="control-label"></label>
+                                    <input asp-for="PhoneNumber" class="form-control" />
+                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                             <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label asp-for="Address" class="control-label"></label>
+                                    <input asp-for="Address" class="form-control" />
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Subject</label>
+                                    <input name="subject" id="subject" type="text" class="form-control" placeholder="Enter Subject...">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label for="comments" class="form-label">Message</label>
+                                    <textarea name="comments" id="comments" rows="4" class="form-control" placeholder="Enter your message..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-lg-12 text-end">
+                                <input type="submit" id="submit" name="send" class="submitBnt btn btn-outline-success" value="Send Message" />
+                            </div>
+                        </div>
+                        <!-- end row -->
+                    </form>
+                </div>
+                <!-- end custom-form -->
+
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container-fluid -->
+</section>
+<!-- contact end -->

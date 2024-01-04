@@ -28,6 +28,9 @@ namespace Symphony_LTD.Models
         [DisplayName("Address")]
         public string? Address { get; set; }
         [Required]
+        [DisplayName("Subject")]
+        public string? Subject { get; set; }
+        [Required]
         [DisplayName("Message")]
         public string? Message { get; set; } 
     }
