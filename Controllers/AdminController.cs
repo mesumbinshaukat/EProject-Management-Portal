@@ -25,8 +25,19 @@ namespace Symphony_LTD.Controllers
             {
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
-                IEnumerable<Admin> objAdmin = _db._Admin;
-                return View("Index");
+                //IEnumerable<Admin> objAdmin = _db._Admin;
+                //IEnumerable<Contact> objContact= _db._Contact.ToList();
+
+                var adminData = _db._Admin.ToList();
+                var contactData = _db._Contact.ToList();
+
+                var viewModel = new AdminAndContact
+                {
+                    Admin = adminData,
+                    Contact = contactData
+                };
+
+                return View("Index", viewModel);
 
             }
             return RedirectToAction("LogIn");

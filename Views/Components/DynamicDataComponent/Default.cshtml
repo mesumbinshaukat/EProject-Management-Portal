@@ -1,0 +1,25 @@
+﻿
+@model IEnumerable<Symphony_LTD.Models.Contact>
+
+<!-- Display the dynamic data -->
+
+        @foreach (var contact in Model)
+        {
+            <a href="javascript:void(0);" class="dropdown-item notify-item active">
+                <div class="notify-icon">
+                    <i class="bi bi-person-circle text-dark"></i>
+                </div>
+                <p class="notify-details">@contact.FirstName @contact.MiddleName @contact.LastName</p>
+                <p class="mb-0 user-msg">
+            <span class="text-dark"><b>Subject:</b> @contact.Subject</span>
+                     
+                </p>
+                <p class="text-muted mb-0 user-msg">
+            <span><b>Message:</b> @contact.Message</span>
+                    
+                </p>
+
+            </a>
+            <hr />
+        }
+

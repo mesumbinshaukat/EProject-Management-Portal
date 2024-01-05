@@ -29,6 +29,9 @@ namespace Symphony_LTD.Models
         public string? Subject { get; set; }
        
         [DisplayName("Message")]
-        public string? Message { get; set; } 
+        public string? Message { get; set; }
+
+        [DisplayName("Read")]
+        public bool Read { get; set; } = false;
     }
 }
