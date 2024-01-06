@@ -42,6 +42,9 @@ namespace Symphony_LTD.Controllers
                 var studentPropertiesCount = _db.Students.Count();
                 ViewBag.TotalColumns = studentPropertiesCount;
 
+                var totalContacts = _db._Contact.Count();
+                ViewBag.TotalContacts = totalContacts;
+
                 var totalRevenue = _db.Courses.ToList();
                 decimal total = 0;
 
