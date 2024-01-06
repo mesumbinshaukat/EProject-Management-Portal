@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
 using Symphony_LTD.Data;
 using Symphony_LTD.Models;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
@@ -18,6 +19,7 @@ namespace Symphony_LTD.Controllers
             _db = db;
         }
 
+        
 
         public IActionResult Index()
         {
@@ -36,6 +38,29 @@ namespace Symphony_LTD.Controllers
                     Admin = adminData,
                     Contact = contactData
                 };
+
+                var studentPropertiesCount = _db.Students.Count();
+                ViewBag.TotalColumns = studentPropertiesCount;
+
+                var totalRevenue = _db.Courses.ToList();
+                decimal total = 0;
+
+                foreach (var i in totalRevenue)
+                {
+                    if (i.CourseFee.HasValue)
+                    {
+                        total += i.CourseFee.Value;
+                    }
+                    else
+                    {
+                        ViewBag.TotalRevenue = "0";
+                    }
+                    // Optionally, handle cases where CourseFee is null if necessary
+                }
+
+                // Set ViewBag.TotalRevenue after the loop finishes to avoid overwriting
+                ViewBag.TotalRevenue = total;
+
 
                 return View("Index", viewModel);
 
@@ -408,6 +433,20 @@ namespace Symphony_LTD.Controllers
             }
 
             return BadRequest();
+        }
+
+        
+        public IActionResult MsgRead (int? id)
+        {
+            var userContact = _db._Contact.FirstOrDefault(s => s.ContactId == id);
+
+            _db.Entry(userContact).State = EntityState.Modified;
+
+            userContact.Read = true;
+            _db._Contact.Update(userContact);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Admin");
+
         }
     }
 }
