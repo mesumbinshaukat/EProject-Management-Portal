@@ -1,11 +1,13 @@
-﻿
-@model IEnumerable<Symphony_LTD.Models.Contact>
+﻿@model IEnumerable<Symphony_LTD.Models.Contact>
 
 <!-- Display the dynamic data -->
 
         @foreach (var contact in Model)
         {
-            <a href="javascript:void(0);" class="dropdown-item notify-item active">
+            @if(contact.Read == false){
+
+
+        <a href="/Admin/Index/#contact-details" class="dropdown-item notify-item active">
                 <div class="notify-icon">
                     <i class="bi bi-person-circle text-dark"></i>
                 </div>
@@ -21,5 +23,6 @@
 
             </a>
             <hr />
+    }
         }
 

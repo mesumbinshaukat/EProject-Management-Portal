@@ -11,7 +11,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-   
+    <style>
+        /* Apply styles to align the content to the left */
+        .contact-user {
+            text-align: left !important; /* Aligns the text content to the left */
+            /* Additional styles if needed */
+            background-color: black;
+            display: flex;
+            align-items:start !important;
+            justify-content:start !important;
+            justify-items:start !important;
+        }
+    </style>
     
         <!-- App favicon -->
         <link rel="shortcut icon" href="~/assets/images/favicon.ico">
@@ -23,6 +34,10 @@
         <!-- icons -->
         <link href="~/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 
+
+        <!-- quill css -->
+        <link href="~/assets/libs/quill/quill.core.css" rel="stylesheet" type="text/css" />
+        <link href="~/assets/libs/quill/quill.snow.css" rel="stylesheet" type="text/css" />
 
         <!-- Plugins css -->
         <link href="~/assets/libs/spectrum-colorpicker2/spectrum.min.css" rel="stylesheet" type="text/css">
@@ -133,11 +148,7 @@
                             <!-- item-->
                             <div class="dropdown-item noti-title">
                                 <h5 class="m-0">
-                                    <span class="float-end">
-                                        <a href="" class="text-dark">
-                                            <small>Clear All</small>
-                                        </a>
-                                    </span>Notification
+                                    Unread Notification
                                 </h5>
                             </div>
 
@@ -149,7 +160,7 @@
                                
 
                             <!-- All-->
-                            <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
+                                    <a href="/Admin/Index/#contact-details" class="dropdown-item text-center text-primary notify-item notify-all">
                                 View all
                                 <i class="fe-arrow-right"></i>
                             </a>
@@ -324,9 +335,9 @@
                         </li>
 
                         <li>
-                            <a href="apps-chat.html">
+                            <a asp-controller="Admin" asp-action="Contact">
                                 <i class="mdi mdi-forum-outline"></i>
-                                <span> Chat </span>
+                                <span> Check Contacts </span>
                             </a>
                         </li>
 
@@ -937,7 +948,7 @@
 
     <!-- Vendor -->
     <!-- footer start -->
-    <footer class="footer">
+    @* <footer class="footer">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
@@ -952,7 +963,7 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> *@
     <!-- end footer -->
 
     <!-- Vendor -->
@@ -983,6 +994,12 @@
     <!-- Init js-->
     <script src="~/assets/js/pages/form-pickers.init.js"></script>
     <script src="~/assets/js/pages/form-wizard.init.js"></script>
+
+    <!-- Quill js -->
+    <script src="assets/libs/quill/quill.min.js"></script>
+
+    <!-- Inbox init -->
+    <script src="assets/js/pages/inbox.js"></script>
 
     <!-- Calendar init -->
     <script src="~/assets/js/pages/calendar.init.js"></script>

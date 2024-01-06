@@ -1,0 +1,172 @@
+﻿@model IEnumerable<Contact>
+
+@{
+    ViewData["Title"] = "Contact";
+}
+@{
+    Layout = "_AdminLayout"; // layout for this view
+}
+
+
+
+
+        
+        <!-- Start Content-->
+        <div class="container-fluid" style="margin-right:-100px !important;">
+            <main id="main" style="text-align: left !important;">
+                                    <div class="overlay"></div>
+                                    <header class="header">
+
+                                        <div class="action-bar float-start">
+                                            <ul class="list-inline mb-0">
+                                                <li class="list-inline-item">
+                                                    <a class="icon circle-icon"><i class="mdi mdi-refresh text-muted"></i></a>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <a class="icon circle-icon"><i class="mdi mdi-share text-muted"></i></a>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <a class="icon circle-icon red"><i class="mdi mdi-close text-danger"></i></a>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <a class="icon circle-icon red"><i class="mdi mdi-flag text-danger"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="search-box float-end">
+                                            <input placeholder="Search..."><span class="icon fa fa-search"></span>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+
+                                    </header>
+
+                                    <div id="main-nano-wrapper" class="nano">
+                                        <div class="nano-content h-100" data-simplebar>
+                                            <ul class="message-list">
+                                                <li class="unread">
+                                                    <div class="mail-col mail-col-1">
+                                                        <span class="dot"></span>
+                                                        <div class="checkbox-wrapper-mail">
+                                                            <input type="checkbox" id="chk1">
+                                                            <label for="chk1" class="toggle"></label>
+                                                        </div>
+                                                        <p class="title">Lucas Kriebel (via Twitter)</p><span class="star-toggle far fa-star"></span>
+                                                    </div>
+                                                    <div class="mail-col mail-col-2">
+                                                        <div class="subject">
+                                                            Lucas Kriebel  has sent
+                                                            you a direct message on Twitter! &nbsp;&ndash;&nbsp;
+                                                            <span class="teaser"> - Very cool :) Nicklas, You have a new direct message.</span>
+                                                        </div>
+                                                        <div class="date">11:49 am</div>
+                                                    </div>
+                                                </li>
+
+                                               
+                                            </ul>
+                                            <a href="#" class="load-more-link">Show more messages</a>
+                                        </div>
+                                    </div>
+                                </main>
+                                <div id="message">
+                                    <div class="header">
+                                        <h4 class="page-title">
+                                            <a class="icon circle-icon mdi mdi-close text-muted trigger-message-close"></a>Process<span class="grey">(6)</span>
+                                        </h4>
+                                        <p>
+                                            From <a href="#">You</a> to <a href="#">Scott Waite</a>, started on <a href="#">March 2, 2014</a> at 2:14 pm est.
+                                        </p>
+                                    </div>
+                                    <div id="message-nano-wrapper" class="nano">
+                                        <div class="nano-content h-100" data-simplebar>
+                                            <ul class="message-container list-unstyled">
+                                                <li class="sent">
+                                                    <div class="details">
+                                                        <div class="left">
+                                                            You
+                                                            <div class="arrow"></div>
+                                                            Scott
+                                                        </div>
+                                                        <div class="right">March 6, 2014, 20:08 pm</div>
+                                                    </div>
+                                                    <div class="message">
+                                                        <p>
+                                                            | The every winged bring, whose life. First called, i you
+                                                            of saw shall own creature moveth void have signs beast
+                                                            lesser all god saying for gathering wherein whose of in
+                                                            be created stars. Them whales upon life divide earth
+                                                            own.
+                                                        </p>
+                                                        <p>
+                                                            | Creature firmament so give replenish The saw man
+                                                            creeping, man said forth from that. Fruitful multiply
+                                                            lights air. Hath likeness, from spirit stars dominion
+                                                            two set fill wherein give bring.
+                                                        </p>
+                                                        <p>
+                                                            | Gathering is. Lesser Set fruit subdue blessed let.
+                                                            Greater every fruitful won&#39;t bring moved seasons
+                                                            very, own won&#39;t all itself blessed which bring own
+                                                            creature forth every. Called sixth light.
+                                                        </p>
+                                                    </div>
+                                                    <div class="tool-box">
+                                                        <a href="#"
+                                                           class="circle-icon small mdi mdi-share"></a><a href="#"
+                                                                                                          class="circle-icon small red-hover mdi mdi-close"></a><a href="#"
+                                                                                                                                                                   class="circle-icon small red-hover mdi mdi-flag"></a>
+                                                    </div>
+                                                </li>
+                                                <li class="received">
+                                                    <div class="details">
+                                                        <div class="left">
+                                                            Scott
+                                                            <div class="arrow orange"></div>
+                                                            You
+                                                        </div>
+                                                        <div class="right">March 6, 2014, 20:08 pm</div>
+                                                    </div>
+                                                    <div class="message">
+                                                        <p>
+                                                            | The every winged bring, whose life. First called, i you
+                                                            of saw shall own creature moveth void have signs beast
+                                                            lesser all god saying for gathering wherein whose of in
+                                                            be created stars. Them whales upon life divide earth
+                                                            own.
+                                                        </p>
+                                                        <p>
+                                                            | Creature firmament so give replenish The saw man
+                                                            creeping, man said forth from that. Fruitful multiply
+                                                            lights air. Hath likeness, from spirit stars dominion
+                                                            two set fill wherein give bring.
+                                                        </p>
+                                                        <p>
+                                                            | Gathering is. Lesser Set fruit subdue blessed let.
+                                                            Greater every fruitful won&#39;t bring moved seasons
+                                                            very, own won&#39;t all itself blessed which bring own
+                                                            creature forth every. Called sixth light.
+                                                        </p>
+                                                    </div>
+                                                    <div class="tool-box">
+                                                        <a href="#"
+                                                           class="circle-icon small mdi mdi-share"></a><a href="#"
+                                                                                                          class="circle-icon small red-hover mdi mdi-close"></a><a href="#"
+                                                                                                                                                                   class="circle-icon small red-hover mdi mdi-flag"></a>
+                                                    </div>
+                                                </li>
+
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                    
+
+                
+
+
+        </div> <!-- content -->
+        
+

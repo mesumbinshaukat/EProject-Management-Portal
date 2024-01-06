@@ -448,5 +448,18 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("Index", "Admin");
 
         }
+
+        public IActionResult Contact ()
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                IEnumerable<Contact> data = _db._Contact.ToList();
+                return View(data);
+            }
+
+            return RedirectToAction("LogIn");
+        }
     }
 }
