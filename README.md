@@ -48,7 +48,8 @@ The project utilizes a SQL database model comprising entities such as Course, St
 
 > Open Package Manager Console ![Package Manager Console](https://github.com/mesumbinshaukat/EProject-Management-Portal/blob/main/temp/images/Package%20Manager%20Console.png?raw=true)
 
-> **❗Note:** Change the `DefaultConnection` in `appsettings.json` according to your SSMS configuation. 
+> [!Note]
+>  Change the `DefaultConnection` in `appsettings.json` according to your SSMS configuation. 
 
 > Run this command to generate the database in the SSMS: 
 ``` 
@@ -63,3 +64,4 @@ update-database
 ## Navigation
 - **Dashboard**: `/admin/login`
 - **Landing Page**: `/index`
+
