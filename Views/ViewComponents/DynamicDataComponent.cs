@@ -18,6 +18,7 @@ namespace Symphony_LTD.Views.ViewComponents
         {
             // Fetch your dynamic data here
             IEnumerable<Contact> data = _db._Contact.ToList();
+            ViewBag.NotificationCount = _db._Contact.Count(s => s.Read == false);
 
             return View("/Views/Components/DynamicDataComponent/Default.cshtml", data);
 

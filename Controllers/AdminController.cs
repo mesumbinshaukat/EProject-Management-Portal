@@ -39,6 +39,9 @@ namespace Symphony_LTD.Controllers
                     Contact = contactData
                 };
 
+                var totalCourses = _db.Courses.Count();
+                ViewBag.TotalCourses = totalCourses;
+
                 var studentPropertiesCount = _db.Students.Count();
                 ViewBag.TotalColumns = studentPropertiesCount;
 
@@ -448,7 +451,7 @@ namespace Symphony_LTD.Controllers
             userContact.Read = true;
             _db._Contact.Update(userContact);
             _db.SaveChanges();
-            return View();
+            return RedirectToAction("Contact");
 
         }
 
@@ -460,6 +463,22 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
                 IEnumerable<Contact> data = _db._Contact.ToList();
                 return View(data);
+            }
+
+            return RedirectToAction("LogIn");
+        }
+
+        public IActionResult DeleteContact(int? id)
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+
+                var contact = _db._Contact.FirstOrDefault(con => con.ContactId == id);
+
+                _db._Contact.Remove(contact);
+                _db.SaveChanges();
+                
+                return RedirectToAction("Contact");
             }
 
             return RedirectToAction("LogIn");

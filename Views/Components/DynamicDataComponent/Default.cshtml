@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<Symphony_LTD.Models.Contact>
 
+@{
+    ViewData["NotiCount"] = @ViewBag.NotificationCount;
+}
 <!-- Display the dynamic data -->
 
         @foreach (var contact in Model)
@@ -26,3 +29,8 @@
     }
         }
 
+        <script>
+
+
+    document.querySelector("#notification").innerHTML = '@ViewBag.NotificationCount'
+        </script>
