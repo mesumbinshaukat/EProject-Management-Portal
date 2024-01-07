@@ -13,6 +13,10 @@ This project aims to create an online portal for Symphony Ltd., a private instit
 - **Frontend:** HTML, CSS, JavaScript
 - **Backend:** C# programming language
 
+## .Net MVC Nugget Packages
+![Screenshot of packages used in this Symphony eProject](https://github.com/mesumbinshaukat/EProject-Management-Portal/blob/main/temp/images/Packages.PNG?raw=true)
+
+
 ## Features
 
 **Course Information:** Display a comprehensive list of courses offered by Symphony Ltd., along with covered topics and respective fees.
@@ -31,6 +35,31 @@ The project utilizes a SQL database model comprising entities such as Course, St
 
 ## How to Use
 
-1. **Clone the Repository:**
+**Clone the Repository:**
    ```bash
    git clone https://github.com/mesumbinshaukat/EProject-Management-Portal.git
+   ```
+
+
+## Run Project
+> Clone this repository to your desktop.
+
+> Open project  solution file `Symphony-LTD.sln`
+
+> Open Package Manager Console ![Package Manager Console](https://github.com/mesumbinshaukat/EProject-Management-Portal/blob/main/temp/images/Package%20Manager%20Console.png?raw=true)
+
+> **❗Note:** Change the `DefaultConnection` in `appsettings.json` according to your SSMS configuation. 
+
+> Run this command to generate the database in the SSMS: 
+``` 
+add-migration Init
+update-database
+```
+
+> Build project with `IIS Express`. 
+
+> **Now try out the project. 💥**
+
+## Navigation
+- **Dashboard**: `/admin/login`
+- **Landing Page**: `/index`
