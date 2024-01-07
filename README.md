@@ -48,14 +48,38 @@ The project utilizes a SQL database model comprising entities such as Course, St
 
 > Open Package Manager Console ![Package Manager Console](https://github.com/mesumbinshaukat/EProject-Management-Portal/blob/main/temp/images/Package%20Manager%20Console.png?raw=true)
 
+> Run this command in `Nugget Package Manager` to generate the database in the SSMS: 
+```
+add-migration Init
+```
+```
+update-database
+```
+
+> [!TIP]
+> Turn on your **2FA** of your gmail account.
+
+> Now setup your Gmail SMTP password. Visit [SMTP Account Password](https://myaccount.google.com/apppasswords)
+
+> Generate the password. Then copy and paste in the notepad and save it anywhere.
+
+> Open terminal in `Visual Studio` on the root directory of repository. (Press `CTRL + Backtick/Tilda`)
+
+> Run the command below:
+```
+dotnet user-secrets init
+```
+
+> Now copy the password which was generated and paste it accordingly:
+```
+dotnet user-secrets set "Gmail_Smtp_Pass" "PASTE_HERE"
+```
+
 > [!Note]
 >  Change the `DefaultConnection` in `appsettings.json` according to your SSMS configuation. 
 
-> Run this command to generate the database in the SSMS: 
-``` 
-add-migration Init
-update-database
-```
+> [!IMPORTANT]
+> Add the `Admin` credentials directly to the `Admin` model in `SSMS` because there's no `Sign Up` page for admin. 
 
 > Build project with `IIS Express`. 
 
