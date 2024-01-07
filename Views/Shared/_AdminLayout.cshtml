@@ -19,6 +19,13 @@
         <!-- icons -->
         <link href="~/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 
+    <!-- third party css -->
+    <link href="assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/datatables.net-select-bs5/css//select.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <!-- third party css end -->
+
         <!-- Plugins css -->
         <link href="~/assets/libs/spectrum-colorpicker2/spectrum.min.css" rel="stylesheet" type="text/css">
         <link href="~/assets/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
@@ -366,6 +373,13 @@
                             </div>
                         </li>
 
+                            <li>
+                                <a asp-controller="FAQ" asp-action="Index">
+                                    <i class="mdi mdi-forum-outline"></i>
+                                    <span> FAQ's </span>
+                                </a>
+                            </li>
+
                     </ul>
 
                 </div>
@@ -544,6 +558,24 @@
     <script src="~/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
     <script src="~/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
     <script src="~/assets/libs/feather-icons/feather.min.js"></script>
+
+    <!-- third party js -->
+    <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="assets/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <script src="assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="assets/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+    <script src="assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="assets/libs/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="assets/libs/datatables.net-select/js/dataTables.select.min.js"></script>
+    <script src="assets/libs/pdfmake/build/pdfmake.min.js"></script>
+    <script src="assets/libs/pdfmake/build/vfs_fonts.js"></script>
+    <!-- third party js ends -->
+    <!-- Datatables init -->
+    <script src="assets/js/pages/datatables.init.js"></script>
 
     <!-- knob plugin -->
     <script src="~/assets/libs/jquery-knob/jquery.knob.min.js"></script>
