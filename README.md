@@ -42,13 +42,13 @@ The project utilizes a SQL database model comprising entities such as Course, St
 
 
 ## Run Project
-> Clone this repository to your desktop.
+Clone this repository to your desktop.
 
-> Open project  solution file `Symphony-LTD.sln`
+Open project  solution file `Symphony-LTD.sln`
 
-> Open Package Manager Console ![Package Manager Console](https://github.com/mesumbinshaukat/EProject-Management-Portal/blob/main/temp/images/Package%20Manager%20Console.png?raw=true)
+Open Package Manager Console ![Package Manager Console](https://github.com/mesumbinshaukat/EProject-Management-Portal/blob/main/temp/images/Package%20Manager%20Console.png?raw=true)
 
-> Run this command in `Nugget Package Manager` to generate the database in the SSMS: 
+Run this command in `Nugget Package Manager` to generate the database in the SSMS: 
 ```
 add-migration Init
 ```
@@ -59,18 +59,18 @@ update-database
 > [!TIP]
 > Turn on your **2FA** of your gmail account.
 
-> Now setup your Gmail SMTP password. Visit [SMTP Account Password](https://myaccount.google.com/apppasswords)
+Now setup your Gmail SMTP password. Visit [SMTP Account Password](https://myaccount.google.com/apppasswords)
 
-> Generate the password. Then copy and paste in the notepad and save it anywhere.
+Generate the password. Then copy and paste in the notepad and save it anywhere.
 
-> Open terminal in `Visual Studio` on the root directory of repository. (Press `CTRL + Backtick/Tilda`)
+Open terminal in `Visual Studio` on the root directory of repository. (Press `CTRL + Backtick/Tilda`)
 
-> Run the command below:
+Run the command below:
 ```
 dotnet user-secrets init
 ```
 
-> Now copy the password which was generated and paste it accordingly:
+Now copy the password which was generated and paste it accordingly:
 ```
 dotnet user-secrets set "Gmail_Smtp_Pass" "PASTE_HERE"
 ```
@@ -81,9 +81,9 @@ dotnet user-secrets set "Gmail_Smtp_Pass" "PASTE_HERE"
 > [!IMPORTANT]
 > Add the `Admin` credentials directly to the `Admin` model in `SSMS` because there's no `Sign Up` page for admin. 
 
-> Build project with `IIS Express`. 
+Build project with `IIS Express`. 
 
-> **Now try out the project. 💥**
+**Now try out the project. 💥**
 
 ## Navigation
 - **Dashboard**: `/admin/login`
