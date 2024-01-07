@@ -448,7 +448,7 @@ namespace Symphony_LTD.Controllers
             userContact.Read = true;
             _db._Contact.Update(userContact);
             _db.SaveChanges();
-            return RedirectToAction("Index", "Admin");
+            return View();
 
         }
 

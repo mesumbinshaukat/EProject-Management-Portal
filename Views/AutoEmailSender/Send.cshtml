@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Send Emai";
+    Layout = "_AdminLayout";
+}
+
+<!-- ============================================================== -->
+<!-- Start Page Content here -->
+<!-- ============================================================== -->
+
+<div class="content-page">
+    <div class="content">
+        <h1>Send Email</h1>
+        <h3>Fill The Required Fields <span class="text-danger fw-bold">*</span></h3>
+        <hr />
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <form method="post" action="@Url.Action("Send")">
+                @Html.AntiForgeryToken();
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <label class="form-label">Recipient Email <span class="text-danger fw-bold">*</span></label>
+                        @if(ViewBag.SendEmail != null){
+                            <input class="form-control" value="@ViewBag.SendEmail" name="recipient_email" required />
+
+                        }else
+                        {
+                            <input class="form-control" name="recipient_email" placeholder="john.doe@gmail.com" required />
+                        }
+
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <label class="form-label">Recipient Name <span class="text-danger fw-bold">*</span></label>
+                        <input class="form-control" name="recipient_name" placeholder="John Doe" required />
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <label class="form-label">Subject <span class="text-danger fw-bold">*</span></label>
+                        <input class="form-control" name="subject" placeholder="Subject" required />
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <label class="form-label">Message <span class="text-danger fw-bold">*</span></label>
+                        <textarea rows="6" placeholder="Message..." name="message" class="form-control" required></textarea>
+                    </div>
+                    <div class="col-12 text-center">
+                        <input type="submit" class="btn btn-outline-success" value="Send"/>
+                    </div>
+
+                </div>
+            </form>
+
+         
+
+        </div> <!-- container -->
+
+    </div> <!-- content -->
+    
+
+</div>
+
+<!-- ============================================================== -->
+<!-- End Page content -->
+<!-- ============================================================== -->
