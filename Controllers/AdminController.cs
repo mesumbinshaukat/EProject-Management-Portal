@@ -446,11 +446,13 @@ namespace Symphony_LTD.Controllers
         {
             var userContact = _db._Contact.FirstOrDefault(s => s.ContactId == id);
 
-            _db.Entry(userContact).State = EntityState.Modified;
+            if (userContact != null)
+            {
+                _db.Entry(userContact).State = EntityState.Modified;
+                userContact.Read = true;
+                _db.SaveChanges();
+            }
 
-            userContact.Read = true;
-            _db._Contact.Update(userContact);
-            _db.SaveChanges();
             return RedirectToAction("Contact");
 
         }
