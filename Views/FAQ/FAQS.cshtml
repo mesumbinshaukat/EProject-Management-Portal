@@ -1,0 +1,53 @@
+﻿@model IEnumerable<FAQ>
+@{
+    ViewData["Title"] = "FAQ's";
+    Layout = "_Layout";
+}
+
+
+
+<section class="bg-home bg-gradient text-light" style="margin-top:-80px;" id="home">
+    <div class="home-center">
+        <div class="home-desc-center">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-sm-6 ">
+                        <h1 class="text-light">FAQS</h1>
+
+                        <h4 class="text-light">Frequently Asked Question</h4>
+                        <hr />
+                        <div class="row">
+                            @foreach (var i in Model.Select((value, index) => new { Value = value, Index = index }))
+                            {
+                                <div class="col-lg-12">
+                                    <p class="d-inline-flex gap-1">
+                                        <a class="btn btn-outline-light" data-bs-toggle="collapse" href="#collapse@(i.Index)" role="button" aria-expanded="false" aria-controls="collapse@(i.Index)">
+                                            @i.Value.Question
+                                        </a>
+                                    </p>
+                                    <div class="collapse" id="collapse@(i.Index)">
+                                        <div class="card card-body text-dark">
+                                            @i.Value.Answer
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+
+                    </div>
+                    <div class="col-lg-5 offset-lg-1 col-sm-6">
+                        <div class="home-img mo-mt-20">
+                            <img src="~/landing_page_images/home-img.png" alt="" class="img-fluid mx-auto d-block">
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+
+            </div>
+            <!-- end container-fluid -->
+        </div>
+    </div>
+</section>
+
+

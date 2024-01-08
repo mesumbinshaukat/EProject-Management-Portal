@@ -57,5 +57,18 @@ namespace Symphony_LTD.Controllers
         }
 
 
+        public IActionResult FAQS ()
+        {
+
+            IEnumerable<FAQ> data = _db.FAQS.ToList();
+            if(data != null)
+            {
+               return View(data);           
+
+            }
+            return View();
+        }
+
+
     }
 }
