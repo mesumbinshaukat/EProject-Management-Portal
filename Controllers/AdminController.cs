@@ -523,7 +523,7 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Branch = _db.Branches.ToList();
                 return View();
             }
-
+            TempData["failed"] = "Please Log In!";
             return RedirectToAction("LogIn");
         }
 
@@ -558,8 +558,8 @@ namespace Symphony_LTD.Controllers
 
                 return RedirectToAction("ViewBranches");
             }
-            TempData["failed"] = "Please Log In!";
-            return RedirectToAction("LogIn");
+            
+            return RedirectToAction("ViewBranches");
         }
 
     }
