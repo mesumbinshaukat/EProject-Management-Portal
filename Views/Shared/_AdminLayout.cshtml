@@ -9,6 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     
+    <!-- Toastr.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+
         <!-- App favicon -->
         <link rel="shortcut icon" href="~/assets/images/favicon.ico">
 
@@ -349,11 +352,25 @@
                         </li>
 
                         <li>
-                            <a asp-controller="Admin" asp-action="Branches">
-                                <i class="mdi mdi-briefcase-variant-outline"></i>
-                                <span> Add Branch </span>
+                            <a href="#branch" data-bs-toggle="collapse">
+                                <i class="mdi mdi-clipboard-outline"></i>
+                                <span> Branch </span>
+                                <span class="menu-arrow"></span>
                             </a>
+                                <div class="collapse" id="branch">
+                                <ul class="nav-second-level">
+                                        <li>
+                                            <a asp-controller="Admin" asp-action="_Branches">Add Branch</a>
+                                        </li>                                  
+                                        <li>
+                                            <a asp-controller="Admin" asp-action="ViewBranches">View Branches</a>
+                                        </li>
+                                    
+                                </ul>
+                            </div>
                         </li>
+
+                      
 
                         <li>
                             <a href="#contacts" data-bs-toggle="collapse">

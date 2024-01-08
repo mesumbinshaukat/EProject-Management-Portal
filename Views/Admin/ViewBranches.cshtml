@@ -1,0 +1,165 @@
+﻿@model Symphony_LTD.Models.Branch
+@{
+    ViewData["Title"] = "Branch List";
+    Layout = "_AdminLayout";
+}
+
+<div class="content-page">
+
+    <div class="content">
+
+        <h1>
+            Branches
+        </h1>
+        <h3>
+            Branch List
+        </h3>
+        <hr />
+
+        <div class="table-responsive">
+            <table class="table table-hover mb-0 text-center">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Branch Name</th>
+                        <th>Branch Code</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>Country</th>
+                        <th>Zip/Postal Code</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var i in ViewBag.Branch)
+                    {
+                    
+                    <tr>
+                        <td>@i.Id</td>
+                        <td>@i.Branches</td>
+                        <td>@i.Code</td>
+                        <td>@i.Address</td>
+                        <td>@i.City</td>
+                        <td>@i.Country</td>
+                        <td>@i.Postal</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-6">
+                                        
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_@i.Id">
+                                            Edit
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal_@i.Id" tabindex="-1" aria-labelledby="exampleModalLabel_@i.Id" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form method="post" asp-action="ViewBranches">
+                                                            @Html.AntiForgeryToken()
+                                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                                            <div class="row">
+
+                                                                <div class="col-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label">Id</label>
+                                                                        <input class="form-control" value="@i.Id" placeholder="Id" required />
+                                                                       
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label" asp-for="Branches"></label>
+                                                                        <input asp-for="Branches" class="form-control" placeholder="Branch Name" value="@i.Branches" required />
+                                                                        <span asp-validation-for="Branches" class="text-danger"></span>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label" asp-for="Code"></label>
+                                                                        <input asp-for="Code" class="form-control" placeholder="Branch Code" value="@i.Code" required />
+                                                                        <span asp-validation-for="Code" class="text-danger"></span>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label" asp-for="Address"></label>
+                                                                        <input asp-for="Address" class="form-control" placeholder="Address" value="@i.Address" required />
+                                                                        <span asp-validation-for="Address" class="text-danger"></span>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label" asp-for="City"></label>
+                                                                        <input asp-for="City" class="form-control" placeholder="City" value="@i.City" required />
+                                                                        <span asp-validation-for="City" class="text-danger"></span>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label" asp-for="Country"></label>
+                                                                        <input asp-for="Country" class="form-control" value="@i.Country" placeholder="Country" required />
+                                                                        <span asp-validation-for="Country" class="text-danger"></span>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label" asp-for="Postal"></label>
+                                                                        <input asp-for="Postal" class="form-control" placeholder="Zip/Postal Code" value="@i.Postal" required />
+                                                                        <span asp-validation-for="Postal" class="text-danger"></span>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-12 mt-3">
+                                                                    <div class="form-group text-center">
+                                                                        <input type="submit" class="btn btn-dark" value="Submit" />
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                
+                                <div class="col-6">
+                                        <a class="btn btn-danger">Delete</a>
+                                </div>
+
+
+                            </div>
+                            </td>
+                    </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+                }

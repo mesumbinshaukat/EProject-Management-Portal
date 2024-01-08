@@ -486,7 +486,7 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("LogIn");
         }
 
-        public IActionResult Branches ()
+        public IActionResult _Branches ()
         {
             if (HttpContext.Session.GetString("s_email") != null)
             {
@@ -499,13 +499,68 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("LogIn");
         }
 
-        public IActionResult Branches (Branch data)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult _Branches (Branch data)
         {
-           
+            if (ModelState.IsValid)
+            {
+                _db.Branches.Add(data);
+                _db.SaveChanges();
+                return RedirectToAction("ViewBranches");
+            }
 
             return RedirectToAction("Index");
         }
 
+
+        public IActionResult ViewBranches()
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                ViewBag.Branch = _db.Branches.ToList();
+                return View();
+            }
+
+            return RedirectToAction("LogIn");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ViewBranches(Branch obj, int? id)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var existingBranch = _db.Branches.FirstOrDefault(b => b.Id == id);
+
+                if(existingBranch != null)
+                {
+                    existingBranch.Branches = obj.Branches;
+                    existingBranch.Address = obj.Address;
+                    existingBranch.Code = obj.Code;
+                    existingBranch.Postal = obj.Postal;
+                    existingBranch.City = obj.City;
+                    existingBranch.Country = obj.Country;
+
+                    _db.Branches.Update(existingBranch);
+                    _db.SaveChanges();
+
+                    TempData["success"] = "Branch Updated";
+
+                    return RedirectToAction("ViewBranches");
+                }
+
+                TempData["failed"] = "Unexpected Error Occured";
+
+
+                return RedirectToAction("ViewBranches");
+            }
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
+        }
 
     }
 }

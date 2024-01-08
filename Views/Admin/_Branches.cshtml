@@ -12,15 +12,15 @@
         <h3>Our Currently Available Branches</h3>
         <hr />
         <div class="container">
-            <form method="post" asp-action="Branches">
-
+            <form method="post" asp-action="_Branches">
+                @Html.AntiForgeryToken()
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="row">
                     <div class="col-6">
                 <div class="form-group">
                             <label class="form-label" asp-for="Branches"></label>
-                            <input asp-for="Branches" class="form-control" placeholder="Branches" required/>
+                            <input asp-for="Branches" class="form-control" placeholder="Branch Name" required/>
                             <span asp-validation-for="Branches" class="text-danger"></span>
                 </div>
 
@@ -65,8 +65,8 @@
                 </div>
 
                     </div>
-                 <div class="col-6">
-                     <div class="form-group">
+                 <div class="col-12 mt-3">
+                     <div class="form-group text-center">
                          <input type="submit" class="btn btn-dark" value="Submit"/>
                      </div>
                  </div>
