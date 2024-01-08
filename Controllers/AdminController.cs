@@ -485,5 +485,27 @@ namespace Symphony_LTD.Controllers
 
             return RedirectToAction("LogIn");
         }
+
+        public IActionResult Branches ()
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                
+                return View();
+            }
+
+            return RedirectToAction("LogIn");
+        }
+
+        public IActionResult Branches (Branch data)
+        {
+           
+
+            return RedirectToAction("Index");
+        }
+
+
     }
 }

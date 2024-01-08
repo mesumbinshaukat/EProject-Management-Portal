@@ -1,0 +1,79 @@
+﻿@model Symphony_LTD.Models.Branch
+
+@{
+    ViewData["Title"] = "Branches";
+    Layout = "_AdminLayout";
+}
+
+
+<div class="content-page">
+    <div class="content">
+        <h1>Branches</h1>
+        <h3>Our Currently Available Branches</h3>
+        <hr />
+        <div class="container">
+            <form method="post" asp-action="Branches">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="row">
+                    <div class="col-6">
+                <div class="form-group">
+                            <label class="form-label" asp-for="Branches"></label>
+                            <input asp-for="Branches" class="form-control" placeholder="Branches" required/>
+                            <span asp-validation-for="Branches" class="text-danger"></span>
+                </div>
+
+                    </div>
+                    <div class="col-6">
+                <div class="form-group">
+                            <label class="form-label" asp-for="Code"></label>
+                            <input asp-for="Code" class="form-control" placeholder="Branch Code" required />
+                            <span asp-validation-for="Code" class="text-danger"></span>
+                </div>
+
+                    </div>
+                    <div class="col-6">
+                <div class="form-group">
+                            <label class="form-label" asp-for="Address"></label>
+                            <input asp-for="Address" class="form-control" placeholder="Address" required />
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+
+                    </div>
+                    <div class="col-6">
+                <div class="form-group">
+                            <label class="form-label" asp-for="City"></label>
+                            <input asp-for="City" class="form-control" placeholder="City" required />
+                            <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+
+                    </div>
+                    <div class="col-6">
+                <div class="form-group">
+                            <label class="form-label" asp-for="Country"></label>
+                            <input asp-for="Country" class="form-control" placeholder="Country" required />
+                            <span asp-validation-for="Country" class="text-danger"></span>
+                </div>
+
+                    </div>
+                    <div class="col-6">
+                <div class="form-group">
+                            <label class="form-label" asp-for="Postal"></label>
+                            <input asp-for="Postal" class="form-control" placeholder="Zip/Postal Code" required />
+                            <span asp-validation-for="Postal" class="text-danger"></span>
+                </div>
+
+                    </div>
+                 <div class="col-6">
+                     <div class="form-group">
+                         <input type="submit" class="btn btn-dark" value="Submit"/>
+                     </div>
+                 </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

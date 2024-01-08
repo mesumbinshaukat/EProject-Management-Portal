@@ -14,5 +14,6 @@ namespace Symphony_LTD.Data
         public DbSet<FAQ> FAQS { get; set; }
         public DbSet<Exam> Exams { get; set; }
         public DbSet<Result> Results { get; set; }
+        public DbSet<Branch> Branches { get; set; }
     }
 }
