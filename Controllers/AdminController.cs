@@ -538,12 +538,12 @@ namespace Symphony_LTD.Controllers
 
                 if(existingBranch != null)
                 {
-                    existingBranch.Branches = obj.Branches;
-                    existingBranch.Address = obj.Address;
-                    existingBranch.Code = obj.Code;
-                    existingBranch.Postal = obj.Postal;
-                    existingBranch.City = obj.City;
-                    existingBranch.Country = obj.Country;
+                    existingBranch.Branches = obj.Branches ?? existingBranch.Branches;
+                    existingBranch.Address = obj.Address ?? existingBranch.Address;
+                    existingBranch.Code = obj.Code ?? existingBranch.Code;
+                    existingBranch.Postal = obj.Postal ?? existingBranch.Postal;
+                    existingBranch.City = obj.City ?? existingBranch.City;
+                    existingBranch.Country = obj.Country ?? existingBranch.Country;
 
                     _db.Branches.Update(existingBranch);
                     _db.SaveChanges();

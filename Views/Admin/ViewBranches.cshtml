@@ -65,71 +65,64 @@
                                                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                                                             <div class="row">
-
                                                                 <div class="col-6">
                                                                     <div class="form-group">
                                                                         <label class="form-label">Id</label>
-                                                                        <input class="form-control" value="@i.Id" placeholder="Id" required />
-                                                                       
+                                                                        <input asp-for="Id" class="form-control" value="@i.Id" readonly />
+                                                                        <span asp-validation-for="Id" class="text-danger"></span>
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="col-6">
                                                                     <div class="form-group">
-                                                                        <label class="form-label" asp-for="Branches"></label>
-                                                                        <input asp-for="Branches" class="form-control" placeholder="Branch Name" value="@i.Branches" required />
+                                                                        <label class="form-label" asp-for="Branches">Branch Name</label>
+                                                                        <input asp-for="Branches" class="form-control" value="@i.Branches" required />
                                                                         <span asp-validation-for="Branches" class="text-danger"></span>
                                                                     </div>
-
                                                                 </div>
                                                                 <div class="col-6">
                                                                     <div class="form-group">
-                                                                        <label class="form-label" asp-for="Code"></label>
-                                                                        <input asp-for="Code" class="form-control" placeholder="Branch Code" value="@i.Code" required />
+                                                                        <label class="form-label" asp-for="Code">Branch Code</label>
+                                                                        <input asp-for="Code" class="form-control" value="@i.Code" required />
                                                                         <span asp-validation-for="Code" class="text-danger"></span>
                                                                     </div>
-
                                                                 </div>
                                                                 <div class="col-6">
                                                                     <div class="form-group">
-                                                                        <label class="form-label" asp-for="Address"></label>
-                                                                        <input asp-for="Address" class="form-control" placeholder="Address" value="@i.Address" required />
+                                                                        <label class="form-label" asp-for="Address">Address</label>
+                                                                        <input asp-for="Address" class="form-control" value="@i.Address" required />
                                                                         <span asp-validation-for="Address" class="text-danger"></span>
                                                                     </div>
-
                                                                 </div>
                                                                 <div class="col-6">
                                                                     <div class="form-group">
-                                                                        <label class="form-label" asp-for="City"></label>
-                                                                        <input asp-for="City" class="form-control" placeholder="City" value="@i.City" required />
+                                                                        <label class="form-label" asp-for="City">City</label>
+                                                                        <input asp-for="City" class="form-control" value="@i.City" required />
                                                                         <span asp-validation-for="City" class="text-danger"></span>
                                                                     </div>
-
                                                                 </div>
                                                                 <div class="col-6">
                                                                     <div class="form-group">
-                                                                        <label class="form-label" asp-for="Country"></label>
-                                                                        <input asp-for="Country" class="form-control" value="@i.Country" placeholder="Country" required />
+                                                                        <label class="form-label" asp-for="Country">Country</label>
+                                                                        <input asp-for="Country" class="form-control" value="@i.Country" required />
                                                                         <span asp-validation-for="Country" class="text-danger"></span>
                                                                     </div>
-
                                                                 </div>
                                                                 <div class="col-6">
                                                                     <div class="form-group">
-                                                                        <label class="form-label" asp-for="Postal"></label>
-                                                                        <input asp-for="Postal" class="form-control" placeholder="Zip/Postal Code" value="@i.Postal" required />
+                                                                        <label class="form-label" asp-for="Postal">Zip/Postal Code</label>
+                                                                        <input asp-for="Postal" class="form-control" value="@i.Postal" required />
                                                                         <span asp-validation-for="Postal" class="text-danger"></span>
                                                                     </div>
-
                                                                 </div>
                                                                 <div class="col-12 mt-3">
                                                                     <div class="form-group text-center">
                                                                         <input type="submit" class="btn btn-dark" value="Submit" />
                                                                     </div>
                                                                 </div>
-
                                                             </div>
                                                         </form>
+
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
