@@ -599,5 +599,53 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("LogIn");
         }
 
+        public IActionResult AboutUs(About data, IFormFile img_one, IFormFile img_two)
+        {
+            if (img_one != null)
+            {
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/media/about");
+                string filepath = Path.Combine(path, img_one.FileName);
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+
+                var stream = new FileStream(filepath, FileMode.Create);
+                img_one.CopyTo(stream);
+                string? filename = img_one.FileName;
+                data.ImageOne = filename;
+            }
+            if (img_two != null)
+            {
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/media/about");
+                string filepath = Path.Combine(path, img_two.FileName);
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+
+                var stream = new FileStream(filepath, FileMode.Create);
+                img_two.CopyTo(stream);
+                string? filename = img_two.FileName;
+                data.ImageTwo = filename;
+            }
+
+            if (ModelState.IsValid)
+            {
+                _db._AboutUs.Add(data);
+                _db.SaveChanges();
+                TempData["success"] = "Content Added To About Us page.";
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
+
+
     }
 }
