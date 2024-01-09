@@ -647,7 +647,19 @@ namespace Symphony_LTD.Controllers
             return View();
         }
 
-
+        public IActionResult EditAbout ()
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                
+                ViewBag.Content = _db._AboutUs.ToList(); 
+                return View();
+            }
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
+        }
 
     }
 }

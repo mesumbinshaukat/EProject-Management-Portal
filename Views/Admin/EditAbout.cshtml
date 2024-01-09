@@ -1,0 +1,86 @@
+﻿@model Symphony_LTD.Models.About
+@{
+    ViewData["title"] = "Edit About Us Content";
+    Layout = "_AdminLayout";
+}
+
+<div class="content-page">
+    <div class="content">
+        <h1>Edit</h1>
+        <h3>Modify The About Us Page Content</h3>
+        <hr />
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <form asp-action="EditAbout" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row">
+                            @foreach (var i in ViewBag.Content)
+                            {
+                            <div class="col-6">
+                                <label asp-for="HeadingOne" class="form-label"></label>
+                                    <input class="form-control" asp-for="HeadingOne" value="@i.HeadingOne" placeholder="First Heading" required/>
+                                    <span asp-validation-for="HeadingOne" class="text-danger"></span>
+                            </div>
+                                <div class="col-6">
+                                    <label asp-for="HeadingTwo" class="form-label"></label>
+                                    <input class="form-control" asp-for="HeadingTwo" value="@i.HeadingTwo" placeholder="Second Heading" required />
+                                    <span asp-validation-for="HeadingTwo" class="text-danger"></span>
+                            </div>
+                                <div class="col-6">
+                                    <label asp-for="ImageOne" class="form-label"></label>
+                                    <input type="file" class="form-control" asp-for="ImageOne" required />
+                                    <p class="text-danger"><cite>@i.ImageOne</cite></p>
+                                    <span asp-validation-for="ImageOne" class="text-danger"></span>
+                            </div>
+                                <div class="col-6">
+                                    <label asp-for="ImageTwo" class="form-label"></label>
+                                    <input class="form-control" type="file" asp-for="ImageTwo" required />
+                                    <p class="text-danger"><cite>@i.ImageTwo</cite></p>
+                                    <span asp-validation-for="ImageTwo" class="text-danger"></span>
+                            </div>
+                                <div class="col-6">
+                                    <label asp-for="ParagraphOne" class="form-label"></label>
+
+                                   <textarea class="form-control" asp-for="ParagraphOne" placeholder="Write Something..." required>@i.ParagraphOne</textarea>
+                                    <span asp-validation-for="ParagraphOne" class="text-danger"></span>
+                            </div>
+                                <div class="col-6">
+                                    <label asp-for="ParagraphTwo" class="form-label"></label>
+
+                                    <textarea class="form-control" asp-for="ParagraphTwo" placeholder="Write Something..." required>@i.ParagraphTwo</textarea>
+                                    <span asp-validation-for="ParagraphTwo" class="text-danger"></span>
+                            </div>
+                                <div class="col-6">
+                                    <label asp-for="ParagraphThree" class="form-label"></label>
+
+                                    <textarea class="form-control" asp-for="ParagraphThree" placeholder="Write Something..." required>@i.ParagraphThree</textarea>
+                                    <span asp-validation-for="ParagraphThree" class="text-danger"></span>
+                            </div>
+                                <div class="col-6">
+                                    <label asp-for="ParagraphFour" class="form-label"></label>
+
+                                    <textarea class="form-control" asp-for="ParagraphFour" placeholder="Write Something..." required>@i.ParagraphFour</textarea>
+                                    <span asp-validation-for="ParagraphFour" class="text-danger"></span>
+                            </div>
+                                
+                            <div class="col-12 mt-3">
+                                    
+                                    <input class="btn btn-outline-success" type="submit" value="Modify"/>
+                                    
+                            </div>
+                                
+
+                            }
+
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
