@@ -65,7 +65,7 @@
                                                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                                                             <div class="row">
-                                                                <div class="col-6">
+                                                                <div class="col-6 d-none">
                                                                     <div class="form-group">
                                                                         <label class="form-label">Id</label>
                                                                         <input asp-for="Id" class="form-control" value="@i.Id" readonly />
@@ -134,7 +134,7 @@
                                 </div>
                                 
                                 <div class="col-6">
-                                        <a class="btn btn-danger">Delete</a>
+                                        <a asp-controller="Admin" asp-action="DeleteBranch" asp-route-id="@i.Id" class="btn btn-danger">Delete</a>
                                 </div>
 
 

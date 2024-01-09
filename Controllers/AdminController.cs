@@ -516,9 +516,10 @@ namespace Symphony_LTD.Controllers
             {
                 _db.Branches.Add(data);
                 _db.SaveChanges();
+                TempData["success"] = "Branch Added " + data.Branches;
                 return RedirectToAction("ViewBranches");
             }
-
+            TempData["failed"] = "Database error. Please contact the developer or support team.";
             return RedirectToAction("Index");
         }
 
@@ -567,8 +568,35 @@ namespace Symphony_LTD.Controllers
 
                 return RedirectToAction("ViewBranches");
             }
-            
+            TempData["failed"] = "Database Error";
             return RedirectToAction("ViewBranches");
+        }
+
+       
+        public IActionResult DeleteBranch (int? id)
+        {
+            var branch = _db.Branches.FirstOrDefault(a => a.Id == id);
+            if (branch != null)
+            {
+                _db.Branches.Remove(branch);
+                _db.SaveChanges();
+                TempData["success"] = "Branch Deleted";
+                return RedirectToAction("ViewBranches");
+            }
+            TempData["failed"] = "Branch not deleted. Error: Trying to delete null value.";
+            return RedirectToAction("ViewBranches");
+        }
+
+        public IActionResult AboutUs()
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                return View();
+            }
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
         }
 
     }

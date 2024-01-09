@@ -24,8 +24,21 @@
                 </div>
             </div>
         </div>
-        <!-- end row -->
 
+        @if (TempData["failed"] != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                An unexpected error occurred while submitting the form.
+            </div>
+        }
+        
+        @if (TempData["success"] != null)
+        {
+        <div class="alert alert-success" role="alert">
+            Form submitted successfully!
+        </div>
+            
+        }
         <div class="row">
             <div class="col-lg-4">
                 <div class="get-in-touch">
@@ -205,8 +218,3 @@
     <!-- end container-fluid -->
 </section>
 <!-- contact end -->
-@section Scripts {
-    @{
-        <partial name="_ValidationScriptsPartial" />
-    }
-                }

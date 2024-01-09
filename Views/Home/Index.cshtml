@@ -202,90 +202,30 @@
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <div class="title text-center">
-                    <h6 class="text-primary small-title">Services</h6>
-                    <h4>What we do</h4>
-                    <p class="text-muted">At solmen va esser far uniform grammatica.</p>
+                    <h6 class="text-primary small-title">Course</h6>
+                    <h4>Available Courses</h4>
+                    <p class="text-muted">These Are The Currently Available Courses</p>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-xl-4 col-sm-6">
-                <div class="services-box p-4 bg-white mt-4">
-                    <div class="services-img float-start me-4">
-                        <img src="~/landing_page_images/icons/layers.png" alt="">
-                    </div>
-                    <h5>Responsive Layouts</h5>
-                    <div class="overflow-hidden">
-                        <p class="text-muted">The new common language will be more simple and regular than the existing European languages.</p>
-                        <a asp-controller="Home" asp-action="Index" class="text-custom">Read more...</a>
+            @foreach (var i in ViewBag.Courses)
+            {
+                <div class="col-xl-4 col-sm-6">
+                    <div class="services-box p-4 bg-white mt-4">
+                        <div class="services-img float-start me-4">
+                            <img src="~/landing_page_images/icons/layers.png" alt="">
+                        </div>
+                        <h5>@i.CourseName</h5>
+                        <div class="overflow-hidden">
+                            <p class="text-muted">@i.CourseDetails</p>
+                            <a asp-controller="User" asp-action="Courses" class="text-custom">Learn More...</a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
+           
 
-            <div class="col-xl-4 col-sm-6">
-                <div class="services-box p-4 bg-white mt-4">
-                    <div class="services-img float-start me-4">
-                        <img src="~/landing_page_images/icons/core.png" alt="">
-                    </div>
-                    <h5>Based on Bootstrap UI</h5>
-                    <div class="overflow-hidden">
-                        <p class="text-muted">If several languages coalesce the grammar language is more than that of indual languages.</p>
-                        <a asp-controller="Home" asp-action="Index" class="text-custom">Read more...</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-4 col-sm-6">
-                <div class="services-box p-4 bg-white mt-4">
-                    <div class="services-img float-start me-4">
-                        <img src="~/landing_page_images/icons/paperdesk.png" alt="">
-                    </div>
-                    <h5>Creative Design</h5>
-                    <div class="overflow-hidden">
-                        <p class="text-muted">It will be as simple as occidental it will be to an english person. It will be as simple as occidental</p>
-                        <a asp-controller="Home" asp-action="Index" class="text-custom">Read more...</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-4 col-sm-6">
-                <div class="services-box p-4 bg-white mt-4">
-                    <div class="services-img float-start me-4">
-                        <img src="~/landing_page_images/icons/solarsystem.png" alt="">
-                    </div>
-                    <h5>Awesome Support</h5>
-                    <div class="overflow-hidden">
-                        <p class="text-muted">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam nisi ut</p>
-                        <a asp-controller="Home" asp-action="Index" class="text-custom">Read more...</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-4 col-sm-6">
-                <div class="services-box p-4 bg-white mt-4">
-                    <div class="services-img float-start me-4">
-                        <img src="~/landing_page_images/icons/datatext.png" alt="">
-                    </div>
-                    <h5>Easy to customize</h5>
-                    <div class="overflow-hidden">
-                        <p class="text-muted">Everyone realizes why a new common language would be one could refuse to pay translators.</p>
-                        <a asp-controller="Home" asp-action="Index" class="text-custom">Read more...</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-4 col-sm-6">
-                <div class="services-box p-4 bg-white mt-4">
-                    <div class="services-img float-start me-4">
-                        <img src="~/landing_page_images/icons/browserscript.png" alt="">
-                    </div>
-                    <h5>Quality Code</h5>
-                    <div class="overflow-hidden">
-                        <p class="text-muted">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis deleniti atque</p>
-                        <a asp-controller="Home" asp-action="Index" class="text-custom">Read more...</a>
-                    </div>
-                </div>
-            </div>
 
         </div>
         <!-- end row -->

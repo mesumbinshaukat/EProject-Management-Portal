@@ -31,7 +31,7 @@ namespace Symphony_LTD.Controllers
                     TempData["success"] = "Submitted!";
                     return RedirectToAction("Contact");
                 }
-            
+            TempData["failed"] = "Error!";
             return View(obj);
         }
 
