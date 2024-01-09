@@ -1,0 +1,77 @@
+﻿@model IEnumerable<About>
+@{
+    ViewData["Title"] = "About Us - Symphony LTD";
+    Layout = "_Layout";
+}
+
+
+<style>
+    .nav-link {
+        color: black !important;
+    }
+
+    
+</style>
+
+
+
+<section class="section" id="contact">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="title text-center mb-5">
+                    <h6 class="text-primary small-title">About <span class="text-warning">Us</span></h6>
+                    <h4>Do Want To Know More About Us?</h4>
+                    <p class="text-muted"><cite>Learn more About Us, And What We Do.</cite></p>
+                </div>
+            </div>
+        </div>
+
+        @foreach (var i in Model)
+        {
+            <div class="row mt-3 text-center">
+                <h3>@i.HeadingOne</h3>
+                <hr />
+                <div class="col-12">
+                    <div class="row align-items-center">
+                        <div class="col-md-4 mb-4 mb-md-0">
+                            <p>@i.ParagraphOne</p>
+                        </div>
+                        <div class="col-md-4 mb-4 mb-md-0">
+                            <div class="center-image">
+                                <img src="~/media/about/@i.ImageOne" width="50%">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <p>@i.ParagraphTwo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <div class="row mt-3 text-center">
+                <h3>@i.HeadingTwo</h3>
+                <hr />
+                <div class="col-12">
+                    <div class="row align-items-center">
+                        <div class="col-md-4 mb-4 mb-md-0">
+                            <p>@i.ParagraphThree</p>
+                        </div>
+                        <div class="col-md-4 mb-4 mb-md-0">
+                            <div class="center-image">
+                                <img src="~/media/about/@i.ImageTwo" width="50%">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <p>@i.ParagraphFour</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        }
+    </div>
+    <!-- end container-fluid -->
+</section>
+

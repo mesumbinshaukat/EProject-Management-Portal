@@ -7,21 +7,29 @@ namespace Symphony_LTD.Models
     {
         [Key]
         public int Id { get; set; }
-        [DisplayName("First Image (Optional)")]
+        [Required]
+        [DisplayName("First Image")]
         public string? ImageOne { get; set; }
-        [DisplayName("Second Image (Optional)")]
+        [Required]
+        [DisplayName("Second Image")]
         public string? ImageTwo { get; set; }
-        [DisplayName("First Paragraph (Optional)")]
+        [Required]
+        [DisplayName("First Paragraph")]
         public string? ParagraphOne {  get; set; }
-        [DisplayName("Second Paragraph (Optional)")]
+        [Required]
+        [DisplayName("Second Paragraph")]
         public string? ParagraphTwo {  get; set; }
-        [DisplayName("Third Paragraph (Optional)")]
+        [Required]
+        [DisplayName("Third Paragraph")]
         public string? ParagraphThree {  get; set; }
-        [DisplayName("Fourth Paragraph (Optional)")]
+        [Required]
+        [DisplayName("Fourth Paragraph")]
         public string? ParagraphFour {  get; set; }
-        [DisplayName("First Heading (Optional)")]
+        [Required]
+        [DisplayName("First Heading")]
         public string? HeadingOne {  get; set; }
-        [DisplayName("Second Heading (Optional)")]
+        [Required]
+        [DisplayName("Second Heading")]
         public string? HeadingTwo {  get; set; }
         
 

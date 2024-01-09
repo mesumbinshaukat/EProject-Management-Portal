@@ -643,7 +643,7 @@ namespace Symphony_LTD.Controllers
                 TempData["success"] = "Content Added To About Us page.";
                 return RedirectToAction("Index");
             }
-
+            TempData["failed"] = "Unexpected Error Occurred.";
             return View();
         }
 

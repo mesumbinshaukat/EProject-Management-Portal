@@ -40,5 +40,11 @@ namespace Symphony_LTD.Controllers
             IEnumerable<Course> data = _db.Courses.ToList();
             return View(data);
         }
+
+        public IActionResult AboutUs()
+        {
+            IEnumerable<About> data = _db._AboutUs.ToList();
+            return View(data);
+        }
     }
 }

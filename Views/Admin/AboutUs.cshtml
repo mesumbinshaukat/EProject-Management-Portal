@@ -17,57 +17,57 @@
             <div class="row">
                     <div class="col-6 mb-2">
                         <div class="form-group">
-                            <label asp-for="HeadingOne" class="form-label"></label>
-                            <input asp-for="HeadingOne" placeholder="First Heading" class="form-control" />
+                            <label asp-for="HeadingOne" class="form-label"></label><span class="text-danger fw-bold">*</span>
+                            <input asp-for="HeadingOne" placeholder="First Heading" class="form-control" required/>
                             <span asp-validation-for="HeadingOne" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-6 mb-2">
                         <div class="form-group">
-                            <label asp-for="HeadingTwo" class="form-label"></label>
-                            <input asp-for="HeadingTwo" placeholder="Second Heading" class="form-control" />
+                            <label asp-for="HeadingTwo" class="form-label"></label><span class="text-danger fw-bold">*</span>
+                            <input asp-for="HeadingTwo" placeholder="Second Heading" class="form-control" required />
                             <span asp-validation-for="HeadingTwo" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-6 mb-2">
                         <div class="form-group">
-                            <label asp-for="ImageOne" class="form-label"></label>
-                            <input type="file" asp-for="ImageOne" name="img_one" class="form-control" />
+                            <label asp-for="ImageOne" class="form-label"></label><span class="text-danger fw-bold">*</span>
+                            <input type="file" asp-for="ImageOne" name="img_one" class="form-control" required />
                             <span asp-validation-for="ImageOne" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-6 mb-2">
                         <div class="form-group">
-                            <label asp-for="ImageTwo" class="form-label"></label>
-                            <input type="file" asp-for="ImageTwo" name="img_two" class="form-control" />
+                            <label asp-for="ImageTwo" class="form-label"></label><span class="text-danger fw-bold">*</span>
+                            <input type="file" asp-for="ImageTwo" name="img_two" class="form-control" required />
                             <span asp-validation-for="ImageTwo" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-6 mb-2">
                         <div class="form-group">
-                            <label asp-for="ParagraphOne" class="form-label"></label>
+                            <label asp-for="ParagraphOne" class="form-label"></label><span class="text-danger fw-bold">*</span>
                             <textarea asp-for="ParagraphOne" class="form-control" placeholder="Write something..."></textarea>
                             <span asp-validation-for="ParagraphOne" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-6 mb-2">
                         <div class="form-group">
-                            <label asp-for="ParagraphTwo" class="form-label"></label>
-                            <textarea asp-for="ParagraphTwo" class="form-control" placeholder="Write something..."></textarea>
+                            <label asp-for="ParagraphTwo" class="form-label"></label><span class="text-danger fw-bold">*</span>
+                            <textarea asp-for="ParagraphTwo" class="form-control" placeholder="Write something..." required></textarea>
                             <span asp-validation-for="ParagraphTwo" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-6 mb-2">
                         <div class="form-group">
-                            <label asp-for="ParagraphThree" class="form-label"></label>
-                            <textarea asp-for="ParagraphThree" class="form-control" placeholder="Write something..."></textarea>
+                            <label asp-for="ParagraphThree" class="form-label"></label><span class="text-danger fw-bold">*</span>
+                            <textarea asp-for="ParagraphThree" class="form-control" placeholder="Write something..." required></textarea>
                             <span asp-validation-for="ParagraphThree" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-6 mb-2">
                         <div class="form-group">
-                            <label asp-for="ParagraphFour" class="form-label"></label>
-                            <textarea asp-for="ParagraphFour" class="form-control" placeholder="Write something..."></textarea>
+                            <label asp-for="ParagraphFour" class="form-label"></label><span class="text-danger fw-bold">*</span>
+                            <textarea asp-for="ParagraphFour" class="form-control" placeholder="Write something..." required></textarea>
                             <span asp-validation-for="ParagraphFour" class="text-danger"></span>
                         </div>
                     </div>
@@ -91,3 +91,8 @@
 
 
 
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+                }
