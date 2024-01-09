@@ -41,6 +41,7 @@
                                         
                                         <th>Question</th>
                                         <th>Answer</th>
+                                        <th>Action</th>
 
                                     </tr>
                                 </thead>
@@ -58,7 +59,21 @@
 
                                         <td style="text-overflow:clip !important; overflow:hidden !important;">@i.Answer</td>
 
+                                        <td>
+                                            <div class="row">
 
+                                                <div class="col-6 m-1">
+                                                    <a asp-controller="FAQ" asp-action="Edit" asp-route-id="@i.Id" class="btn btn-warning">Edit</a>
+
+                                                </div>
+                                                <div class="col-6 m-1">
+                                                        <a asp-controller="FAQ" asp-action="Delete" asp-route-id="@i.Id" class="btn btn-danger">Delete</a>
+
+                                                </div>
+
+                                            </div>
+
+                                        </td>
                                         </tr>
 
                                     }
