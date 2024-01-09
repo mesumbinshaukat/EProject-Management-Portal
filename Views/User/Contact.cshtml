@@ -10,66 +10,8 @@
     }
 </style>
 
-@* <h1>Contact</h1>
 
-<h4>Contact</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Contact">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MiddleName" class="control-label"></label>
-                <input asp-for="MiddleName" class="form-control" />
-                <span asp-validation-for="MiddleName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CenterName" class="control-label"></label>
-                <input asp-for="CenterName" class="form-control" />
-                <span asp-validation-for="CenterName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Message" class="control-label"></label>
-                <input asp-for="Message" class="form-control" />
-                <span asp-validation-for="Message" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
- *@
 <!-- contact start -->
 <section class="section" id="contact">
     <div class="container-fluid">
@@ -91,12 +33,14 @@
                     <p class="text-muted mb-5">Get In Touch With Us For More Details.</p>
 
                     <div class="mb-3">
-                        <div class="get-touch-icon float-start me-3">
-                        </div>
+                                               
                         <div class="overflow-hidden">
+
                             <h5 class="font-16 mb-0">E-mail</h5>
                             <p class="text-muted">info@mesum.online</p>
                         </div>
+
+                           
                     </div>
                     <div class="mb-3">
                         <div class="get-touch-icon float-start me-3">
@@ -206,7 +150,63 @@
             </div>
         </div>
         <!-- end row -->
+
+        <div class="row mt-3 text-center">
+            <h3>Branches</h3>
+            <hr />
+            <div class="col-12">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                Branch
+                            </th>
+                            <th>
+                                Branch Code
+                            </th>
+                            <th>
+                                Address
+                            </th>
+                            <th>
+                                City
+                            </th>
+                            <th>
+                                Country
+                            </th>
+                            <th>
+                                Postal/Zip Code
+                            </th>
+
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var i in ViewBag.Branches)
+                        {
+                       
+                        <tr>
+                            <td>@i.Branches</td>
+                            <td>@i.Code</td>
+                            <td>@i.Address</td>
+                            <td>@i.City</td>
+                            <td>@i.Country</td>
+                            <td>@i.Postal</td>
+                        </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
     </div>
     <!-- end container-fluid -->
 </section>
 <!-- contact end -->
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+                }

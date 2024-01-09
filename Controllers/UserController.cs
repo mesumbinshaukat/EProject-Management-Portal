@@ -15,6 +15,7 @@ namespace Symphony_LTD.Controllers
 
         public IActionResult Contact()
         {
+            ViewBag.Branches = _db.Branches.ToList();
             return View();
         }
 
@@ -27,7 +28,8 @@ namespace Symphony_LTD.Controllers
                 {
                     _db._Contact.Add(obj);
                     _db.SaveChanges();
-                    return RedirectToAction("Index", "Home");
+                    TempData["success"] = "Submitted!";
+                    return RedirectToAction("Contact");
                 }
             
             return View(obj);

@@ -71,6 +71,7 @@ namespace Symphony_LTD.Controllers
                 return View("Index", viewModel);
 
             }
+            TempData["failed"] = "Please Log In!";
             return RedirectToAction("LogIn");
         }
 
@@ -141,6 +142,7 @@ namespace Symphony_LTD.Controllers
                 TempData["success"] = "Logged Out Successfully";
                 return RedirectToAction("LogIn", "Admin");
             }
+            TempData["failed"] = "Please Log In!";
             return RedirectToAction("LogIn");
         }
 
@@ -155,6 +157,7 @@ namespace Symphony_LTD.Controllers
                 return View(courses);
 
             }
+            TempData["failed"] = "Please Log In!";
             return RedirectToAction("LogIn");
         }
 
@@ -168,6 +171,7 @@ namespace Symphony_LTD.Controllers
                 return View();
 
             }
+            TempData["failed"] = "Please Log In!";
             return RedirectToAction("LogIn");
         }
 
@@ -210,6 +214,7 @@ namespace Symphony_LTD.Controllers
 
 
             }
+            TempData["failed"] = "Please Log In!";
             return RedirectToAction("LogIn");
         }
 
@@ -253,6 +258,7 @@ namespace Symphony_LTD.Controllers
 
                 return View();
             }
+            TempData["failed"] = "Please Log In!";
             return RedirectToAction("LogIn");
 
         }
@@ -282,7 +288,7 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
                 return View();
             }
-
+            TempData["failed"] = "Please Log In!";
             return View("LogIn");
         }
 
@@ -352,7 +358,7 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Student = _db.Students.ToList();
                 return View(studentData);
             }
-
+            TempData["failed"] = "Please Log In!";
             return RedirectToAction("LogIn");
         }
 
@@ -420,7 +426,7 @@ namespace Symphony_LTD.Controllers
                 IEnumerable<Student> obj = _db.Students;
                 return View(obj);
             }
-
+            TempData["failed"] = "Please Log In!";
             return RedirectToAction("LogIn");
         }
 
@@ -434,6 +440,7 @@ namespace Symphony_LTD.Controllers
                 {
                     _db.Students.Remove(_id);
                     _db.SaveChanges();
+                    TempData["success"] = "Student Deleted!";
                     return RedirectToAction("Student");
                 }
             }
@@ -451,6 +458,8 @@ namespace Symphony_LTD.Controllers
                 _db.Entry(userContact).State = EntityState.Modified;
                 userContact.Read = true;
                 _db.SaveChanges();
+                TempData["success"] = "Msg Seen";
+                
             }
 
             return RedirectToAction("Contact");
@@ -466,7 +475,7 @@ namespace Symphony_LTD.Controllers
                 IEnumerable<Contact> data = _db._Contact.ToList();
                 return View(data);
             }
-
+            TempData["failed"] = "Please Log In!";
             return RedirectToAction("LogIn");
         }
 
@@ -479,10 +488,10 @@ namespace Symphony_LTD.Controllers
 
                 _db._Contact.Remove(contact);
                 _db.SaveChanges();
-                
+                TempData["success"] = "Successfuly Deleted!";
                 return RedirectToAction("Contact");
             }
-
+            TempData["failed"] = "Please Log In!";
             return RedirectToAction("LogIn");
         }
 
@@ -495,7 +504,7 @@ namespace Symphony_LTD.Controllers
                 
                 return View();
             }
-
+            TempData["failed"] = "Please Log In!";
             return RedirectToAction("LogIn");
         }
 
