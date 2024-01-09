@@ -27,6 +27,8 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\media\faculty\" />
+    <Folder Include="wwwroot\media\about\" />
   </ItemGroup>
 
   <ItemGroup>
