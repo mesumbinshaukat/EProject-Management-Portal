@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Course>
+@{
+    ViewData["Title"] = "Courses";
+}
+
+<style>
+    .nav-link {
+        color: black !important;
+    }
+</style>
+
+
+
+<!-- contact start -->
+<section class="section" id="contact">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="title text-center mb-2">
+                    <h6 class="text-primary small-title">Courses</h6>
+                    <h4>Available <span class="text-warning">Courses</span></h4>
+                    <p class="text-muted">Check out the available courses details.</p>
+        <hr />
+                </div>
+            </div>
+        </div>
+        <div class="row text-center">
+            <h3>Courses</h3>
+           
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Course Name
+                            </th>
+                            <th>
+                                Topics Covered
+                            </th>
+                            <th>
+                                Fee
+                            </th>
+                            <th>
+                                Detail
+                            </th>
+                            <th>
+                                Course Entrance Exam Detail
+                            </th>
+                           
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var i in Model)
+                        {
+
+                            <tr>
+                                <td>@i.CourseName</td>
+                                <td>@i.TopicsCovered</td>
+                                <td>@i.CourseFee</td>
+                                <td>@i.CourseDetails</td>
+                                <td>@i.EntranceExamDetails</td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <!-- end container-fluid -->
+</section>
+<!-- contact end -->
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+                }
