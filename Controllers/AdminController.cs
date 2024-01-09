@@ -599,6 +599,8 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("LogIn");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AboutUs(About data, IFormFile img_one, IFormFile img_two)
         {
             if (img_one != null)
