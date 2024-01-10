@@ -17,54 +17,63 @@
                         @Html.AntiForgeryToken()
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="row">
-                            @foreach (var i in ViewBag.Content)
+                            @foreach (var i in @ViewBag.Content)
                             {
+                            
+                               
+                                    <input type="hidden" class="form-control" asp-for="Id" value="@i.Id" placeholder="First Heading" required/>
+                                   
+                            
                             <div class="col-6">
                                 <label asp-for="HeadingOne" class="form-label"></label>
-                                    <input class="form-control" asp-for="HeadingOne" value="@i.HeadingOne" placeholder="First Heading" required/>
+                                    <input class="form-control" asp-for="HeadingOne" value="@i.HeadingOne" placeholder="First Heading" />
                                     <span asp-validation-for="HeadingOne" class="text-danger"></span>
                             </div>
+
                                 <div class="col-6">
                                     <label asp-for="HeadingTwo" class="form-label"></label>
-                                    <input class="form-control" asp-for="HeadingTwo" value="@i.HeadingTwo" placeholder="Second Heading" required />
+                                    <input class="form-control" asp-for="HeadingTwo" value="@i.HeadingTwo" placeholder="Second Heading"  />
                                     <span asp-validation-for="HeadingTwo" class="text-danger"></span>
                             </div>
                                 <div class="col-6">
                                     <label asp-for="ImageOne" class="form-label"></label>
-                                    <input type="file" class="form-control" asp-for="ImageOne" required />
+                                    <input type="file" class="form-control" name="img_one" value="@i.ImageOne" asp-for="ImageOne" />
                                     <p class="text-danger"><cite>@i.ImageOne</cite></p>
                                     <span asp-validation-for="ImageOne" class="text-danger"></span>
                             </div>
                                 <div class="col-6">
                                     <label asp-for="ImageTwo" class="form-label"></label>
-                                    <input class="form-control" type="file" asp-for="ImageTwo" required />
+                                    <input class="form-control" value="@i.ImageTwo" name="img_two" type="file" asp-for="ImageTwo" />
                                     <p class="text-danger"><cite>@i.ImageTwo</cite></p>
                                     <span asp-validation-for="ImageTwo" class="text-danger"></span>
-                            </div>
+                                </div>
                                 <div class="col-6">
                                     <label asp-for="ParagraphOne" class="form-label"></label>
-
-                                   <textarea class="form-control" asp-for="ParagraphOne" placeholder="Write Something..." required>@i.ParagraphOne</textarea>
+                                    <textarea class="form-control" value="@i.ParagraphOne" asp-for="ParagraphOne" placeholder="Leave it empty if you want the default paragraph..." ></textarea>
+                                    <p>@(i.ParagraphOne)</p>
                                     <span asp-validation-for="ParagraphOne" class="text-danger"></span>
-                            </div>
+                                </div>
+
                                 <div class="col-6">
                                     <label asp-for="ParagraphTwo" class="form-label"></label>
-
-                                    <textarea class="form-control" asp-for="ParagraphTwo" placeholder="Write Something..." required>@i.ParagraphTwo</textarea>
+                                    <textarea class="form-control" value="@i.ParagraphTwo" asp-for="ParagraphTwo" placeholder="Leave it empty if you want the default paragraph..." ></textarea>
+                                    <p>@(i.ParagraphTwo)</p>
                                     <span asp-validation-for="ParagraphTwo" class="text-danger"></span>
-                            </div>
+                                </div>
+
                                 <div class="col-6">
                                     <label asp-for="ParagraphThree" class="form-label"></label>
-
-                                    <textarea class="form-control" asp-for="ParagraphThree" placeholder="Write Something..." required>@i.ParagraphThree</textarea>
+                                    <textarea class="form-control" value="@i.ParagraphThree" asp-for="ParagraphThree" placeholder="Leave it empty if you want the default paragraph..."></textarea>
+                                    <p>@i.ParagraphThree</p>
                                     <span asp-validation-for="ParagraphThree" class="text-danger"></span>
-                            </div>
+                                </div>
+
                                 <div class="col-6">
                                     <label asp-for="ParagraphFour" class="form-label"></label>
-
-                                    <textarea class="form-control" asp-for="ParagraphFour" placeholder="Write Something..." required>@i.ParagraphFour</textarea>
+                                    <textarea class="form-control" value="@i.ParagraphFour" asp-for="ParagraphFour" placeholder="Leave it empty if you want the default paragraph..."></textarea>
+                                    <p>@i.ParagraphFour</p>
                                     <span asp-validation-for="ParagraphFour" class="text-danger"></span>
-                            </div>
+                                </div>
                                 
                             <div class="col-12 mt-3">
                                     
