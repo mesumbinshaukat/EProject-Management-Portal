@@ -855,7 +855,7 @@ namespace Symphony_LTD.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditFaculty(Faculty data, IFormFile img)
+        public IActionResult EditFaculty(Faculty data)
         {
             if (HttpContext.Session.GetString("s_email") != null)
             {
