@@ -599,9 +599,15 @@ namespace Symphony_LTD.Controllers
         {
             if (HttpContext.Session.GetString("s_email") != null)
             {
+                if(_db._AboutUs.FirstOrDefault() == null)
+                {
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
                 return View();
+
+                }
+                TempData["failed"] = "Main About page content is already in the database. You can only modify it, for adding new content again, consider deleting current content.";
+                return RedirectToAction("EditAbout");
             }
             TempData["failed"] = "Please Log In!";
             return RedirectToAction("LogIn");
@@ -662,7 +668,9 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
                 
-                ViewBag.Content = _db._AboutUs.ToList(); 
+                ViewBag.Content = _db._AboutUs.FirstOrDefault(); 
+                ViewBag.ImageOne = _db._AboutUs.FirstOrDefault().ImageOne; 
+                ViewBag.ImageTwo = _db._AboutUs.FirstOrDefault().ImageTwo; 
                 return View();
             }
             TempData["failed"] = "Please Log In!";
@@ -671,9 +679,42 @@ namespace Symphony_LTD.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditAbout (About data, IFormFile img_one, IFormFile img_two) 
+        public IActionResult EditAbout (About data) 
         {
-            if (img_one != null)
+           
+
+            if (ModelState.IsValid)
+            {
+                var existing = _db._AboutUs.FirstOrDefault();
+
+
+                if (existing != null)
+                {
+                    existing.HeadingOne = data.HeadingOne ?? existing.HeadingOne;
+                    existing.HeadingTwo = data.HeadingTwo ?? existing.HeadingTwo;
+                    existing.ParagraphOne = data.ParagraphOne ?? existing.ParagraphOne;
+                    existing.ParagraphTwo = data.ParagraphTwo ?? existing.ParagraphTwo;
+                    existing.ParagraphThree = data.ParagraphThree ?? existing.ParagraphThree;
+                    existing.ParagraphFour = data.ParagraphFour ?? existing.ParagraphFour;
+                    
+                    _db._AboutUs.Update(existing);
+                    _db.SaveChanges();
+                    TempData["success"] = "About Us Page Edited Successfully.";
+                    return RedirectToAction("EditAbout");
+                }
+                TempData["failed"] = "Error: There's no existing row selected.";
+                return RedirectToAction("EditAbout");
+
+            }
+            TempData["failed"] = "Unexpected Error Occurred.";
+            return RedirectToAction("EditAbout");
+        }
+
+        [HttpPost]
+        public IActionResult UpdateAboutImage (IFormFile img_one, IFormFile img_two)
+        {
+            var x = _db._AboutUs.FirstOrDefault();
+            if (img_one != null && img_one.FileName != x.ImageOne)
             {
                 string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/media/about");
                 string filepath = Path.Combine(path, img_one.FileName);
@@ -687,9 +728,15 @@ namespace Symphony_LTD.Controllers
                 var stream = new FileStream(filepath, FileMode.Create);
                 img_one.CopyTo(stream);
                 string? filename = img_one.FileName;
-                data.ImageOne = filename;
+                x.ImageOne = filename;
+
+                _db._AboutUs.Update(x);
+                _db.SaveChanges();
+                TempData["success"] = "Image Edited Successfully.";
+                return RedirectToAction("EditAbout");
             }
-            if (img_two != null)
+            
+            if (img_two != null && img_two.FileName != x.ImageTwo)
             {
                 string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/media/about");
                 string filepath = Path.Combine(path, img_two.FileName);
@@ -703,35 +750,15 @@ namespace Symphony_LTD.Controllers
                 var stream = new FileStream(filepath, FileMode.Create);
                 img_two.CopyTo(stream);
                 string? filename = img_two.FileName;
-                data.ImageTwo = filename;
-            }
+                x.ImageTwo = filename;
 
-            if (ModelState.IsValid)
-            {
-                var existing = _db._AboutUs.FirstOrDefault(x => x.Id == data.Id);
-
-
-                if (existing != null)
-                {
-                    existing.HeadingOne = data.HeadingOne ?? existing.HeadingOne;
-                    existing.HeadingTwo = data.HeadingTwo ?? existing.HeadingTwo;
-                    existing.ParagraphOne = data.ParagraphOne ?? existing.ParagraphOne;
-                    existing.ParagraphTwo = data.ParagraphTwo ?? existing.ParagraphTwo;
-                    existing.ParagraphThree = data.ParagraphThree ?? existing.ParagraphThree;
-                    existing.ParagraphFour = data.ParagraphFour ?? existing.ParagraphFour;
-                    existing.ImageOne = data.ImageOne ?? existing.ImageOne;
-                    existing.ImageTwo = data.ImageTwo ?? existing.ImageTwo;
-
-                    _db._AboutUs.Update(existing);
-                    _db.SaveChanges();
-                    TempData["success"] = "About Us Page Edited Successfully.";
-                    return RedirectToAction("Index");
-                }
-                TempData["failed"] = "Error: There's no existing row selected.";
+                _db._AboutUs.Update(x);
+                _db.SaveChanges();
+                TempData["success"] = "Image Edited Successfully.";
                 return RedirectToAction("EditAbout");
-
             }
-            TempData["failed"] = "Unexpected Error Occurred.";
+            
+            TempData["failed"] = "Image update failed!";
             return RedirectToAction("EditAbout");
         }
 

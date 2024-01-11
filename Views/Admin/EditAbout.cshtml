@@ -19,30 +19,19 @@
                         <div class="row">
                             @if (ViewBag.Content != null)
                             {
-                                var i = ViewBag.Content as About;
-                            <div class="col-6">
-                                <label asp-for="HeadingOne" class="form-label"></label>
+                                var i = ViewBag.Content;
+                                <div class="col-6">
+                                    <label asp-for="HeadingOne" class="form-label"></label>
                                     <input class="form-control" asp-for="HeadingOne" value="@i.HeadingOne" placeholder="First Heading" />
                                     <span asp-validation-for="HeadingOne" class="text-danger"></span>
-                            </div>
+                                </div>
 
                                 <div class="col-6">
                                     <label asp-for="HeadingTwo" class="form-label"></label>
-                                    <input class="form-control" asp-for="HeadingTwo" value="@i.HeadingTwo" placeholder="Second Heading"  />
+                                    <input class="form-control" asp-for="HeadingTwo" value="@i.HeadingTwo" placeholder="Second Heading" />
                                     <span asp-validation-for="HeadingTwo" class="text-danger"></span>
-                            </div>
-                                <div class="col-6">
-                                    <label asp-for="ImageOne" class="form-label"></label>
-                                    <input type="file" class="form-control" name="img_one" value="@i.ImageOne" asp-for="ImageOne" />
-                                    <p class="text-danger"><cite>@i.ImageOne</cite></p>
-                                    <span asp-validation-for="ImageOne" class="text-danger"></span>
-                            </div>
-                                <div class="col-6">
-                                    <label asp-for="ImageTwo" class="form-label"></label>
-                                    <input class="form-control" value="@i.ImageTwo" name="img_two" type="file" asp-for="ImageTwo" />
-                                    <p class="text-danger"><cite>@i.ImageTwo</cite></p>
-                                    <span asp-validation-for="ImageTwo" class="text-danger"></span>
                                 </div>
+                               
                                 <div class="col-6">
                                     <label asp-for="ParagraphOne" class="form-label"></label>
                                     <textarea class="form-control" asp-for="ParagraphOne" placeholder="Leave it empty if you want the default paragraph...">@i.ParagraphOne</textarea>
@@ -70,18 +59,104 @@
                                     <p>@i.ParagraphFour</p>
                                     <span asp-validation-for="ParagraphFour" class="text-danger"></span>
                                 </div>
-                                
-                            <div class="col-12 mt-3">
-                                    
-                                    <input class="btn btn-outline-success" type="submit" value="Modify"/>
-                                    
-                            </div>
-                                
+
+                                <div class="col-12 mt-3">
+
+                                    <input class="btn btn-outline-success" type="submit" value="Modify" />
+
+                                </div>
 
                             }
 
                         </div>
                     </form>
+                                <div class="mt-3">
+
+                                    
+
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                                        Modify Frist Image
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                        <form asp-action="UpdateAboutImage" enctype="multipart/form-data">
+                                            @if (ViewBag.ImageOne != null)
+                                            {
+                                                var i = ViewBag.ImageOne;
+                                                <div class="col-6">
+                                                    <label asp-for="ImageOne" class="form-label"></label>
+                                                    <input type="file" class="form-control" name="img_one" value="@i" asp-for="ImageOne" />
+                                                    <p class="text-danger"><cite>@i</cite></p>
+                                                    <img src="~/media/about/@i" class="w-75" />
+                                                    <span asp-validation-for="ImageOne" class="text-danger"></span>
+                                                </div>
+                                            }
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-success">Update</button>
+                                            </div>
+                                        </form>
+                                                </div>
+                                             
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                    <div class="mt-3">
+
+                                 
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                        Modify Second Image
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                        <form asp-action="UpdateAboutImage" enctype="multipart/form-data">
+                                            @if (ViewBag.ImageTwo != null)
+                                            {
+                                                var i = ViewBag.ImageTwo;
+
+                                                <div class="col-6">
+                                                    <label asp-for="ImageTwo" class="form-label"></label>
+                                                    <input class="form-control" value="@i" name="img_two" type="file" asp-for="ImageTwo" />
+                                                    <p class="text-danger"><cite>@i</cite></p>
+                                                    <img src="~/media/about/@i" class="w-75"/>
+                                                    <span asp-validation-for="ImageTwo" class="text-danger"></span>
+                                                </div>
+
+                                            }
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-success">Update</button>
+                                                </div>
+                                        </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                           
                 </div>
 
             </div>
