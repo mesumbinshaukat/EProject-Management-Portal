@@ -31,7 +31,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Add Faculty</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -40,13 +40,13 @@
                                     @Html.AntiForgeryToken()
                                     <div class="col-6">
                                         <label asp-for="Name" class="form-label"></label> <span class="text-danger fw-bold">*</span>
-                                        <input class="form-control" asp-for="Name" required />
+                                        <input class="form-control" asp-for="Name" placeholder="Full Name" required />
 
                                         <label asp-for="Role" class="form-label"></label> <span class="text-danger fw-bold">*</span>
-                                        <input asp-for="Role" class="form-control" required />
+                                        <input asp-for="Role" class="form-control" placeholder="Role/Passion" required />
 
                                         <label asp-for="Image" class="form-label"></label> <span class="text-danger fw-bold">*</span>
-                                        <input asp-for="Image" type="file" name="img" class="form-control" required />
+                                        <input asp-for="Image" type="file" name="img" class="form-control required />
 
 
 
@@ -143,10 +143,10 @@
                                                                 <input type="hidden" value="@i.Id" asp-for="Id" />
 
                                                                 <label asp-for="Name" class="form-label"></label>
-                                                                <input class="form-control" value="@i.Name" asp-for="Name" />
+                                                                <input class="form-control" value="@i.Name" asp-for="Name" placeholder="Full Name" />
 
                                                                 <label asp-for="Role" class="form-label"></label>
-                                                                <input asp-for="Role" value="@i.Role" class="form-control" />
+                                                                <input asp-for="Role" value="@i.Role" class="form-control" placeholder="Role" />
 
                                                             </div>
 
