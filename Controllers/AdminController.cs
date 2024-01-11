@@ -790,5 +790,66 @@ namespace Symphony_LTD.Controllers
             TempData["failed"] = "Please Log In!";
             return RedirectToAction("LogIn");
         }
+
+        public IActionResult Faculty ()
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+               
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+
+                ViewBag.Faculty = _db._Faculty.ToList();
+
+                return View();
+            }
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Faculty(Faculty obj, IFormFile img)
+        {
+            if (img != null)
+            {
+                try
+                {
+                    string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/media/faculty");
+
+                    if (!Directory.Exists(uploadsFolder))
+                    {
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+
+                    string uniqueFileName = Guid.NewGuid().ToString() + "_" + img.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        img.CopyTo(stream);
+                    }
+
+                    obj.Image = uniqueFileName;
+                }
+                catch (Exception ex)
+                {
+                    // Handle the exception (e.g., log it)
+                    ModelState.AddModelError("Image", "Error uploading the image");
+                }
+            }
+
+            if (ModelState.IsValid)
+            {
+                _db._Faculty.Add(obj);
+                _db.SaveChanges();
+                TempData["success"] = "Faculty Data Successfully Added.";
+                return RedirectToAction("Faculty");
+            }
+
+            TempData["failed"] = "Error, while inserting data to database.";
+            return RedirectToAction("Faculty");
+        }
     }
 }

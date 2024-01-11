@@ -1,0 +1,152 @@
+﻿@model Symphony_LTD.Models.Faculty
+@{
+    ViewData["Title"] = "Faculty";
+    Layout = "_AdminLayout";
+}
+
+<div class="content-page">
+    <div class="content">
+        <h1>
+            Faculty
+        </h1>
+        <h3>
+            Faculty Details
+        </h3>
+        <hr />
+        <div class="container">
+            <div class="container text-end">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal_add">
+                    Add Faculty
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade text-start" id="exampleModal_add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form asp-action="Faculty" enctype="multipart/form-data">
+
+                                    @Html.AntiForgeryToken()
+                                    <div class="col-6">
+                                        <label asp-for="Name" class="form-label"></label> <span class="text-danger fw-bold">*</span>
+                                        <input class="form-control" asp-for="Name" required/>
+
+                                        <label asp-for="Role" class="form-label"></label> <span class="text-danger fw-bold">*</span>
+                                        <input asp-for="Role" class="form-control" required />
+
+                                        <label asp-for="Image" class="form-label"></label> <span class="text-danger fw-bold">*</span>
+                                        <input asp-for="Image" type="file" name="img" class="form-control" required />
+                                        
+                                       
+
+                                    </div>
+
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-success">Add</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table table-hover text-center">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Image</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var i in ViewBag.Faculty)
+                    {
+                    <tr>
+                        <td>@i.Name</td>
+                        <td>@i.Role</td>
+                        <td><img src="~/media/faculty/@i.Image" class="w-50"/></td>
+                        <td>
+                            <div class="row">
+
+                                <div class="col-6">
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal_@i.Id">
+                                            Edit
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal_@i.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form asp-action="EditFaculty" enctype="multipart/form-data">
+                                                           @Html.AntiForgeryToken()
+                                                                
+                                                                <div class="col-6">
+                                                                    <input type="hidden" value="@i.Id" asp-for="Id"/>
+
+                                                                    <label asp-for="Name" class="form-label"></label>
+                                                                    <input class="form-control" value="@i.Name" asp-for="Name" />
+
+                                                                    <label asp-for="Role" class="form-label"></label>
+                                                                    <input asp-for="Role" value="@i.Role" class="form-control"/>
+
+                                                                    <label asp-for="Image" class="form-label"></label>
+                                                                    <input asp-for="Image" type="file" class="form-control"/>
+                                                                    <p class="text-danger"><cite>@i.Image</cite></p>
+                                                                    <img src="~/media/faculty/@i.Image" class="w-75" />
+                                                                    
+                                                                </div>
+                                                           
+
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-success">Update</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <a asp-action="DeleteFaculty" asp-route-id="@i.Id" class="btn btn-danger">Delete</a>
+                                </div>
+
+                            </div>
+
+                        </td>
+                    </tr>
+                        
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Image</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+</div>

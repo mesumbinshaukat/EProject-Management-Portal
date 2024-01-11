@@ -10,7 +10,7 @@ namespace Symphony_LTD.Models
         public string? Name { get; set; }
         [Required]
         public string? Role { get; set; }
-        [Required]
+        
         public string? Image {  get; set; }
     }
 }
