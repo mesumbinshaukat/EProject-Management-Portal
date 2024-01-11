@@ -28,8 +28,7 @@ namespace Symphony_LTD.Controllers
             {
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
-                //IEnumerable<Admin> objAdmin = _db._Admin;
-                //IEnumerable<Contact> objContact= _db._Contact.ToList();
+                
 
                 var adminData = _db._Admin.ToList();
                 var contactData = _db._Contact.ToList();
@@ -48,6 +47,9 @@ namespace Symphony_LTD.Controllers
 
                 var totalContacts = _db._Contact.Count();
                 ViewBag.TotalContacts = totalContacts;
+
+                var allFaculties = _db._Faculty.ToList();
+                ViewBag.TotalFaculties = allFaculties;
 
                 var totalRevenue = _db.Courses.ToList();
                 decimal total = 0;
