@@ -665,6 +665,14 @@ namespace Symphony_LTD.Controllers
         {
             if (HttpContext.Session.GetString("s_email") != null)
             {
+                var fetch = _db._AboutUs.FirstOrDefault();
+
+                if(fetch == null)
+                {
+                    TempData["failed"] = "Can't edit because there's no content. Consider adding the content.";
+                    return RedirectToAction("AboutUs");
+                }
+
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
                 
@@ -682,11 +690,9 @@ namespace Symphony_LTD.Controllers
         public IActionResult EditAbout (About data) 
         {
            
-
             if (ModelState.IsValid)
             {
                 var existing = _db._AboutUs.FirstOrDefault();
-
 
                 if (existing != null)
                 {
@@ -713,54 +719,76 @@ namespace Symphony_LTD.Controllers
         [HttpPost]
         public IActionResult UpdateAboutImage (IFormFile img_one, IFormFile img_two)
         {
-            var x = _db._AboutUs.FirstOrDefault();
-            if (img_one != null && img_one.FileName != x.ImageOne)
+            if (HttpContext.Session.GetString("s_email") != null)
             {
-                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/media/about");
-                string filepath = Path.Combine(path, img_one.FileName);
-
-                if (!Directory.Exists(path))
+                var x = _db._AboutUs.FirstOrDefault();
+                if (img_one != null && img_one.FileName != x.ImageOne)
                 {
-                    Directory.CreateDirectory(path);
+                    string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/media/about");
+                    string filepath = Path.Combine(path, img_one.FileName);
+
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+
+                    var stream = new FileStream(filepath, FileMode.Create);
+                    img_one.CopyTo(stream);
+                    string? filename = img_one.FileName;
+                    x.ImageOne = filename;
+
+                    _db._AboutUs.Update(x);
+                    _db.SaveChanges();
+                    TempData["success"] = "Image Edited Successfully.";
+                    return RedirectToAction("EditAbout");
                 }
 
-
-                var stream = new FileStream(filepath, FileMode.Create);
-                img_one.CopyTo(stream);
-                string? filename = img_one.FileName;
-                x.ImageOne = filename;
-
-                _db._AboutUs.Update(x);
-                _db.SaveChanges();
-                TempData["success"] = "Image Edited Successfully.";
-                return RedirectToAction("EditAbout");
-            }
-            
-            if (img_two != null && img_two.FileName != x.ImageTwo)
-            {
-                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/media/about");
-                string filepath = Path.Combine(path, img_two.FileName);
-
-                if (!Directory.Exists(path))
+                if (img_two != null && img_two.FileName != x.ImageTwo)
                 {
-                    Directory.CreateDirectory(path);
+                    string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/media/about");
+                    string filepath = Path.Combine(path, img_two.FileName);
+
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+
+                    var stream = new FileStream(filepath, FileMode.Create);
+                    img_two.CopyTo(stream);
+                    string? filename = img_two.FileName;
+                    x.ImageTwo = filename;
+
+                    _db._AboutUs.Update(x);
+                    _db.SaveChanges();
+                    TempData["success"] = "Image Edited Successfully.";
+                    return RedirectToAction("EditAbout");
                 }
 
-
-                var stream = new FileStream(filepath, FileMode.Create);
-                img_two.CopyTo(stream);
-                string? filename = img_two.FileName;
-                x.ImageTwo = filename;
-
-                _db._AboutUs.Update(x);
-                _db.SaveChanges();
-                TempData["success"] = "Image Edited Successfully.";
+                TempData["failed"] = "Image update failed!";
                 return RedirectToAction("EditAbout");
             }
-            
-            TempData["failed"] = "Image update failed!";
-            return RedirectToAction("EditAbout");
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
         }
 
+        public IActionResult DeleteAbout ()
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                var fetch = _db._AboutUs.FirstOrDefault();
+
+                if (fetch != null)
+                {
+                    _db._AboutUs.Remove(fetch);
+                    _db.SaveChanges();
+                    TempData["success"] = "Successfully deleted!";
+                    return RedirectToAction("AboutUs");
+                }
+                TempData["failed"] = "Can't delete due to null or inavlid value.";
+                return RedirectToAction("EditAbout");
+            }
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
+        }
     }
 }
