@@ -795,8 +795,7 @@ namespace Symphony_LTD.Controllers
         public IActionResult Faculty ()
         {
             if (HttpContext.Session.GetString("s_email") != null)
-            {
-               
+            {           
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
 
@@ -924,6 +923,53 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("LogIn");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult FacultyImage (int _id , IFormFile img)
+        {
+            if(HttpContext.Session.GetString("s_email") != null)
+            {
+                var existing_path = _db._Faculty.FirstOrDefault(x => x.Id == _id);
+
+                if (existing_path != null)
+                {
+                    try
+                    {
+                        if (img != null)
+                        {
+                            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/media/faculty");
+                            string filepath = Path.Combine(path, img.FileName);
+
+                            if (!Directory.Exists(path))
+                            {
+                                Directory.CreateDirectory(path);
+                            }
+
+                            var stream = new FileStream(filepath, FileMode.Create);
+                            img.CopyTo(stream);
+                            string? filename = img.FileName;
+                            existing_path.Image = filename;
+
+                            _db._Faculty.Update(existing_path);
+                            _db.SaveChanges();
+
+                            TempData["success"] = "Image Update!";
+                            return RedirectToAction("Faculty");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        TempData["failed"] = ex.Message;
+                        ModelState.AddModelError("Image", "Error uploading the image: " + ex.Message);
+                    }
+                }
+
+
+                return View();
+            }
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
+        }
 
     }
 }

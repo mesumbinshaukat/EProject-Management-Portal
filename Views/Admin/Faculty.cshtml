@@ -4,6 +4,12 @@
     Layout = "_AdminLayout";
 }
 
+<style>
+    .center-table{
+        vertical-align: middle;
+    }
+</style>
+
 <div class="content-page">
     <div class="content">
         <h1>
@@ -72,11 +78,44 @@
                 <tbody>
                     @foreach (var i in ViewBag.Faculty)
                     {
-                    <tr>
+                    <tr class="center-table">
                         <td>@i.Name</td>
                         <td>@i.Role</td>
                         <td><img src="~/media/faculty/@i.Image" class="w-25"/>
-                            
+                        
+                                <!-- Button trigger modal -->
+                               
+
+                                <a class="text-info fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModalImg_@i.Id" style="cursor:pointer;" id="_img">Update Image</a>
+
+                               
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalImg_@i.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Update Image</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                               <form asp-action="FacultyImage" enctype="multipart/form-data">
+                                                   @Html.AntiForgeryToken()
+                                                    <input type="hidden" name="_id" value="@i.Id" asp-for="Id" />
+                                                     <label asp-for="Image" class="form-label"></label>
+                                                <input asp-for="Image" type="file" name="img" value="@i.Image" class="form-control"/>
+                                                <p class="text-danger"><cite>@i.Image</cite></p>
+                                                <img src="~/media/faculty/@i.Image" class="w-75" />
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-success">Update Image</button>
+                                            </div>
+                                               </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                         </td>
                         <td>
                             <div class="row">
@@ -92,11 +131,11 @@
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Update Faculty Details</h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form asp-action="EditFaculty" enctype="multipart/form-data">
+                                                        <form asp-action="EditFaculty">
                                                            @Html.AntiForgeryToken()
                                                                 
                                                                 <div class="col-6">
@@ -107,11 +146,6 @@
 
                                                                     <label asp-for="Role" class="form-label"></label>
                                                                     <input asp-for="Role" value="@i.Role" class="form-control"/>
-
-                                                                   @*  <label asp-for="Image" class="form-label"></label>
-                                                                    <input asp-for="Image" type="file" name="img" value="@i.Image" class="form-control"/>
-                                                                    <p class="text-danger"><cite>@i.Image</cite></p>
-                                                                    <img src="~/media/faculty/@i.Image" class="w-75" /> *@
                                                                     
                                                                 </div>
                                                            
@@ -152,3 +186,11 @@
     </div>
 
 </div>
+
+<script>
+    document.querySelector("#_img").addEventListener("Click", () => {
+        alert(1)
+        console.log("Working")
+    })
+
+</script>
