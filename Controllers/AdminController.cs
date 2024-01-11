@@ -971,5 +971,25 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("LogIn");
         }
 
+        public IActionResult DeleteFaculty (int? id)
+        {
+
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                var existing_faculty = _db._Faculty.FirstOrDefault(f => f.Id == id);
+                if (id != null && existing_faculty != null)
+                {
+                    _db._Faculty.Remove(existing_faculty);
+                    _db.SaveChanges();
+                    TempData["success"] = "Successfully Deleted!";
+                    return RedirectToAction("Faculty");
+                }
+
+                TempData["failed"] = "Id is invalid or null!";
+            }
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("Faculty");
+        }
+
     }
 }
