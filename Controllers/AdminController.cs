@@ -436,16 +436,18 @@ namespace Symphony_LTD.Controllers
             {
                 var _id = _db.Students.Find(id);
 
-                if (id != null)
+                if (id != null && _id != null)
                 {
                     _db.Students.Remove(_id);
                     _db.SaveChanges();
                     TempData["success"] = "Student Deleted!";
                     return RedirectToAction("Student");
                 }
+                TempData["failed"] = "Student can't be deleted due to invalid null or invalid ID.";
+                return RedirectToAction("Student");
             }
-
-            return BadRequest();
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
         }
 
         
@@ -486,9 +488,15 @@ namespace Symphony_LTD.Controllers
 
                 var contact = _db._Contact.FirstOrDefault(con => con.ContactId == id);
 
+                if(contact != null)
+                {
                 _db._Contact.Remove(contact);
                 _db.SaveChanges();
                 TempData["success"] = "Successfuly Deleted!";
+                return RedirectToAction("Contact");
+
+                }
+                TempData["failed"] = "Null ID Error!";
                 return RedirectToAction("Contact");
             }
             TempData["failed"] = "Please Log In!";
@@ -661,6 +669,8 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("LogIn");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult EditAbout (About data, IFormFile img_one, IFormFile img_two) 
         {
             if (img_one != null)
@@ -700,9 +710,19 @@ namespace Symphony_LTD.Controllers
             {
                 var existing = _db._AboutUs.FirstOrDefault(x => x.Id == data.Id);
 
+
                 if (existing != null)
                 {
-                    _db._AboutUs.Add(data);
+                    existing.HeadingOne = data.HeadingOne ?? existing.HeadingOne;
+                    existing.HeadingTwo = data.HeadingTwo ?? existing.HeadingTwo;
+                    existing.ParagraphOne = data.ParagraphOne ?? existing.ParagraphOne;
+                    existing.ParagraphTwo = data.ParagraphTwo ?? existing.ParagraphTwo;
+                    existing.ParagraphThree = data.ParagraphThree ?? existing.ParagraphThree;
+                    existing.ParagraphFour = data.ParagraphFour ?? existing.ParagraphFour;
+                    existing.ImageOne = data.ImageOne ?? existing.ImageOne;
+                    existing.ImageTwo = data.ImageTwo ?? existing.ImageTwo;
+
+                    _db._AboutUs.Update(existing);
                     _db.SaveChanges();
                     TempData["success"] = "About Us Page Edited Successfully.";
                     return RedirectToAction("Index");

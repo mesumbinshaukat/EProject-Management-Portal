@@ -17,13 +17,9 @@
                         @Html.AntiForgeryToken()
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="row">
-                            @foreach (var i in @ViewBag.Content)
+                            @if (ViewBag.Content != null)
                             {
-                            
-                               
-                                    <input type="hidden" class="form-control" asp-for="Id" value="@i.Id" placeholder="First Heading" required/>
-                                   
-                            
+                                var i = ViewBag.Content as About;
                             <div class="col-6">
                                 <label asp-for="HeadingOne" class="form-label"></label>
                                     <input class="form-control" asp-for="HeadingOne" value="@i.HeadingOne" placeholder="First Heading" />
@@ -49,28 +45,28 @@
                                 </div>
                                 <div class="col-6">
                                     <label asp-for="ParagraphOne" class="form-label"></label>
-                                    <textarea class="form-control" value="@i.ParagraphOne" asp-for="ParagraphOne" placeholder="Leave it empty if you want the default paragraph..." ></textarea>
+                                    <textarea class="form-control" asp-for="ParagraphOne" placeholder="Leave it empty if you want the default paragraph...">@i.ParagraphOne</textarea>
                                     <p>@(i.ParagraphOne)</p>
                                     <span asp-validation-for="ParagraphOne" class="text-danger"></span>
                                 </div>
 
                                 <div class="col-6">
                                     <label asp-for="ParagraphTwo" class="form-label"></label>
-                                    <textarea class="form-control" value="@i.ParagraphTwo" asp-for="ParagraphTwo" placeholder="Leave it empty if you want the default paragraph..." ></textarea>
+                                    <textarea class="form-control" asp-for="ParagraphTwo" placeholder="Leave it empty if you want the default paragraph...">@i.ParagraphTwo</textarea>
                                     <p>@(i.ParagraphTwo)</p>
                                     <span asp-validation-for="ParagraphTwo" class="text-danger"></span>
                                 </div>
 
                                 <div class="col-6">
                                     <label asp-for="ParagraphThree" class="form-label"></label>
-                                    <textarea class="form-control" value="@i.ParagraphThree" asp-for="ParagraphThree" placeholder="Leave it empty if you want the default paragraph..."></textarea>
+                                    <textarea class="form-control" asp-for="ParagraphThree" placeholder="Leave it empty if you want the default paragraph...">@i.ParagraphThree</textarea>
                                     <p>@i.ParagraphThree</p>
                                     <span asp-validation-for="ParagraphThree" class="text-danger"></span>
                                 </div>
 
                                 <div class="col-6">
                                     <label asp-for="ParagraphFour" class="form-label"></label>
-                                    <textarea class="form-control" value="@i.ParagraphFour" asp-for="ParagraphFour" placeholder="Leave it empty if you want the default paragraph..."></textarea>
+                                    <textarea class="form-control" asp-for="ParagraphFour" placeholder="Leave it empty if you want the default paragraph...">@i.ParagraphFour</textarea>
                                     <p>@i.ParagraphFour</p>
                                     <span asp-validation-for="ParagraphFour" class="text-danger"></span>
                                 </div>
