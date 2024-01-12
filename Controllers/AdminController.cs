@@ -64,10 +64,9 @@ namespace Symphony_LTD.Controllers
                     {
                         ViewBag.TotalRevenue = "0";
                     }
-                    // Optionally, handle cases where CourseFee is null if necessary
+                    
                 }
-
-                // Set ViewBag.TotalRevenue after the loop finishes to avoid overwriting
+                
                 ViewBag.TotalRevenue = total;
 
 
@@ -967,7 +966,20 @@ namespace Symphony_LTD.Controllers
                 return View();
             }
             TempData["failed"] = "Please Log In!";
-            return View("LogIn");
+            return RedirectToAction("LogIn");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddResult (Result data)
+        {
+            if (ModelState.IsValid)
+            {
+                
+            }
+            
+            TempData["failed"] = "Database Error";
+            return RedirectToAction("AddResult");
         }
 
     }

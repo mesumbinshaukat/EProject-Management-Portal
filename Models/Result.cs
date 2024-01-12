@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Symphony_LTD.Models
@@ -11,6 +12,9 @@ namespace Symphony_LTD.Models
         public int? StudentId { get; set; }
         [Required]
         public int? SubjectId { get; set; }
+        [Required]
+        [DisplayName("Comments")]
+        public string? Comments { get; set; }
         [Required]
         public decimal? MarksObtained { get; set; }
     }

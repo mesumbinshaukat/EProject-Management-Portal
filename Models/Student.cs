@@ -39,6 +39,8 @@ namespace Symphony_LTD.Models
         [DisplayName("Password")]
         [DefaultValue(null)]
         public string? Password { get; set; }
-
+        [Required]
+        [DisplayName]
+        public int? Class { get; set;}
     }
 }

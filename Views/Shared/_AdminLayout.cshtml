@@ -325,12 +325,29 @@
                             </a>
                         </li>
 
-                        <li>
-                                <a asp-action="Exam">
+                      
+
+                            <li>
+                                <a href="#exam" data-bs-toggle="collapse">
                                     <i class="mdi mdi-clipboard-outline"></i>
-                                    <span> Add Student Exam </span>
+                                    <span> Exam </span>
+                                    <span class="menu-arrow"></span>
                                 </a>
-                        </li>
+                                <div class="collapse" id="exam">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a asp-action="Exam">Individual Student Exam</a>
+                                        </li>
+                                        <li>
+                                            <a asp-controller="Admin" asp-action="Student">Entrance Exam</a>
+                                        </li>
+                                        <li>
+                                            <a asp-controller="Admin" asp-action="Student">Course Exam</a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </li>
 
                         <li>
                             <a href="#sidebarTasks" data-bs-toggle="collapse">
