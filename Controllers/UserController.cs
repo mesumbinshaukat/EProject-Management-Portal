@@ -45,6 +45,10 @@ namespace Symphony_LTD.Controllers
         {
             IEnumerable<About> data = _db._AboutUs.ToList();
             ViewBag.Faculty = _db._Faculty.ToList();
+            ViewBag.FacultyCount = _db._Faculty.Count();
+            ViewBag.TotalCourses = _db.Courses.Count();
+            ViewBag.TotalStudents = _db.Students.Count();
+            ViewBag.Branches = _db.Branches.Count();
             return View(data);
         }
     }

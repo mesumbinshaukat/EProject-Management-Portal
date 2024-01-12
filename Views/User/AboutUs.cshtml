@@ -119,5 +119,94 @@
         <!-- Demo end -->
 
     </div>
+
+    <!-- counter start -->
+    <section class="section bg-gradient">
+        <div class="container-fluid">
+            <div class="row" id="counter">
+                
+                  
+                <div class="col-lg-3 col-sm-6">
+                    <div class="text-center p-3">
+
+                        <div class="counter-content">
+                            <h2 class="counter_value mb-3 text-white" data-target="@ViewBag.FacultyCount">0</h2>
+                            <h5 class="counter-name text-white">Faculties</h5>
+                        </div>
+                    </div>
+                </div>
+
+               
+                <div class="col-lg-3 col-sm-6">
+                    <div class="text-center p-3">
+
+                        <div class="counter-content">
+                            <h2 class="counter_value mb-3 text-white" data-target="@ViewBag.TotalCourses">0</h2>
+                            <h5 class="counter-name text-white">Courses</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="text-center p-3">
+
+                        <div class="counter-content">
+                            <h2 class="counter_value mb-3 text-white" data-target="@ViewBag.TotalStudents">0</h2>
+                            <h5 class="counter-name text-white">Students</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="text-center p-3">
+
+                        <div class="counter-content">
+                            <h2 class="counter_value mb-3 text-white" data-target="@ViewBag.Branches">0</h2>
+                            <h5 class="counter-name text-white">Branches</h5>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- counter end -->
 </section>
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    // Function to animate counter values
+    function animateCounterValues() {
+        $('.counter_value').each(function () {
+            var $this = $(this);
+            var target = $this.data('target');
+            $({ count: 0 }).animate(
+                { count: target },
+                {
+                    duration: 500,
+                    easing: 'swing',
+                    step: function () {
+                        $this.text(Math.floor(this.count));
+                    },
+                    complete: function () {
+                        $this.text(target);
+                    }
+                }
+            );
+        });
+    }
+
+    // Trigger counter animation when the section comes into view
+    $(document).ready(function () {
+        var $counterSection = $('#counter');
+        var isCounterAnimated = false;
+
+        $(window).on('scroll', function () {
+            var windowBottom = $(window).scrollTop() + $(window).height();
+            var sectionTop = $counterSection.offset().top;
+
+            if (!isCounterAnimated && windowBottom > sectionTop) {
+                animateCounterValues();
+                isCounterAnimated = true;
+            }
+        });
+    });
+</script>
