@@ -14,8 +14,8 @@ namespace Symphony_LTD.Models
         [DisplayName("Total Marks")]
         public string? TotalMarks { get; set; }
         [Required]
-        [DisplayName("Courses Will Covered")]
-        public int[]? Courses {  get; set; }
+        [DisplayName("Course Exam")]
+        public int? Course {  get; set; }
         [Required]
         [DisplayName("Exam Description")]
         public string? Description { get; set; }
