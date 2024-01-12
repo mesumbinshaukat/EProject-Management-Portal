@@ -13,5 +13,8 @@ namespace Symphony_LTD.Models
         [Required]
         [DisplayName("Class Strength / Student Limit")]
         public double? Limit { get; set; }
+        [Required]
+        [DisplayName("Course")]
+        public int? Course { get; set; }
     }
 }
