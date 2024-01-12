@@ -955,5 +955,20 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("Faculty");
         }
 
+        public IActionResult AddResult ()
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+
+                ViewBag.Course = _db.Courses.ToList();
+                ViewBag.Student = _db.Students.ToList();
+                return View();
+            }
+            TempData["failed"] = "Please Log In!";
+            return View("LogIn");
+        }
+
     }
 }
