@@ -864,30 +864,6 @@ namespace Symphony_LTD.Controllers
 
                 if (existing_faculty != null)
                 {
-                    //    try
-                    //    {
-                    //        if (img != null)
-                    //        {
-                    //            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/media/faculty");
-                    //            string filepath = Path.Combine(path, img.FileName);
-
-                    //            if (!Directory.Exists(path))
-                    //            {
-                    //                Directory.CreateDirectory(path);
-                    //            }
-
-                    //            var stream = new FileStream(filepath, FileMode.Create);
-                    //            img.CopyTo(stream);
-                    //            string? filename = img.FileName;
-                    //            data.Image = filename;
-                    //        }
-                    //    }
-                    //    catch (Exception ex)
-                    //    {
-                    //        TempData["failed"] = ex.Message;
-                    //        ModelState.AddModelError("Image", "Error uploading the image: " + ex.Message);
-                    //    }
-
                     if (ModelState.IsValid)
                     {
                         existing_faculty.Name = data.Name ?? existing_faculty.Name;
@@ -899,24 +875,10 @@ namespace Symphony_LTD.Controllers
                         TempData["success"] = "Updated!";
                         return RedirectToAction("Faculty");
                     }
-                    //else
-                    //{
-                    //    // Extract detailed error messages
-                    //    var errorMessages = ModelState.Values
-                    //        .SelectMany(v => v.Errors)
-                    //        .Select(e => e.ErrorMessage)
-                    //        .ToList();
-
-                    //    // Join the error messages into a single string
-                    //    var detailedErrors = string.Join(", ", errorMessages);
-
-                    //    TempData["failed"] = "Validation error: " + detailedErrors;
-                    //}
+                    
                     TempData["failed"] = "Error!";
                     return RedirectToAction("Faculty");
-
                 }
-
                 TempData["failed"] = "There's no faculty.";
                 return RedirectToAction("Faculty");
             }

@@ -44,6 +44,7 @@ namespace Symphony_LTD.Controllers
         public IActionResult AboutUs()
         {
             IEnumerable<About> data = _db._AboutUs.ToList();
+            ViewBag.Faculty = _db._Faculty.ToList();
             return View(data);
         }
     }
