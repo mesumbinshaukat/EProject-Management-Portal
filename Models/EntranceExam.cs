@@ -19,5 +19,8 @@ namespace Symphony_LTD.Models
         [Required]
         [DisplayName("Exam Description")]
         public string? Description { get; set; }
+        [Required]
+        [DisplayName("Date")]
+        public DateTime? Date { get; set; }
     }
 }

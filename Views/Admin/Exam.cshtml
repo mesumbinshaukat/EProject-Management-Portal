@@ -19,7 +19,8 @@
         <!-- Start Content-->
         <div class="container-fluid">
             <h2>Add Exam For Student</h2>
-            <h4>Assigning Exams For Students Individually</h4>
+            <h4>Assigning Entrance Exams For Students Individually</h4>
+            <h5 class="text-danger">This is only for those students who were unable to attempt the exam, because of a serious problem.</h5>
             <hr />
             <form method="post" asp-action="Exam">
                 <div class="row">
@@ -40,7 +41,15 @@
 
                                 <div class="mb-3">
                                     <label class="form-label" asp-for="StudentId"></label>
-                                    <input type="text" asp-for="StudentId" class="form-control" placeholder="Student Roll Number">
+                                    <select asp-for="StudentId" class="form-control">
+                                        @foreach (var i in ViewBag.Student)
+                                        {
+                                            <option value="@i.RollNumber">
+                                                Name: @i.FirstName @i.MiddleName @i.LastName | Roll No#-: @i.RollNumber
+                                        </option>
+                                        }
+                                    </select>
+
                                 </div>
                                   <div class="mb-3">
 

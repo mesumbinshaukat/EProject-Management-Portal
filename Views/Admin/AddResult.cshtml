@@ -7,7 +7,7 @@
 
 <div class="content-page">
     <div class="content">
-        <h1>Add Results</h1>
+        <h1>Individual Student Exam Results</h1>
 
         <h4>Make Result For Student</h4>
         <hr />
@@ -18,10 +18,10 @@
                     <div class="form-group mb-2">
                         <label class="form-label">Student</label>
                         <select class="form-control" asp-for="StudentId">
-                        @foreach (var i in ViewBag.Student)
+                            @foreach (var i in ViewBag.Exam)
                         {
-                            <option value="@i.StudentId">
-                                @i.FirstName @i.MiddleName @i.LastName
+                                <option value="@i.Id">
+                                    @i.StudentId
                             </option>
 
                         }
@@ -32,13 +32,12 @@
                     <div class="form-group mb-2">
                         
                         <label class="form-label">Course Name</label>
-                        <select asp-for="SubjectId" class="form-control">
-                            @foreach (var i in ViewBag.Course)
+                        <select asp-for="SubjectId" class="form-control check">
+                            @foreach (var i in ViewBag.Exam)
                             {
                                 <option value="@i.Id">
-                                    @i.CourseName
+                                    @i.CourseId
                                 </option>
-
                             }
 
                         </select>
@@ -59,9 +58,10 @@
                         <input type="submit" value="Make Result" class="btn btn-outline-dark" />
                     </div>
                 </form>
+
             </div>
         </div>     
     </div>
 </div>
 
-
+                       

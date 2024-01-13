@@ -22,6 +22,9 @@
         <!-- icons -->
         <link href="~/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 
+    <!-- Responsive Table css -->
+    <link href="assets/libs/admin-resources/rwd-table/rwd-table.min.css" rel="stylesheet" type="text/css" />
+
     <!-- third party css -->
     <link href="assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/libs/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" type="text/css" />
@@ -451,7 +454,7 @@
                                             <a asp-controller="Admin" asp-action="EditResult">Edit Result</a>
                                         </li>
                                         <li>
-                                            <a asp-controller="Admin" asp-action="ViewResult">Check Results</a>
+                                            <a asp-controller="Admin" asp-action="CheckResults">Check Results</a>
                                         </li>
 
                                     </ul>
@@ -659,6 +662,13 @@
     <!-- knob plugin -->
     <script src="~/assets/libs/jquery-knob/jquery.knob.min.js"></script>
 
+    <!-- Responsive Table js -->
+    <script src="assets/libs/admin-resources/rwd-table/rwd-table.min.js"></script>
+
+    <!-- Init js -->
+    <script src="assets/js/pages/responsive-table.init.js"></script>
+
+
     <!--Morris Chart-->
     <script src="~/assets/libs/morris.js06/morris.min.js"></script>
     <script src="~/assets/libs/raphael/raphael.min.js"></script>
@@ -708,6 +718,8 @@
                         console.error('Error:', error);
                     });
             });
+
+           
         });
     </script>
 

@@ -255,6 +255,7 @@ namespace Symphony_LTD.Controllers
             if (HttpContext.Session.GetString("s_email") != null)
             {
                 ViewBag.Course = _db.Courses.ToList();
+                ViewBag.Student = _db.Students.ToList();
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
 
@@ -961,8 +962,11 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
 
-                ViewBag.Course = _db.Courses.ToList();
-                ViewBag.Student = _db.Students.ToList();
+                var fetch_individual_exam = _db.Exams.ToList();
+
+                ViewBag.Exam = fetch_individual_exam;
+
+
                 return View();
             }
             TempData["failed"] = "Please Log In!";
@@ -975,11 +979,26 @@ namespace Symphony_LTD.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+                _db.Results.Add(data);
+                _db.SaveChanges();
+                TempData["success"] = "Result Has Been Created!";
+                return RedirectToAction("AddResult");
             }
             
             TempData["failed"] = "Database Error";
             return RedirectToAction("AddResult");
+        }
+
+        public IActionResult CheckResults ()
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                return View();
+            }
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
         }
 
     }
