@@ -989,17 +989,52 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("AddResult");
         }
 
-        public IActionResult CheckResults ()
+        public IActionResult CheckResults()
         {
             if (HttpContext.Session.GetString("s_email") != null)
             {
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+
+                var fetch_result = _db.Results.ToList();
+
+                if (fetch_result != null && fetch_result.Any())
+                {
+                    var studentDetails = new List<Student>(); // Create a list to store multiple students
+
+                    foreach (var item in fetch_result)
+                    {
+                        var student = _db.Students.FirstOrDefault(i => i.StudentId == item.StudentId);
+
+                        if (student != null)
+                        {
+                            studentDetails.Add(student); // Add each student to the list
+                        }
+                    }
+
+                    if (studentDetails.Any())
+                    {
+                        ViewBag.StudentDetails = studentDetails; // Store the list in ViewBag
+                        ViewBag.Result = fetch_result;
+                        TempData["success"] = "There are total " + fetch_result.Count() + " results";
+                    }
+                    else
+                    {
+                        TempData["failed"] = "No Student";
+                    }
+                }
+                else
+                {
+                    TempData["failed"] = "No Results";
+                }
+
                 return View();
             }
+
             TempData["failed"] = "Please Log In!";
             return RedirectToAction("LogIn");
         }
+
 
     }
 }
