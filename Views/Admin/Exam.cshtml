@@ -44,7 +44,7 @@
                                     <select asp-for="StudentId" class="form-control">
                                         @foreach (var i in ViewBag.Student)
                                         {
-                                            <option value="@i.RollNumber">
+                                            <option value="@i.StudentId">
                                                 Name: @i.FirstName @i.MiddleName @i.LastName | Roll No#-: @i.RollNumber
                                         </option>
                                         }

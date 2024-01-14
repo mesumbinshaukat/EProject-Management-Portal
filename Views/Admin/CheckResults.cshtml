@@ -35,21 +35,21 @@
                                             <tbody>
                                                 @if (ViewBag.StudentDetails != null)
                                                 {
-                                                @foreach(var i in ViewBag.StudentDetails)
-                                                    {                                                  
-                                                <tr>
-                                                        <td>@i.RollNumber</td>
-                                                        <td>@i.FirstName @i.MiddleName @i.LastName</td>
-                                                    <td>14.81 (2.54%)</td>
-                                                    <td>582.93</td>
-                                                    <td>597.95</td>
-                                                    <td>597.73 x 100</td>
-                                                    <td>597.91 x 300</td>
-                                                    <td>731.10</td>
-                                                </tr>
+                                                    @foreach (var i in ViewBag.StudentDetails)
+                                                    {                                    
+                                                        <tr>
+                                                            <td>@i.RollNumber</td>
+                                                            <td>@i.FirstName @i.MiddleName @i.LastName</td>
+                                                            <td>@i.Class</td>
+                                                            <td>582.93</td>
+                                                            <td>597.95</td>
+                                                            <td>597.73 x 100</td>
+                                                            <td>597.91 x 300</td>
+                                                            <td>731.10</td>
+                                                        </tr>
                                                     }
                                                 }
-                                              
+
                                             </tbody>
                                         </table>
                                     </div> <!-- end .table-responsive -->
