@@ -998,58 +998,32 @@ namespace Symphony_LTD.Controllers
 
                 var resultDetails = _db.Results.ToList();
 
-                ViewBag.ResultDetails = resultDetails;
-
-                if(resultDetails != null)
+                if (resultDetails != null && resultDetails.Any())
                 {
-                    foreach(var i in resultDetails)
+                    var studentDetailsList = new List<Student>();
+
+                    foreach (var i in resultDetails)
                     {
                         var studentDetails = _db.Students.FirstOrDefault(x => x.StudentId == i.StudentId);
 
-                        if(studentDetails != null)
+                        if (studentDetails != null)
                         {
-                            ViewBag.StudentDetails = studentDetails;
+                            studentDetailsList.Add(studentDetails);
                         }
                         else
                         {
                             TempData["failed"] = "No Student";
                         }
                     }
+
+                    ViewBag.StudentDetailsList = studentDetailsList;
                 }
                 else
                 {
                     TempData["failed"] = "No Results";
+                    // Add logging to help identify the issue
+                    Console.WriteLine("No results found or resultDetails is null.");
                 }
-
-                //if (fetch_result != null && fetch_result.Any())
-                //{
-                //    var studentDetails = new List<Student>(); // Create a list to store multiple students
-
-                //    foreach (var item in fetch_result)
-                //    {
-                //        var student = _db.Students.FirstOrDefault(i => i.StudentId == item.StudentId);
-
-                //        if (student != null)
-                //        {
-                //            studentDetails.Add(student); // Add each student to the list
-                //        }
-                //    }
-
-                //    if (studentDetails.Any())
-                //    {
-                //        ViewBag.StudentDetails = studentDetails; // Store the list in ViewBag
-                //        ViewBag.Result = fetch_result;
-                //        TempData["success"] = "There are total " + fetch_result.Count() + " results";
-                //    }
-                //    else
-                //    {
-                //        TempData["failed"] = "No Student";
-                //    }
-                //}
-                //else
-                //{
-                //    TempData["failed"] = "No Results";
-                //}
 
                 return View();
             }
@@ -1057,7 +1031,6 @@ namespace Symphony_LTD.Controllers
             TempData["failed"] = "Please Log In!";
             return RedirectToAction("LogIn");
         }
-
 
     }
 }
