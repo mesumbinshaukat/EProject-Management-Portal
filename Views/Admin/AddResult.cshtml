@@ -20,7 +20,7 @@
                         <select class="form-control" asp-for="StudentId">
                             @foreach (var i in ViewBag.Exam)
                         {
-                                <option value="@i.Id">
+                                <option value="@i.StudentId">
                                     @i.StudentId
                             </option>
 
