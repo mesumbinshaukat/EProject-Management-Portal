@@ -11,11 +11,11 @@ namespace Symphony_LTD.Models
         [Required]
         [DisplayName("Roll Number")]
         public int? RollNumber { get; set; }
-        [Required]
+       
         [DisplayName("First Name")]
         public string? FirstName { get; set; }
         [DisplayName("Middle Name (Optional)")]
-        public string? MiddleName {  get; set; }
+        public string? MiddleName {  get; set; } = null;
         [Required]
         [DisplayName("Last Name")]
         public string? LastName { get; set; }
@@ -39,8 +39,8 @@ namespace Symphony_LTD.Models
         [DisplayName("Password")]
         [DefaultValue(null)]
         public string? Password { get; set; }
-        [Required]
         [DisplayName]
+        [DefaultValue(null)]
         public int? Class { get; set;}
     }
 }

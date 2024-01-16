@@ -1,0 +1,46 @@
+﻿@model Symphony_LTD.Models.Class
+
+@{
+    ViewData["Title"] = "Class";
+    Layout = "_AdminLayout";
+}
+
+<div class="content-page">
+    <div class="content">
+        <h1>Class</h1>
+
+        <h4>Make Classes</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Class">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="_Class" class="control-label"></label>
+                        <input asp-for="_Class" class="form-control" />
+                        <span asp-validation-for="_Class" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Limit" class="control-label"></label>
+                        <input asp-for="Limit" class="form-control" />
+                        <span asp-validation-for="Limit" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Course" class="control-label"></label>
+                        <input asp-for="Course" class="form-control" />
+                        <span asp-validation-for="Course" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create Class" class="btn btn-outline-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
