@@ -1032,16 +1032,32 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("LogIn");
         }
 
-        public IActionResult Class ()
+        public IActionResult Classes ()
         {
             if (HttpContext.Session.GetString("s_email") != null)
             {
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
-                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();             
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                ViewBag.Courses = _db.Courses.ToList();
                 return View();
             }
             TempData["failed"] = "Please Log In!";
             return RedirectToAction("LogIn");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Classes(Class obj)
+        {
+            if(ModelState.IsValid)
+            {
+                _db._Class.Add(obj);
+                _db.SaveChanges();
+                TempData["success"] = "Class Created Successfully!";
+                return RedirectToAction("Classes");
+            }
+            TempData["failed"] = "Database Issue!";
+            return RedirectToAction("Classes");
         }
 
     }
