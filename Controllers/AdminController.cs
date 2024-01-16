@@ -20,7 +20,7 @@ namespace Symphony_LTD.Controllers
             _db = db;
         }
 
-        
+
 
         public IActionResult Index()
         {
@@ -28,7 +28,7 @@ namespace Symphony_LTD.Controllers
             {
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
-                
+
 
                 var adminData = _db._Admin.ToList();
                 var contactData = _db._Contact.ToList();
@@ -64,9 +64,9 @@ namespace Symphony_LTD.Controllers
                     {
                         ViewBag.TotalRevenue = "0";
                     }
-                    
+
                 }
-                
+
                 ViewBag.TotalRevenue = total;
 
 
@@ -296,7 +296,7 @@ namespace Symphony_LTD.Controllers
             return View("LogIn");
         }
 
-        
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -312,7 +312,7 @@ namespace Symphony_LTD.Controllers
                     Directory.CreateDirectory(path);
                 }
 
-                
+
                 var stream = new FileStream(filepath, FileMode.Create);
                 stdImage.CopyTo(stream);
                 string? filename = stdImage.FileName;
@@ -331,12 +331,12 @@ namespace Symphony_LTD.Controllers
                 catch (Exception ex)
                 {
                     ModelState.AddModelError("", "An error occurred while saving the student details.");
-                    
+
                     return View(ex);
                 }
             }
 
-            
+
             return View(obj);
         }
 
@@ -359,7 +359,7 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
                 ViewBag.Student = _db.Students.ToList();
                 ViewBag.Password = _db.Students.FirstOrDefault(x => x.StudentId == id).Password;
-                
+
                 ViewBag.Classes = _db._Class.ToList();
                 return View(studentData);
             }
@@ -375,37 +375,37 @@ namespace Symphony_LTD.Controllers
             {
                 var existingStudent = _db.Students.FirstOrDefault(s => s.StudentId == updatedStudent.StudentId);
 
-            if (existingStudent == null)
-            {
-                return NotFound(); // Handle if the student is not found
-            }
+                if (existingStudent == null)
+                {
+                    return NotFound(); // Handle if the student is not found
+                }
 
-            _db.Entry(existingStudent).State = EntityState.Modified;
+                _db.Entry(existingStudent).State = EntityState.Modified;
 
                 // Update the existing student entity with the changes from updatedStudent
                 existingStudent.RollNumber = updatedStudent.RollNumber ?? existingStudent.RollNumber;
-            existingStudent.FirstName = updatedStudent.FirstName ?? existingStudent.FirstName;
-            existingStudent.MiddleName = updatedStudent.MiddleName ?? existingStudent.MiddleName;
-            existingStudent.LastName = updatedStudent.LastName ?? existingStudent.LastName;
-            existingStudent.DateOfBirth = updatedStudent.DateOfBirth ?? existingStudent.DateOfBirth;
-            existingStudent.Address = updatedStudent.Address ?? existingStudent.Address;
-            existingStudent.Email = updatedStudent.Email ?? existingStudent.Email;
-            existingStudent.PhoneNumber = updatedStudent.PhoneNumber ?? existingStudent.PhoneNumber;            
-            existingStudent.Password = updatedStudent.Password ?? existingStudent.Password;
-            existingStudent.Accept = updatedStudent.Accept ?? existingStudent.Accept;
-            existingStudent.Class = updatedStudent.Class ?? existingStudent.Class;
+                existingStudent.FirstName = updatedStudent.FirstName ?? existingStudent.FirstName;
+                existingStudent.MiddleName = updatedStudent.MiddleName ?? existingStudent.MiddleName;
+                existingStudent.LastName = updatedStudent.LastName ?? existingStudent.LastName;
+                existingStudent.DateOfBirth = updatedStudent.DateOfBirth ?? existingStudent.DateOfBirth;
+                existingStudent.Address = updatedStudent.Address ?? existingStudent.Address;
+                existingStudent.Email = updatedStudent.Email ?? existingStudent.Email;
+                existingStudent.PhoneNumber = updatedStudent.PhoneNumber ?? existingStudent.PhoneNumber;
+                existingStudent.Password = updatedStudent.Password ?? existingStudent.Password;
+                existingStudent.Accept = updatedStudent.Accept ?? existingStudent.Accept;
+                existingStudent.Class = updatedStudent.Class ?? existingStudent.Class;
 
-            
 
-            
+
+
                 _db.Students.Update(existingStudent);
                 _db.SaveChanges();
                 TempData["success"] = "Edited!";
                 return RedirectToAction("Student");
             }
             TempData["failed"] = "Database issue!";
-            return RedirectToAction ("Student");
-            
+            return RedirectToAction("Student");
+
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -414,31 +414,31 @@ namespace Symphony_LTD.Controllers
 
             if (HttpContext.Session.GetString("s_email") != null)
             {
-            var existingStudent = _db.Students.FirstOrDefault(x => x.StudentId == _id);
+                var existingStudent = _db.Students.FirstOrDefault(x => x.StudentId == _id);
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
 
                 if (stdImage != null)
-            {
-                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
-                string filepath = Path.Combine(path, stdImage.FileName);
-
-                if (!Directory.Exists(path))
                 {
-                    Directory.CreateDirectory(path);
-                }
+                    string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                    string filepath = Path.Combine(path, stdImage.FileName);
 
-                var stream = new FileStream(filepath, FileMode.Create);
-                stdImage.CopyTo(stream);
-                string? filename = stdImage.FileName;
-                existingStudent.Picture = filename ?? existingStudent.Picture;
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+
+                    var stream = new FileStream(filepath, FileMode.Create);
+                    stdImage.CopyTo(stream);
+                    string? filename = stdImage.FileName;
+                    existingStudent.Picture = filename ?? existingStudent.Picture;
                     _db.Students.Update(existingStudent);
                     _db.SaveChanges();
                     TempData["success"] = "Image Updated!";
                     return RedirectToAction("Student");
                 }
             }
-            if(stdImage == null)
+            if (stdImage == null)
             {
                 TempData["success"] = "Invalid Image or No Image Selected.";
                 return RedirectToAction("Student");
@@ -461,7 +461,7 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("LogIn");
         }
 
-        public IActionResult DeleteStudent (int? id)
+        public IActionResult DeleteStudent(int? id)
         {
             if (HttpContext.Session.GetString("s_email") != null)
             {
@@ -481,8 +481,8 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("LogIn");
         }
 
-        
-        public IActionResult MsgRead (int? id)
+
+        public IActionResult MsgRead(int? id)
         {
             var userContact = _db._Contact.FirstOrDefault(s => s.ContactId == id);
 
@@ -492,14 +492,14 @@ namespace Symphony_LTD.Controllers
                 userContact.Read = true;
                 _db.SaveChanges();
                 TempData["success"] = "Msg Seen";
-                
+
             }
 
             return RedirectToAction("Contact");
 
         }
 
-        public IActionResult Contact ()
+        public IActionResult Contact()
         {
             if (HttpContext.Session.GetString("s_email") != null)
             {
@@ -519,12 +519,12 @@ namespace Symphony_LTD.Controllers
 
                 var contact = _db._Contact.FirstOrDefault(con => con.ContactId == id);
 
-                if(contact != null)
+                if (contact != null)
                 {
-                _db._Contact.Remove(contact);
-                _db.SaveChanges();
-                TempData["success"] = "Successfuly Deleted!";
-                return RedirectToAction("Contact");
+                    _db._Contact.Remove(contact);
+                    _db.SaveChanges();
+                    TempData["success"] = "Successfuly Deleted!";
+                    return RedirectToAction("Contact");
 
                 }
                 TempData["failed"] = "Null ID Error!";
@@ -534,13 +534,13 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("LogIn");
         }
 
-        public IActionResult _Branches ()
+        public IActionResult _Branches()
         {
             if (HttpContext.Session.GetString("s_email") != null)
             {
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
-                
+
                 return View();
             }
             TempData["failed"] = "Please Log In!";
@@ -549,7 +549,7 @@ namespace Symphony_LTD.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult _Branches (Branch data)
+        public IActionResult _Branches(Branch data)
         {
             if (ModelState.IsValid)
             {
@@ -585,7 +585,7 @@ namespace Symphony_LTD.Controllers
 
                 var existingBranch = _db.Branches.FirstOrDefault(b => b.Id == id);
 
-                if(existingBranch != null)
+                if (existingBranch != null)
                 {
                     existingBranch.Branches = obj.Branches ?? existingBranch.Branches;
                     existingBranch.Address = obj.Address ?? existingBranch.Address;
@@ -611,8 +611,8 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("ViewBranches");
         }
 
-       
-        public IActionResult DeleteBranch (int? id)
+
+        public IActionResult DeleteBranch(int? id)
         {
             var branch = _db.Branches.FirstOrDefault(a => a.Id == id);
             if (branch != null)
@@ -630,11 +630,11 @@ namespace Symphony_LTD.Controllers
         {
             if (HttpContext.Session.GetString("s_email") != null)
             {
-                if(_db._AboutUs.FirstOrDefault() == null)
+                if (_db._AboutUs.FirstOrDefault() == null)
                 {
-                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
-                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
-                return View();
+                    ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                    ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                    return View();
 
                 }
                 TempData["failed"] = "Main About page content is already in the database. You can only modify it, for adding new content again, consider deleting current content.";
@@ -692,13 +692,13 @@ namespace Symphony_LTD.Controllers
             return View();
         }
 
-        public IActionResult EditAbout ()
+        public IActionResult EditAbout()
         {
             if (HttpContext.Session.GetString("s_email") != null)
             {
                 var fetch = _db._AboutUs.FirstOrDefault();
 
-                if(fetch == null)
+                if (fetch == null)
                 {
                     TempData["failed"] = "Can't edit because there's no content. Consider adding the content.";
                     return RedirectToAction("AboutUs");
@@ -706,10 +706,10 @@ namespace Symphony_LTD.Controllers
 
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
-                
-                ViewBag.Content = _db._AboutUs.FirstOrDefault(); 
-                ViewBag.ImageOne = _db._AboutUs.FirstOrDefault().ImageOne; 
-                ViewBag.ImageTwo = _db._AboutUs.FirstOrDefault().ImageTwo; 
+
+                ViewBag.Content = _db._AboutUs.FirstOrDefault();
+                ViewBag.ImageOne = _db._AboutUs.FirstOrDefault().ImageOne;
+                ViewBag.ImageTwo = _db._AboutUs.FirstOrDefault().ImageTwo;
                 return View();
             }
             TempData["failed"] = "Please Log In!";
@@ -718,9 +718,9 @@ namespace Symphony_LTD.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditAbout (About data) 
+        public IActionResult EditAbout(About data)
         {
-           
+
             if (ModelState.IsValid)
             {
                 var existing = _db._AboutUs.FirstOrDefault();
@@ -733,7 +733,7 @@ namespace Symphony_LTD.Controllers
                     existing.ParagraphTwo = data.ParagraphTwo ?? existing.ParagraphTwo;
                     existing.ParagraphThree = data.ParagraphThree ?? existing.ParagraphThree;
                     existing.ParagraphFour = data.ParagraphFour ?? existing.ParagraphFour;
-                    
+
                     _db._AboutUs.Update(existing);
                     _db.SaveChanges();
                     TempData["success"] = "About Us Page Edited Successfully.";
@@ -748,7 +748,7 @@ namespace Symphony_LTD.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateAboutImage (IFormFile img_one, IFormFile img_two)
+        public IActionResult UpdateAboutImage(IFormFile img_one, IFormFile img_two)
         {
             if (HttpContext.Session.GetString("s_email") != null)
             {
@@ -802,7 +802,7 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("LogIn");
         }
 
-        public IActionResult DeleteAbout ()
+        public IActionResult DeleteAbout()
         {
             if (HttpContext.Session.GetString("s_email") != null)
             {
@@ -822,10 +822,10 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("LogIn");
         }
 
-        public IActionResult Faculty ()
+        public IActionResult Faculty()
         {
             if (HttpContext.Session.GetString("s_email") != null)
-            {           
+            {
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
 
@@ -865,7 +865,7 @@ namespace Symphony_LTD.Controllers
                 }
                 catch (Exception ex)
                 {
-                    
+
                     ModelState.AddModelError("Image", "Error uploading the image" + ex);
                 }
             }
@@ -903,7 +903,7 @@ namespace Symphony_LTD.Controllers
                         TempData["success"] = "Updated!";
                         return RedirectToAction("Faculty");
                     }
-                    
+
                     TempData["failed"] = "Error!";
                     return RedirectToAction("Faculty");
                 }
@@ -917,9 +917,9 @@ namespace Symphony_LTD.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult FacultyImage (int _id , IFormFile img)
+        public IActionResult FacultyImage(int _id, IFormFile img)
         {
-            if(HttpContext.Session.GetString("s_email") != null)
+            if (HttpContext.Session.GetString("s_email") != null)
             {
                 var existing_path = _db._Faculty.FirstOrDefault(x => x.Id == _id);
 
@@ -963,7 +963,7 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("LogIn");
         }
 
-        public IActionResult DeleteFaculty (int? id)
+        public IActionResult DeleteFaculty(int? id)
         {
 
             if (HttpContext.Session.GetString("s_email") != null)
@@ -983,7 +983,7 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("Faculty");
         }
 
-        public IActionResult AddResult ()
+        public IActionResult AddResult()
         {
             if (HttpContext.Session.GetString("s_email") != null)
             {
@@ -1003,7 +1003,7 @@ namespace Symphony_LTD.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddResult (Result data)
+        public IActionResult AddResult(Result data)
         {
             if (ModelState.IsValid)
             {
@@ -1012,7 +1012,7 @@ namespace Symphony_LTD.Controllers
                 TempData["success"] = "Result Has Been Created!";
                 return RedirectToAction("AddResult");
             }
-            
+
             TempData["failed"] = "Database Error";
             return RedirectToAction("AddResult");
         }
@@ -1060,7 +1060,7 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("LogIn");
         }
 
-        public IActionResult Classes ()
+        public IActionResult Classes()
         {
             if (HttpContext.Session.GetString("s_email") != null)
             {
@@ -1078,7 +1078,7 @@ namespace Symphony_LTD.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Classes(Class obj)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _db._Class.Add(obj);
                 _db.SaveChanges();
@@ -1088,7 +1088,7 @@ namespace Symphony_LTD.Controllers
             TempData["failed"] = "Database Issue!";
             return RedirectToAction("Classes");
         }
-        
+
         public IActionResult CourseExam()
         {
             if (HttpContext.Session.GetString("s_email") != null)
@@ -1097,19 +1097,28 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
                 ViewBag.Courses = _db.Courses.ToList();
                 ViewBag.Classes = _db._Class.ToList();
+                ViewBag.ScheduledExams = _db._CourseExam.ToList();
                 return View();
             }
             TempData["failed"] = "Please Log In!";
             return RedirectToAction("LogIn");
         }
-    
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult CourseExam(CourseExam data)
         {
-        return View("LogIn");
-    }
+            if (ModelState.IsValid)
+            {
+                _db._CourseExam.Add(data);
+                _db.SaveChanges();
+                TempData["success"] = "Exam Scheduled!";
+                return RedirectToAction("CourseExam");
+            }
+            TempData["failed"] = "Can't schedule exam due to unexpected error.";
+            return View("CourseExam");
+        }
 
 
     }
