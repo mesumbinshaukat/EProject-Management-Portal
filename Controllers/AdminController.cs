@@ -1120,6 +1120,63 @@ namespace Symphony_LTD.Controllers
             return View("CourseExam");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteCourseExam (int? id)
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                if (id != null)
+                {
+                    var fetchDetails = _db._CourseExam.FirstOrDefault(x => x.Id == id);
+                    if(fetchDetails != null)
+                    {
+                        _db._CourseExam.Remove(fetchDetails);
+                        _db.SaveChanges();
+                        TempData["success"] = "Successfully Deleted!";
+                        return RedirectToAction("CourseExam");
+                    }
+                    TempData["failed"] = "Can't delete because can't find the specified field.";
+                    return RedirectToAction("CourseExam");
+                }
+                TempData["failed"] = "Invalid Id or Null Id error.";
+                return RedirectToAction("CourseExam");
+            }
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
+           
+        }
+
+        public IActionResult EditCourseExam (int? id)
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+
+                if (id != null)
+                {
+                    var existing_details = _db._CourseExam.FirstOrDefault(x => x.Id == id);
+                    if (existing_details != null)
+                    {
+                ViewBag.Courses = _db.Courses.ToList();
+                ViewBag.Classes = _db._Class.ToList();
+                ViewBag.ScheduledExams = _db._CourseExam.ToList();
+                return View();
+
+                    }
+                    TempData["failed"] = "Can't edit because there's no matching id.";
+                    return RedirectToAction("CourseExam");
+
+                }
+                TempData["failed"] = "Invalid Id or Null Id error.";
+                return RedirectToAction("CourseExam");
+            }
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
+        }
 
     }
 }

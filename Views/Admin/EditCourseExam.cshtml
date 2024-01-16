@@ -1,0 +1,59 @@
+﻿@model Symphony_LTD.Models.CourseExam
+@{
+    Layout = "_AdminLayout";
+    ViewData["title"] = "Edit/Modify Course Exam";
+}
+
+<div class="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <form asp-action="EditCourseExam">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label asp-for="ExamName" class="control-label"></label>
+                        <input asp-for="ExamName" class="form-control" placeholder="Exam Title" required />
+                        <span asp-validation-for="ExamName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="Class" class="control-label"></label>
+                        <select asp-for="Class" class="form-control">
+                            @foreach (var i in ViewBag.Classes)
+                            {
+                                @foreach (var x in ViewBag.Courses)
+                                {
+                                    if (x.Id == i.Course)
+                                    {
+                                        <option value="@i._Class">Class: <b>@i._Class</b> | Course: <b>@x.CourseName</b></option>
+                                    }
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="Class" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="TotalScore" class="control-label"></label>
+                        <input asp-for="TotalScore" class="form-control" placeholder="Total Marks/Score" />
+                        <span asp-validation-for="TotalScore" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" placeholder="Description" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="Date" class="control-label"></label>
+                        <input asp-for="Date" class="form-control" />
+                        <span asp-validation-for="Date" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-3 text-center">
+                        <input type="submit" value="Create" class="btn btn-outline-success" />
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
