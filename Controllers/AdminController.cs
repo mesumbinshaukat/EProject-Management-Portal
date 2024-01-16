@@ -289,6 +289,7 @@ namespace Symphony_LTD.Controllers
             {
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                ViewBag.Classes = _db._Class.ToList();
                 return View();
             }
             TempData["failed"] = "Please Log In!";
@@ -322,12 +323,10 @@ namespace Symphony_LTD.Controllers
             {
                 try
                 {
-                    
-
                     _db.Students.Add(obj);
                     _db.SaveChanges();
-
-                    return RedirectToAction("Index", "Admin");
+                    TempData["success"] = "Student Added!";
+                    return RedirectToAction("Student");
                 }
                 catch (Exception ex)
                 {
@@ -359,6 +358,8 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
                 ViewBag.Student = _db.Students.ToList();
+                ViewBag.Password = _db.Students.FirstOrDefault(x => x.StudentId == id).Password;
+                ViewBag.Classes = _db._Class.ToList();
                 return View(studentData);
             }
             TempData["failed"] = "Please Log In!";
@@ -381,17 +382,18 @@ namespace Symphony_LTD.Controllers
             _db.Entry(existingStudent).State = EntityState.Modified;
 
                 // Update the existing student entity with the changes from updatedStudent
-                existingStudent.RollNumber = updatedStudent.RollNumber;
-            existingStudent.FirstName = updatedStudent.FirstName;
-            existingStudent.MiddleName = updatedStudent.MiddleName;
-            existingStudent.LastName = updatedStudent.LastName;
-            existingStudent.DateOfBirth = updatedStudent.DateOfBirth;
-            existingStudent.Address = updatedStudent.Address;
-            existingStudent.Email = updatedStudent.Email;
-            existingStudent.PhoneNumber = updatedStudent.PhoneNumber;
+                existingStudent.RollNumber = updatedStudent.RollNumber ?? existingStudent.RollNumber;
+            existingStudent.FirstName = updatedStudent.FirstName ?? existingStudent.FirstName;
+            existingStudent.MiddleName = updatedStudent.MiddleName ?? existingStudent.MiddleName;
+            existingStudent.LastName = updatedStudent.LastName ?? existingStudent.LastName;
+            existingStudent.DateOfBirth = updatedStudent.DateOfBirth ?? existingStudent.DateOfBirth;
+            existingStudent.Address = updatedStudent.Address ?? existingStudent.Address;
+            existingStudent.Email = updatedStudent.Email ?? existingStudent.Email;
+            existingStudent.PhoneNumber = updatedStudent.PhoneNumber ?? existingStudent.PhoneNumber;
             existingStudent.Picture = updatedStudent.Picture ?? existingStudent.Picture;
-            existingStudent.Password = updatedStudent.Password;
-            existingStudent.Accept = updatedStudent.Accept;
+            existingStudent.Password = updatedStudent.Password ?? existingStudent.Password;
+            existingStudent.Accept = updatedStudent.Accept ?? existingStudent.Accept;
+            existingStudent.Class = updatedStudent.Class ?? existingStudent.Class;
 
             if (stdImage != null)
             {

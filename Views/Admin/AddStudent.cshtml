@@ -4,68 +4,68 @@
     ViewData["Title"] = "AddStudent";
     Layout = "_AdminLayout";
 }
- <div class="content-page">
+<div class="content-page">
     <div class="content">
-<h2>AddStudent</h2>
-<h4>Assign Student Credentials</h4>
-<hr />
+        <h2>AddStudent</h2>
+        <h4>Assign Student Credentials</h4>
+        <hr />
         <div class="container-fluid">
 
-       
-        <div class="row">
 
             <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title">FILL STUDENT FORM</h4>
-                            <p class="sub-header">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title">FILL STUDENT FORM</h4>
+                                <p class="sub-header">
                                     Please fill this form accurately to avoid any inconvenience for the student in future. Required fields are: <code>First Name</code>, <code>Last Name</code>, <code>Email</code>, <code>Password</code>, <code>Date Of Birth</code>, <code>Roll No#</code>, <code>Picture</code>, <code>Phone Number</code>, <code>Address</code>.
-                            </p>
+                                </p>
 
                                 <form asp-action="AddStudent" enctype="multipart/form-data">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    
+                                    <div class="row">
+                                        <div class="col-lg-6">
 
-                                        <div class="mb-3">
+
+                                            <div class="mb-3">
                                                 <label asp-for="FirstName" class="form-label"></label><span class="text-danger fw-bold">*</span>
                                                 <input type="text" asp-for="FirstName" class="form-control" placeholder="First Name" required>
-                                        </div>
-                                         <div class="mb-3">
+                                            </div>
+                                            <div class="mb-3">
                                                 <label asp-for="MiddleName" class="form-label"></label>
                                                 <input type="text" asp-for="MiddleName" class="form-control" placeholder="Middle Name">
-                                        </div>
-                                         <div class="mb-3">
+                                            </div>
+                                            <div class="mb-3">
                                                 <label asp-for="LastName" class="form-label"></label><span class="text-danger fw-bold">*</span>
                                                 <input type="text" asp-for="LastName" class="form-control" placeholder="Last Name" required>
-                                        </div>
+                                            </div>
 
-                                        <div class="mb-3">
+                                            <div class="mb-3">
                                                 <label asp-for="Email" class="form-label"></label><span class="text-danger fw-bold">*</span>
                                                 <input type="email" asp-for="Email" class="form-control" placeholder="Email" required>
-                                        </div>
+                                            </div>
 
-                                      
-                                        <div class="mb-3">
+
+                                            <div class="mb-3">
                                                 <label asp-for="Password" class="form-label"></label><span class="text-danger fw-bold">*</span>
-                                            <div class="input-group input-group-merge">
+                                                <div class="input-group input-group-merge">
                                                     <input type="password" asp-for="Password" class="form-control" placeholder="Enter your password" required>
-                                                <div class="input-group-text" data-password="false">
-                                                    <span class="password-eye"></span>
+                                                    <div class="input-group-text" data-password="false">
+                                                        <span class="password-eye"></span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                            
 
 
-                                     
 
-                                     
-                                    
-                                </div> <!-- end col -->
 
-                                <div class="col-lg-6">
-                                    
+
+                                        </div> <!-- end col -->
+
+                                        <div class="col-lg-6">
+
 
 
                                             <div class="mb-3">
@@ -73,58 +73,67 @@
                                                 <input type="number" asp-for="RollNumber" class="form-control" placeholder="Roll Number" required>
                                             </div>
 
-                                        <div class="mb-3">
+                                            <div class="mb-3">
                                                 <label asp-for="Picture" class="form-label"></label><span class="text-danger fw-bold">*</span>
                                                 <input type="file" asp-for="Picture" class="form-control" name="stdImage" required>
-                                        </div>
+                                            </div>
 
-                                        <div class="mb-3">
+                                            <div class="mb-3">
                                                 <label asp-for="DateOfBirth" class="form-label"></label><span class="text-danger fw-bold">*</span>
                                                 <input class="form-control" asp-for="DateOfBirth" id="DateOfBirth" type="date" required>
-                                        </div>
+                                            </div>
 
-                                        <div class="mb-3">
+                                            <div class="mb-3">
                                                 <label asp-for="PhoneNumber" class="form-label"></label><span class="text-danger fw-bold">*</span>
                                                 <input class="form-control" asp-for="PhoneNumber" type="tel" placeholder="Phone Number" required>
                                             </div>
 
-                                       
 
-                                        <div class="mb-3">
+
+                                            <div class="mb-3">
                                                 <label asp-for="Address" class="form-label"></label><span class="text-danger fw-bold">*</span>
                                                 <input class="form-control" asp-for="Address" type="text" placeholder="Address" required>
-                                        </div>
+                                            </div>
 
-                                         <div class="mb-3" style="display:none;">
+                                            <div class="mb-3" style="display:none;">
                                                 <label asp-for="Accept" class="form-label"></label><span class="text-danger fw-bold">*</span>
-                                                <input class="form-control" asp-for="Accept" type="text" value="Accepted" disabled required>
+                                                <input class="form-control" asp-for="Accept" type="text" value="Accepted" required>
+                                            </div>
+
+
+
+
+
+                                        </div> <!-- end col -->
+                                        <div class="mb-3">
+                                            <label asp-for="Class" class="form-label"></label><span class="text-danger fw-bold">*</span>
+                                            <select asp-for="Class" required class="form-control">
+                                                @foreach (var i in ViewBag.Classes)
+                                                {
+                                                    <option value="@i._Class">@i._Class</option>
+                                                }
+                                            </select>
                                         </div>
+                                        <div class="mb-3">
 
-                                        
-
-                                       
-
-                                </div> <!-- end col -->
-                                    <div class="mb-3">
-
-                                       <input type="submit" value="Add" class="form-control btn btn-success" />
+                                            <input type="submit" value="Add" class="form-control btn btn-success" />
+                                        </div>
                                     </div>
-                            </div>
-                                    </form>
-                            <!-- end row-->
+                                </form>
+                                <!-- end row-->
 
-                        </div> <!-- end card-body -->
-                    </div> <!-- end card -->
-                </div><!-- end col -->
+                            </div> <!-- end card-body -->
+                        </div> <!-- end card -->
+                    </div><!-- end col -->
+                </div>
+                <!-- end row -->
             </div>
-            <!-- end row -->
-    </div>
         </div>
+    </div>
 </div>
-</div> 
 
 @section Scripts {
     @{
         <partial name="_ValidationScriptsPartial" />
     }
-                }
+}

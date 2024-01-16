@@ -36,6 +36,7 @@
                                         <th>Picture</th>
                                         <th>Accept</th>
                                         <th>Password</th>
+                                        <th>Class</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -55,10 +56,11 @@
                                             <td><img src="~/images/@i.Picture" class="w-75"> </td>
                                             <td>@i.Accept</td>
                                             <td>@i.Password</td>
+                                            <td>@i.Class</td>
                                             <td>
                                                 <div class="row">
                                                     <div class="col-lg-6">
-                                                        <a class="btn btn-warning" asp-action="ChangeStudent" asp-route-id="@i.StudentId">Edit</a>
+                                                        <a class="btn btn-warning me-5" asp-action="ChangeStudent" asp-route-id="@i.StudentId">Edit</a>
                                                     </div>
                                                     <div class="col-lg-6">
 
