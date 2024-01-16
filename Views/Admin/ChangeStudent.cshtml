@@ -12,7 +12,7 @@
         <h1>Edit/Delete Student</h1>
         <hr />
         <div class="container-sm">
-            <form method="post" asp-action="ChangeStudent" enctype="multipart/form-data">
+            <form method="post" asp-action="ChangeStudent">
                 @Html.AntiForgeryToken()
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="row">
@@ -74,14 +74,7 @@
                             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label asp-for="Picture" class="control-label"></label>
-                            <input type="file" asp-for="Picture" name="stdImage" class="form-control" placeholder="Profile Picture" />
-                            <p id="img_path"></p>
-                            <span asp-validation-for="Picture" class="text-danger"></span>
-                        </div>
-                    </div>
+                   
                     <div class="col-6">
                         <div class="form-group">
                             <label asp-for="Password" class="control-label"></label>

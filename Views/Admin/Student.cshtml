@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<Student>
-
 @{
     ViewData["Title"] = "Student";
     Layout = "_AdminLayout";
@@ -59,10 +58,45 @@
                                             <td>@i.Class</td>
                                             <td>
                                                 <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <a class="btn btn-warning me-5" asp-action="ChangeStudent" asp-route-id="@i.StudentId">Edit</a>
+                                                    <div class="col-lg-4 me-5">
+                                                        <a class="btn btn-warning" asp-action="ChangeStudent" asp-route-id="@i.StudentId">Edit</a>
                                                     </div>
-                                                    <div class="col-lg-6">
+
+
+                                                    <div class="col-lg-4 me-5">
+
+                                                        @* Model *@
+
+                                                        <!-- Button trigger modal -->
+                                                        <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleImage-@i.StudentId">
+                                                            Update Image
+                                                        </button>
+
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="exampleImage-@i.StudentId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm</h1>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form asp-action="UpdateStudentImage" enctype="multipart/form-data">
+                                                                            <input type="hidden" value="@i.StudentId" required/>
+                                                                            <label class="form-label">Student Profile Picture</label>
+                                                                            <input type="file" class="form-control" id="img" required/>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                        <input class="btn btn-outline-success" value="Update" />
+                                                                    </div>
+                                                                        </form>
+                                                                        <p id="test"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
 
                                                         @* Model *@
 
@@ -112,10 +146,14 @@
     </div>
 
 </div>
-
+<script>
+    document.querySelector("#img").addEventListener("Click", () => {
+        document.getElementById("test").value = "Working"
+    })
+</script>
 
 @section Scripts {
     @{
-        <partial name="_ValidationScriptsPartial" />
+            <partial name="_ValidationScriptsPartial" />
     }
                 }

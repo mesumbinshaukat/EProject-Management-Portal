@@ -359,6 +359,7 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
                 ViewBag.Student = _db.Students.ToList();
                 ViewBag.Password = _db.Students.FirstOrDefault(x => x.StudentId == id).Password;
+                
                 ViewBag.Classes = _db._Class.ToList();
                 return View(studentData);
             }
@@ -368,7 +369,7 @@ namespace Symphony_LTD.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ChangeStudent(Student updatedStudent, IFormFile stdImage)
+        public IActionResult ChangeStudent(Student updatedStudent)
         {
             if (ModelState.IsValid)
             {
@@ -389,27 +390,12 @@ namespace Symphony_LTD.Controllers
             existingStudent.DateOfBirth = updatedStudent.DateOfBirth ?? existingStudent.DateOfBirth;
             existingStudent.Address = updatedStudent.Address ?? existingStudent.Address;
             existingStudent.Email = updatedStudent.Email ?? existingStudent.Email;
-            existingStudent.PhoneNumber = updatedStudent.PhoneNumber ?? existingStudent.PhoneNumber;
-            existingStudent.Picture = updatedStudent.Picture ?? existingStudent.Picture;
+            existingStudent.PhoneNumber = updatedStudent.PhoneNumber ?? existingStudent.PhoneNumber;            
             existingStudent.Password = updatedStudent.Password ?? existingStudent.Password;
             existingStudent.Accept = updatedStudent.Accept ?? existingStudent.Accept;
             existingStudent.Class = updatedStudent.Class ?? existingStudent.Class;
 
-            if (stdImage != null)
-            {
-                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
-                string filepath = Path.Combine(path, stdImage.FileName);
-
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-
-                var stream = new FileStream(filepath, FileMode.Create);
-                stdImage.CopyTo(stream);
-                string? filename = stdImage.FileName;
-                    existingStudent.Picture = filename;
-            }
+            
 
             
                 _db.Students.Update(existingStudent);
@@ -422,7 +408,38 @@ namespace Symphony_LTD.Controllers
             
         }
 
-    
+        public IActionResult UpdateStudentImage(int? id, IFormFile stdImage)
+        {
+            var existingStudent = _db.Students.FirstOrDefault(x => x.StudentId == id);
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+
+                if (stdImage != null)
+            {
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                string filepath = Path.Combine(path, stdImage.FileName);
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                var stream = new FileStream(filepath, FileMode.Create);
+                stdImage.CopyTo(stream);
+                string? filename = stdImage.FileName;
+                existingStudent.Picture = filename ?? existingStudent.Picture;
+                    _db.Students.Update(existingStudent);
+                    _db.SaveChanges();
+                    TempData["success"] = "Image Updated!";
+                    return RedirectToAction("Student");
+                }
+            }
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
+        }
+
         public IActionResult Student()
         {
             if (HttpContext.Session.GetString("s_email") != null)
