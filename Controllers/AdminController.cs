@@ -414,10 +414,11 @@ namespace Symphony_LTD.Controllers
             
                 _db.Students.Update(existingStudent);
                 _db.SaveChanges();
+                TempData["success"] = "Edited!";
                 return RedirectToAction("Student");
             }
-
-            return RedirectToAction ("Index");
+            TempData["failed"] = "Database issue!";
+            return RedirectToAction ("Student");
             
         }
 
