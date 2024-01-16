@@ -407,12 +407,13 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction ("Student");
             
         }
-
-        public IActionResult UpdateStudentImage(int? id, IFormFile stdImage)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UpdateStudentImage(int? _id, IFormFile stdImage)
         {
-            var existingStudent = _db.Students.FirstOrDefault(x => x.StudentId == id);
             if (HttpContext.Session.GetString("s_email") != null)
             {
+            var existingStudent = _db.Students.FirstOrDefault(x => x.StudentId == _id);
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
 
@@ -446,8 +447,8 @@ namespace Symphony_LTD.Controllers
             {
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
-                IEnumerable<Student> obj = _db.Students;
-                return View(obj);
+                ViewBag.Student = _db.Students.ToList();
+                return View();
             }
             TempData["failed"] = "Please Log In!";
             return RedirectToAction("LogIn");

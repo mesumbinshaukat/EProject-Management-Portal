@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Student>
+﻿@model Symphony_LTD.Models.Student
 @{
     ViewData["Title"] = "Student";
     Layout = "_AdminLayout";
@@ -40,7 +40,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var i in Model)
+                                    @foreach (var i in ViewBag.Student)
                                     {
                                         <tr>
                                             <td>@i.StudentId</td>
@@ -52,56 +52,55 @@
                                             <td>@i.Address</td>
                                             <td>@i.Email</td>
                                             <td>@i.PhoneNumber</td>
-                                            <td><img src="~/images/@i.Picture" class="w-75"> </td>
-                                            <td>@i.Accept</td>
-                                            <td>@i.Password</td>
-                                            <td>@i.Class</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-lg-4 me-5">
-                                                        <a class="btn btn-warning" asp-action="ChangeStudent" asp-route-id="@i.StudentId">Edit</a>
-                                                    </div>
+                                            <td class="text-center">
+                                                <img src="~/images/@i.Picture" class="w-100"> <div class="col-4">
+                                                    <!-- Button trigger modal -->
+                                                    <button type="button" class="btn btn-outline-dark mt-2" data-bs-toggle="modal" data-bs-target="#exampleImage-@i.StudentId">
+                                                        Change Image
+                                                    </button>
 
-
-                                                    <div class="col-lg-4 me-5">
-
-                                                        @* Model *@
-
-                                                        <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleImage-@i.StudentId">
-                                                            Update Image
-                                                        </button>
-
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="exampleImage-@i.StudentId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm</h1>
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <form asp-action="UpdateStudentImage" enctype="multipart/form-data">
-                                                                            <input type="hidden" value="@i.StudentId" required/>
-                                                                            <label class="form-label">Student Profile Picture</label>
-                                                                            <input type="file" class="form-control" id="img" required/>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                                        <input class="btn btn-outline-success" value="Update" />
-                                                                    </div>
-                                                                        </form>
-                                                                        <p id="test"></p>
-                                                                    </div>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleImage-@i.StudentId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update Picture</h1>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form asp-action="UpdateStudentImage" enctype="multipart/form-data">
+                                                                        @Html.AntiForgeryToken()
+                                                                        <input type="hidden" value="@i.StudentId" name="_id" asp-for="StudentId" />
+                                                                        <label class="form-label">Student Profile Picture</label>
+                                                                        <input type="file" class="form-control" asp-for="Picture" name="stdImage" />
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                            <input type="submit" class="btn btn-outline-success" value="Update" />
+                                                                        </div>
+                                                                    </form>
+                                                                    
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-4">
+                                                </div>
+                                            </td>
+                                            <td>@i.Accept</td>
+                                            <td>@i.Password</td>
+                                            <td>@i.Class</td>
+                                            <td>
+                                                <div class="container-fluid w-100">
+                                                <div class="row">
+                                                   
+                                                        <div class="col-4">
+                                                            <a class="btn btn-warning" asp-action="ChangeStudent" asp-route-id="@i.StudentId">Edit</a>
+                                                        </div>
+                                                    <div class="col-4">
 
-                                                        @* Model *@
+                                                     
 
                                                         <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-@i.StudentId">
+                                                        <button type="button" class="btn btn-danger ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal-@i.StudentId">
                                                             Delete
                                                         </button>
 
@@ -125,6 +124,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                </div>
                                             </td>
                                         </tr>
                                     }
@@ -146,12 +147,6 @@
     </div>
 
 </div>
-<script>
-    document.querySelector("#img").addEventListener("Click", () => {
-        document.getElementById("test").value = "Working"
-    })
-</script>
-
 @section Scripts {
     @{
             <partial name="_ValidationScriptsPartial" />
