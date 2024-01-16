@@ -411,6 +411,7 @@ namespace Symphony_LTD.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult UpdateStudentImage(int? _id, IFormFile stdImage)
         {
+
             if (HttpContext.Session.GetString("s_email") != null)
             {
             var existingStudent = _db.Students.FirstOrDefault(x => x.StudentId == _id);
@@ -437,6 +438,12 @@ namespace Symphony_LTD.Controllers
                     return RedirectToAction("Student");
                 }
             }
+            if(stdImage == null)
+            {
+                TempData["success"] = "Invalid Image or No Image Selected.";
+                return RedirectToAction("Student");
+            }
+
             TempData["failed"] = "Please Log In!";
             return RedirectToAction("LogIn");
         }
@@ -1081,6 +1088,29 @@ namespace Symphony_LTD.Controllers
             TempData["failed"] = "Database Issue!";
             return RedirectToAction("Classes");
         }
+        
+        public IActionResult CourseExam()
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                ViewBag.Courses = _db.Courses.ToList();
+                ViewBag.Classes = _db._Class.ToList();
+                return View();
+            }
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
+        }
+    
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CourseExam(CourseExam data)
+        {
+        return View("LogIn");
+    }
+
 
     }
 }

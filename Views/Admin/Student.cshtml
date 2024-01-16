@@ -72,7 +72,7 @@
                                                                         @Html.AntiForgeryToken()
                                                                         <input type="hidden" value="@i.StudentId" name="_id" asp-for="StudentId" />
                                                                         <label class="form-label">Student Profile Picture</label>
-                                                                        <input type="file" class="form-control" asp-for="Picture" name="stdImage" />
+                                                                        <input type="file" class="form-control" asp-for="Picture" name="stdImage" required/>
                                                                         <div class="modal-footer">
                                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                                                             <input type="submit" class="btn btn-outline-success" value="Update" />

@@ -15,10 +15,7 @@ namespace Symphony_LTD.Models
         public int? Class {  get; set; }
         [Required]
         [DisplayName("Total Score")]
-        public float? TotalScore { get; set; }
-        [Required]
-        [DisplayName("Course")]
-        public int? Course {  get; set; }
+        public float? TotalScore { get; set; }   
         [Required]
         [DisplayName("Description")]
         public string? Description { get; set; }
