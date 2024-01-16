@@ -1161,10 +1161,16 @@ namespace Symphony_LTD.Controllers
                     var existing_details = _db._CourseExam.FirstOrDefault(x => x.Id == id);
                     if (existing_details != null)
                     {
-                ViewBag.Courses = _db.Courses.ToList();
-                ViewBag.Classes = _db._Class.ToList();
-                ViewBag.ScheduledExams = _db._CourseExam.ToList();
-                return View();
+                        ViewBag.Id = existing_details.Id;
+                        ViewBag.ExamName = existing_details.ExamName;
+                        ViewBag.Class = existing_details.Class;
+                        ViewBag.TotalScore = existing_details.TotalScore;
+                        ViewBag.Description = existing_details.Description;
+                        ViewBag.Date = existing_details.Date;
+                        ViewBag.Courses = _db.Courses.ToList();
+                        ViewBag.Classes = _db._Class.ToList();
+                        ViewBag.ScheduledExams = _db._CourseExam.ToList();
+                        return View();
 
                     }
                     TempData["failed"] = "Can't edit because there's no matching id.";
