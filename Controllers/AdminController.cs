@@ -1039,6 +1039,7 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
                 ViewBag.Courses = _db.Courses.ToList();
+                ViewBag.Classes = _db._Class.ToList();
                 return View();
             }
             TempData["failed"] = "Please Log In!";
