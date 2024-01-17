@@ -176,17 +176,11 @@
                             </div>
 
                             <!-- item-->
-                            <a href="contacts-profile.html" class="dropdown-item notify-item">
-                                <i class="fe-user"></i>
-                                <span>My Account</span>
+                            <a asp-controller="Home" asp-action="Index" target="_blank" class="dropdown-item notify-item">
+                                    <i class="mdi mdi-home-circle"></i>
+                                <span>Visit Site</span>
                             </a>
-
-                            <!-- item-->
-                            <a href="auth-lock-screen.html" class="dropdown-item notify-item">
-                                <i class="fe-lock"></i>
-                                <span>Lock Screen</span>
-                            </a>
-
+                                                      
                             <div class="dropdown-divider"></div>
 
                             <!-- item-->
@@ -261,21 +255,9 @@
                         <div class="dropdown-menu user-pro-dropdown">
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="fe-user me-1"></i>
-                                <span>My Account</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="fe-settings me-1"></i>
-                                <span>Settings</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="fe-lock me-1"></i>
-                                <span>Lock Screen</span>
+                            <a asp-controller="Home" asp-action="Index" class="dropdown-item notify-item">
+                                    <i class="mdi mdi-home-circle"></i>
+                                <span>Visit Site</span>
                             </a>
 
                             <!-- item-->
@@ -448,6 +430,13 @@
                                 <a asp-controller="FAQ" asp-action="Index">
                                     <i class="mdi mdi-forum-outline"></i>
                                     <span> FAQ's </span>
+                                </a>
+                            </li>
+
+                             <li>
+                                <a asp-controller="Home" asp-action="Index">
+                                    <i class="mdi mdi-home-circle"></i>
+                                    <span> Home Page / Landing Page </span>
                                 </a>
                             </li>
 
