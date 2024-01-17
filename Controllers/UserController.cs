@@ -53,5 +53,13 @@ namespace Symphony_LTD.Controllers
             
             return View(data);
         }
+
+        public IActionResult Courses()
+        {
+            ViewBag.Courses = _db.Courses.ToList();
+
+
+            return View();
+        }
     }
 }

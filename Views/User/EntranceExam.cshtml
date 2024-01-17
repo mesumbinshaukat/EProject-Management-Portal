@@ -42,37 +42,43 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var i in ViewBag.EntranceExam)
-                        {
-                            <tr>
-                                @if (ViewBag.TotalCourses != null)
-                                {
-                                    @foreach (var x in ViewBag.TotalCourses)
-                                    {
-                                        if (x.Id == i.Course)
-                                        {
 
-                                            <td>@i.ExamName</td>
-                                            <td>@i.TotalMarks</td>
-                                            <td>@i.Description</td>
-                                            <td>@i.Date</td>
-                                            <td>@x.CourseName</td>
-                                            <td>@x.TopicsCovered</td>
-                                            <td>@x.CourseFee</td>
-                                            <td>@x.CourseDetails</td>
-                                            @if(i.Pending == true)
+                        @if(ViewBag.EntranceExam != null)
+                        {
+                            @foreach (var i in ViewBag.EntranceExam)
+                            {
+                                <tr>
+                                    @if (ViewBag.TotalCourses != null)
+                                    {
+                                        @foreach (var x in ViewBag.TotalCourses)
+                                        {
+                                            if (x.Id == i.Course)
                                             {
-                                                <td class="text-success">Available</td>
-                                            }else
-                                            {
-                                                <td class="text-danger">Not Available</td>
+
+                                                <td>@i.ExamName</td>
+                                                <td>@i.TotalMarks</td>
+                                                <td>@i.Description</td>
+                                                <td>@i.Date</td>
+                                                <td>@x.CourseName</td>
+                                                <td>@x.TopicsCovered</td>
+                                                <td>@x.CourseFee</td>
+                                                <td>@x.CourseDetails</td>
+                                                @if (i.Pending == true)
+                                                {
+                                                    <td class="text-success">Available</td>
+                                                }
+                                                else
+                                                {
+                                                    <td class="text-danger">Not Available</td>
+                                                }
                                             }
                                         }
                                     }
-                                }
-                                
-                            </tr>
-                        }
+
+                                </tr>
+                            }
+                        }                       
+
                     </tbody>
                 </table>
             </div>
