@@ -22,5 +22,6 @@ namespace Symphony_LTD.Data
         public DbSet<EntranceExam>? _EntranceExam { get; set; }
         public DbSet<EntranceExamResult>? _EntranceExamResult { get; set; }
         public DbSet<CourseExamResult>? _CourseExamResult { get; set; }
+        public DbSet<HomeSectionOne>? _HomeSectionOne { get; set; }
     }
 }

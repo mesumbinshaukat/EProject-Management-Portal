@@ -1222,7 +1222,7 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
                 ViewBag.Courses = _db.Courses.ToList();
-                ViewBag.EntranceExam = _db._EntranceExam.ToList();                
+                ViewBag.EntranceExam = _db._EntranceExam.ToList();
                 return View();
             }
             TempData["failed"] = "Please Log In!";
@@ -1247,6 +1247,18 @@ namespace Symphony_LTD.Controllers
             }
             TempData["failed"] = "Can't schedule Exam Due To Database Error!";
             return RedirectToAction("EntranceExam");
+        }
+
+        public IActionResult Home ()
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();                
+                return View();
+            }
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
         }
 
     }
