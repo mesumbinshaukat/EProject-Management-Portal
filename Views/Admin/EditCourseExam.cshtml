@@ -6,18 +6,21 @@
 
 <div class="content-page">
     <div class="content">
+        <h1>Edit Exam</h1>
+        <h3>Edit/Modify Course Exam</h3>
+        <hr />
         <div class="container-fluid">
             <form asp-action="EditCourseExam">
                 @Html.AntiForgeryToken()
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="row">
                     <input asp-for="Id" value="@ViewBag.Id" type="hidden" required/>
-                    <div class="form-group col-6">
+                    <div class="form-group col-6 mb-2">
                         <label asp-for="ExamName" class="control-label"></label>
                         <input asp-for="ExamName" class="form-control" value="@ViewBag.ExamName" placeholder="Exam Title" required />
                         <span asp-validation-for="ExamName" class="text-danger"></span>
                     </div>
-                    <div class="form-group col-6">
+                    <div class="form-group col-6 mb-2">
                         <label asp-for="Class" class="control-label"></label>
                         <select asp-for="Class" class="form-control">
                             @foreach (var i in ViewBag.Classes)
@@ -33,23 +36,24 @@
                         </select>
                         <span asp-validation-for="Class" class="text-danger"></span>
                     </div>
-                    <div class="form-group col-6">
+                    <div class="form-group col-6 mb-2">
                         <label asp-for="TotalScore" class="control-label"></label>
                         <input asp-for="TotalScore" class="form-control" value="@ViewBag.TotalScore" placeholder="Total Marks/Score" />
                         <span asp-validation-for="TotalScore" class="text-danger"></span>
                     </div>
-                    <div class="form-group col-6">
+                    <div class="form-group col-6 mb-2">
                         <label asp-for="Description" class="control-label"></label>
                         <input asp-for="Description" class="form-control" value="@ViewBag.Description" placeholder="Description" />
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
-                    <div class="form-group col-6">
-                        <label asp-for="Date" class="control-label"></label>
+                    <div class="form-group col-6" mb-2>
+                        <label asp-for="Date" class="control-label"></label><code>(Leave It Empty For The default schedule: <b>@ViewBag.Date</b>)</code>
                         <input asp-for="Date" value="@ViewBag.Date" class="form-control" />
                         <span asp-validation-for="Date" class="text-danger"></span>
                     </div>
-                    <div class="form-group mt-3 text-center">
-                        <input type="submit" value="Create" class="btn btn-outline-success" />
+                    <div class="form-group col-6">
+                        <label class="form-label">Update/Modify</label>
+                        <input type="submit" value="Modify" class="btn btn-dark form-control" />
                     </div>
                 </div>
 
