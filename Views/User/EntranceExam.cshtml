@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Courses";
+}
+
+<style>
+    .nav-link {
+        color: black !important;
+    }
+</style>
+
+
+
+<!-- contact start -->
+<section class="section" id="contact">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="title text-center mb-2">
+                    <h6 class="text-primary small-title">Entrance Exams</h6>
+                    <h4>Available <span class="text-warning">Exams</span></h4>
+                    <p class="text-muted">Check out the available entrance exam details.</p>
+        <hr />
+                </div>
+            </div>
+        </div>
+        <div class="row text-center">
+            <h3>Exams</h3>
+           
+            <div class="col-12">
+                <table class="table text-center">
+                    <thead>
+                        <tr>
+                            <th>Exam Name/Title</th>
+                            <th>Total Marks</th>
+                            <th>Exam Description/Detail</th>
+                            <th>Schedule Date</th>
+                            <th>Course</th>
+                            <th>Topics Covered In Course</th>
+                            <th>Course Fee</th>
+                            <th>Course Details</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var i in ViewBag.EntranceExam)
+                        {
+                            <tr>
+                                @if (ViewBag.TotalCourses != null)
+                                {
+                                    @foreach (var x in ViewBag.TotalCourses)
+                                    {
+                                        if (x.Id == i.Course)
+                                        {
+
+                                            <td>@i.ExamName</td>
+                                            <td>@i.TotalMarks</td>
+                                            <td>@i.Description</td>
+                                            <td>@i.Date</td>
+                                            <td>@x.CourseName</td>
+                                            <td>@x.TopicsCovered</td>
+                                            <td>@x.CourseFee</td>
+                                            <td>@x.CourseDetails</td>
+                                            @if(i.Pending == true)
+                                            {
+                                                <td class="text-success">Available</td>
+                                            }else
+                                            {
+                                                <td class="text-danger">Not Available</td>
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <!-- end container-fluid -->
+</section>
+<!-- contact end -->

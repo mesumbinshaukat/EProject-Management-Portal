@@ -35,10 +35,11 @@ namespace Symphony_LTD.Controllers
             return View(obj);
         }
 
-        public IActionResult Courses ()
-        {
-            IEnumerable<Course> data = _db.Courses.ToList();
-            return View(data);
+        public IActionResult EntranceExam ()
+        {            
+            ViewBag.EntranceExam = _db._EntranceExam.ToList();
+            ViewBag.TotalCourses = _db.Courses.ToList();
+            return View();
         }
 
         public IActionResult AboutUs()
@@ -49,6 +50,7 @@ namespace Symphony_LTD.Controllers
             ViewBag.TotalCourses = _db.Courses.Count();
             ViewBag.TotalStudents = _db.Students.Count();
             ViewBag.Branches = _db.Branches.Count();
+            
             return View(data);
         }
     }
