@@ -1184,5 +1184,17 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("LogIn");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditCourseExam (CourseExam data)
+        {
+            if(ModelState.IsValid)
+            {
+                
+            }
+            TempData["failed"] = "Database error.";
+            return RedirectToAction("CourseExam");
+        }
+
     }
 }

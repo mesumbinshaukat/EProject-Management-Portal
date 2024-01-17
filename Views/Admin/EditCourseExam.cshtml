@@ -11,9 +11,10 @@
                 @Html.AntiForgeryToken()
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="row">
+                    <input asp-for="Id" value="@ViewBag.Id" type="hidden" required/>
                     <div class="form-group col-6">
                         <label asp-for="ExamName" class="control-label"></label>
-                        <input asp-for="ExamName" class="form-control" placeholder="Exam Title" required />
+                        <input asp-for="ExamName" class="form-control" value="@ViewBag.ExamName" placeholder="Exam Title" required />
                         <span asp-validation-for="ExamName" class="text-danger"></span>
                     </div>
                     <div class="form-group col-6">
@@ -34,17 +35,17 @@
                     </div>
                     <div class="form-group col-6">
                         <label asp-for="TotalScore" class="control-label"></label>
-                        <input asp-for="TotalScore" class="form-control" placeholder="Total Marks/Score" />
+                        <input asp-for="TotalScore" class="form-control" value="@ViewBag.TotalScore" placeholder="Total Marks/Score" />
                         <span asp-validation-for="TotalScore" class="text-danger"></span>
                     </div>
                     <div class="form-group col-6">
                         <label asp-for="Description" class="control-label"></label>
-                        <input asp-for="Description" class="form-control" placeholder="Description" />
+                        <input asp-for="Description" class="form-control" value="@ViewBag.Description" placeholder="Description" />
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                     <div class="form-group col-6">
                         <label asp-for="Date" class="control-label"></label>
-                        <input asp-for="Date" class="form-control" />
+                        <input asp-for="Date" value="@ViewBag.Date" class="form-control" />
                         <span asp-validation-for="Date" class="text-danger"></span>
                     </div>
                     <div class="form-group mt-3 text-center">
