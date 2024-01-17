@@ -1261,5 +1261,41 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("LogIn");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Home (HomeSectionOne data, IFormFile _img)
+        {
+            if (_img != null)
+            {
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/media/home");
+                string filepath = Path.Combine(path, _img.FileName);
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                var stream = new FileStream(filepath, FileMode.Create);
+                _img.CopyTo(stream);
+                string? filename = _img.FileName;
+                data.Img = filename;                
+            }
+
+            if (ModelState.IsValid)
+            {
+                if(data != null)
+                {
+                    _db._HomeSectionOne.Add(data);
+                    _db.SaveChanges();
+                    TempData["success"] = "Successfully Modified Home Page.";
+                    return RedirectToAction("Home");
+                }
+                TempData["failed"] = "Values are invalid, or you've have left some fields null.";
+                return RedirectToAction("Home");
+            }
+            TempData["failed"] = "Database Error!";
+            return RedirectToAction("Home");
+        }
+
     }
 }

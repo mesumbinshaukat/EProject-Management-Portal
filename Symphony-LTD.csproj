@@ -29,6 +29,7 @@
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\media\faculty\" />
     <Folder Include="wwwroot\media\about\" />
+    <Folder Include="wwwroot\media\home\" />
   </ItemGroup>
 
   <ItemGroup>
