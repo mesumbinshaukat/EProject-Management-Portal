@@ -25,9 +25,14 @@
                         <select asp-for="Class" class="form-control">
                             @foreach (var i in ViewBag.Classes)
                             {
+                                
                                 @foreach (var x in ViewBag.Courses)
                                 {
-                                    if (x.Id == i.Course)
+                                    if (i._Class == ViewBag.Class)
+                                    {
+                                        <option value="@i._Class">Class: <b>@i._Class</b> | Course: <b>@x.CourseName</b></option>
+                                    }
+                                    if (x.Id == i.Course && ViewBag.Class != @i._Class)
                                     {
                                         <option value="@i._Class">Class: <b>@i._Class</b> | Course: <b>@x.CourseName</b></option>
                                     }

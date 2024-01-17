@@ -1190,7 +1190,23 @@ namespace Symphony_LTD.Controllers
         {
             if(ModelState.IsValid)
             {
-                
+                var existing_exam = _db._CourseExam.FirstOrDefault(x => x.Id == data.Id);
+
+                if(existing_exam != null)
+                {
+                    existing_exam.ExamName = data.ExamName ?? existing_exam.ExamName;
+                    existing_exam.Class = data.Class ?? existing_exam.Class;
+                    existing_exam.Description = data.Description ?? existing_exam.Description;
+                    existing_exam.Date = data.Date ?? existing_exam.Date;
+                    existing_exam.TotalScore = data.TotalScore ?? existing_exam.TotalScore;
+
+                    _db._CourseExam.Update(existing_exam);
+                    _db.SaveChanges();
+                    TempData["success"] = "Scheduled Exam Modified/Updated!";
+                    return RedirectToAction("CourseExam");
+                }
+                TempData["failed"] = "No Scheduled Exam Found On The Specified Id: " + data.Id;
+                return RedirectToAction("CourseExam");
             }
             TempData["failed"] = "Database error.";
             return RedirectToAction("CourseExam");

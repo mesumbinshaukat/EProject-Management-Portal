@@ -19,7 +19,7 @@ namespace Symphony_LTD.Models
         [Required]
         [DisplayName("Description")]
         public string? Description { get; set; }
-        [Required]
+        
         [DisplayName("Date")]
         public DateTime? Date { get; set; }
     }
