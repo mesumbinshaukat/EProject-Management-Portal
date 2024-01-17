@@ -1221,7 +1221,8 @@ namespace Symphony_LTD.Controllers
             {
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
-                ViewBag.Courses = _db.Courses.ToList();                
+                ViewBag.Courses = _db.Courses.ToList();
+                ViewBag.EntranceExam = _db._EntranceExam.ToList();                
                 return View();
             }
             TempData["failed"] = "Please Log In!";
@@ -1232,7 +1233,20 @@ namespace Symphony_LTD.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult EntranceExam (EntranceExam data)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                if(data != null)
+                {
+                    _db._EntranceExam.Add(data);
+                    _db.SaveChanges();
+                    TempData["success"] = "Entrance Exam Scheduled Successfully.";
+                    return RedirectToAction("EntranceExam");
+                }
+                TempData["failed"] = "Error: Empty Field!";
+                return RedirectToAction("EntranceExam");
+            }
+            TempData["failed"] = "Can't schedule Exam Due To Database Error!";
+            return RedirectToAction("EntranceExam");
         }
 
     }
