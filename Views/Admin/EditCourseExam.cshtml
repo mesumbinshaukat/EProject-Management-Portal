@@ -23,15 +23,11 @@
                     <div class="form-group col-6 mb-2">
                         <label asp-for="Class" class="control-label"></label>
                         <select asp-for="Class" class="form-control">
+                            <option value="@ViewBag.Class">Default -: Class: <b>@ViewBag.Class</b> | Course: <b>@ViewBag.Course</b></option>                            
                             @foreach (var i in ViewBag.Classes)
-                            {
-                                
+                            {                                
                                 @foreach (var x in ViewBag.Courses)
-                                {
-                                    if (i._Class == ViewBag.Class)
-                                    {
-                                        <option value="@i._Class">Class: <b>@i._Class</b> | Course: <b>@x.CourseName</b></option>
-                                    }
+                                {                                    
                                     if (x.Id == i.Course && ViewBag.Class != @i._Class)
                                     {
                                         <option value="@i._Class">Class: <b>@i._Class</b> | Course: <b>@x.CourseName</b></option>
