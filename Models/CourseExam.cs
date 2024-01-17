@@ -22,5 +22,9 @@ namespace Symphony_LTD.Models
         
         [DisplayName("Date")]
         public DateTime? Date { get; set; }
+
+        [DisplayName("Status")]
+        [DefaultValue(true)]
+        public bool? Pending { get; set; } = true;
     }
 }

@@ -25,6 +25,8 @@ namespace Symphony_LTD.Models
         [Required]
         [DisplayName("Exam Detail")]
         public string? Detail {  get; set; }
-       
+        [DisplayName("Status")]
+        [DefaultValue(true)]
+        public bool? Pending { get; set; } = true;
     }
 }
