@@ -20,6 +20,7 @@ namespace Symphony_LTD.Controllers
         public IActionResult Index()
         {
             ViewBag.Courses = _db.Courses.ToList();
+            ViewBag.SectionOne = _db._HomeSectionOne.ToList();
             return View();
         }
 
