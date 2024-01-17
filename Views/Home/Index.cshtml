@@ -3,13 +3,14 @@
 }
 
 <!-- home start -->
-@foreach (var i in ViewBag.SectionOne)
-{
+
 <section class="bg-home bg-gradient" id="home">
     <div class="home-center">
         <div class="home-desc-center">
             <div class="container-fluid">
                 <div class="row align-items-center">
+                    @foreach (var i in ViewBag.SectionOne)
+                    {
                     <div class="col-lg-6 col-sm-6">
                         <div class="home-title">
                                 @if (i.H5 != null)
@@ -62,9 +63,17 @@
                     </div>
                     <div class="col-lg-5 offset-lg-1 col-sm-6">
                         <div class="home-img mo-mt-20">
-                            <img src="~/landing_page_images/home-img.png" alt="" class="img-fluid mx-auto d-block">
+                                @if(i.Img != null)
+                                {
+                                    <img src="~/media/home/@i.Img" alt="" class="img-fluid mx-auto d-block">
+                                }
+                                else{
+                                <img src="~/landing_page_images/home-img.png" alt="" class="img-fluid mx-auto d-block">
+
+                                }
                         </div>
                     </div>
+                        }
                 </div>
                 <!-- end row -->
 
@@ -73,7 +82,7 @@
         </div>
     </div>
 </section>
-}
+
 <!-- home end -->
 <!-- features start -->
 <section class="features" id="features">
