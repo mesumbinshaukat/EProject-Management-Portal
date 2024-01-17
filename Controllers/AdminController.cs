@@ -1215,5 +1215,25 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("CourseExam");
         }
 
+        public IActionResult EntranceExam ()
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                ViewBag.Courses = _db.Courses.ToList();                
+                return View();
+            }
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EntranceExam (EntranceExam data)
+        {
+            return View();
+        }
+
     }
 }

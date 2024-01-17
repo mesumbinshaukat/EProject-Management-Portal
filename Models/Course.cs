@@ -20,9 +20,7 @@ namespace Symphony_LTD.Models
         [Required]
         [DisplayName("Course Details")]
         public string? CourseDetails { get; set; }
-        [Required]
-        [DisplayName("Entrance Exam")]
-        public string? EntranceExamDetails { get; set; }
+        
 
     }
 }
