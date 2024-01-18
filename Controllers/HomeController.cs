@@ -20,7 +20,21 @@ namespace Symphony_LTD.Controllers
         public IActionResult Index()
         {
             ViewBag.Courses = _db.Courses.ToList();
-            ViewBag.SectionOne = _db._HomeSectionOne.ToList();
+            var existing_content = _db._HomeSectionOne.ToList();
+            if(ViewBag.SectionOne != null)
+            {
+            foreach(var i in existing_content)
+                {
+                    ViewBag.H5 = i.H5;
+                    ViewBag.H2 = i.H2;
+                    ViewBag.Paragraph = i.Paragraph;
+                    ViewBag.BtnAction = i.BtnAction;
+                    ViewBag.BtnVal = i.BtnVal;
+                    ViewBag.Img = i.Img;
+                }
+
+            }
+
             return View();
         }
 

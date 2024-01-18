@@ -9,29 +9,29 @@
         <div class="home-desc-center">
             <div class="container-fluid">
                 <div class="row align-items-center">
-                    @foreach (var i in ViewBag.SectionOne)
-                    {
+                    
                     <div class="col-lg-6 col-sm-6">
                         <div class="home-title">
-                                @if (i.H5 != null)
+                            @if (ViewBag.H5 != null)
                                 {
-                                    <h5 class="mb-3 text-white-50">@i.H5</h5>
+                                <h5 class="mb-3 text-white-50">@ViewBag.H5</h5>
                                 }else
                                 {
                                 <h5 class="mb-3 text-white-50">Symphony Institute</h5>
                                 }
 
-                                @if (i.H2 != null){
-                                    <h2 class="mb-4 text-white">@i.H2</h2>
+                            @if (ViewBag.H2 != null)
+                            {
+                                <h2 class="mb-4 text-white">@ViewBag.H2</h2>
                                 }
                                 else{
 
                                     <h2 class="mb-4 text-white">Make your Site Amazing & Unique with Adminto</h2>
                                     }
 
-                                @if (i.Paragraph != null)
+                            @if (ViewBag.Paragraph != null)
                                 {
-                                    <p class="text-white-50 home-desc font-16 mb-5">@i.Paragraph</p>
+                                <p class="text-white-50 home-desc font-16 mb-5">@ViewBag.Paragraph</p>
                                 }
                                 else{
                                     <p class="text-white-50 home-desc font-16 mb-5">Adminto is a fully featured premium Landing template built on top of awesome Bootstrap 4.3.1, modern web technology HTML5, CSS3 and jQuery. </p>
@@ -39,18 +39,18 @@
                                     
                                     }
                             <div class="watch-video mt-5">
-                                    @if (i.BtnAction != null && i.BtnVal != null)
+                                @if (ViewBag.BtnAction != null && ViewBag.BtnVal != null)
                                     {
-                                        <a href="@i.BtnAction" class="btn btn-custom me-4">@i.BtnVal</a>
+                                    <a href="@ViewBag.BtnAction" class="btn btn-custom me-4">@ViewBag.BtnVal</a>
 
                                     }
-                                    else if (i.BtnAction != null)
+                                else if (ViewBag.BtnAction != null)
                                     {
-                                        <a href="@i.BtnAction" class="btn btn-custom me-4">Get Started</a>
+                                    <a href="@ViewBag.BtnAction" class="btn btn-custom me-4">Get Started</a>
                                     }
-                                    else if (i.BtnVal != null)
+                                else if (ViewBag.BtnVal != null)
                                     {
-                                        <a asp-controller="Home" asp-action="Index" class="btn btn-custom me-4">@i.BtnVal</a>
+                                    <a asp-controller="Home" asp-action="Index" class="btn btn-custom me-4">@ViewBag.BtnVal</a>
                                     }
                                     else {
                                     <a asp-controller="Home" asp-action="Index" class="btn btn-custom me-4">Get Started</a>
@@ -63,9 +63,9 @@
                     </div>
                     <div class="col-lg-5 offset-lg-1 col-sm-6">
                         <div class="home-img mo-mt-20">
-                                @if(i.Img != null)
+                            @if (ViewBag.Img != null)
                                 {
-                                    <img src="~/media/home/@i.Img" alt="" class="img-fluid mx-auto d-block">
+                                <img src="~/media/home/@ViewBag.Img" alt="@ViewBag.Img" class="img-fluid mx-auto d-block">
                                 }
                                 else{
                                 <img src="~/landing_page_images/home-img.png" alt="" class="img-fluid mx-auto d-block">
@@ -73,7 +73,7 @@
                                 }
                         </div>
                     </div>
-                        }
+                        
                 </div>
                 <!-- end row -->
 
