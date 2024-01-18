@@ -18,27 +18,28 @@
                 <div class="row">
                     <div class="col-6 mb-2">
                         <label class="form-label" asp-for="H5"></label>
-                        <input class="form-control" asp-for="H5" placeholder="Heading 5 - <h5></h5>"/>
+                        <input class="form-control" value="@ViewBag.H5" asp-for="H5" placeholder="Heading 5 - <h5></h5>" />
                     </div>
                     <div class="col-6 mb-2">
                         <label class="form-label" asp-for="H2"></label>
-                        <input class="form-control" asp-for="H2" placeholder="Heading 2 - <h2></h2>" />
+                        <input class="form-control" value="@ViewBag.H2" asp-for="H2" placeholder="Heading 2 - <h2></h2>" />
                     </div>
                     <div class="col-6 mb-2">
                         <label class="form-label" asp-for="Paragraph"></label>
-                        <input class="form-control" asp-for="Paragraph" placeholder="Paragraph" />
+                        <input class="form-control" value="@ViewBag.Paragraph" asp-for="Paragraph" placeholder="Paragraph" />
                     </div>
                     <div class="col-6 mb-2">
                         <label class="form-label" asp-for="BtnVal"></label>
-                        <input class="form-control" asp-for="BtnVal" placeholder="Button Value" />
+                        <input class="form-control" value="@ViewBag.BtnVal" asp-for="BtnVal" placeholder="Button Value" />
                     </div>
                     <div class="col-6 mb-2">
                         <label class="form-label" asp-for="BtnAction"></label>
-                        <input class="form-control" asp-for="BtnAction" placeholder="Button HREF/Action/Redirection/Url" />
+                        <input class="form-control" value="@ViewBag.BtnAction" asp-for="BtnAction" placeholder="Button HREF/Action/Redirection/Url" />
                     </div>
                     <div class="col-6 mb-2">
                         <label class="form-label" asp-for="Img"></label>
-                        <input type="file" class="form-control" asp-for="Img" name="_img" placeholder="Image" />
+                        <input type="file" value="@ViewBag.Img" class="form-control" asp-for="Img" name="_img" placeholder="Image" />
+                        <p class="text-danger">@ViewBag.Img</p>
                     </div>
                     <div class="form-group">
                         <input class="form-control btn btn-outline-success" value="Modify" type="submit"/>

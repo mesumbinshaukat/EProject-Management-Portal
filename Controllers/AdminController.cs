@@ -1253,6 +1253,17 @@ namespace Symphony_LTD.Controllers
         {
             if (HttpContext.Session.GetString("s_email") != null)
             {
+                var existing_data = _db._HomeSectionOne.FirstOrDefault();
+                if (existing_data != null)
+                {
+                    ViewBag.H5 = existing_data.H5;
+                    ViewBag.H2 = existing_data.H2;
+                    ViewBag.Paragraph = existing_data.Paragraph;
+                    ViewBag.BtnVal = existing_data.BtnVal;
+                    ViewBag.BtnAction = existing_data.BtnAction;
+                    ViewBag.Img = existing_data.Img;
+                }
+
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();                
                 return View();
@@ -1265,6 +1276,7 @@ namespace Symphony_LTD.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Home (HomeSectionOne data, IFormFile _img)
         {
+            var existing_data = _db._HomeSectionOne.FirstOrDefault();
             if (_img != null)
             {
                 string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/media/home");
@@ -1278,42 +1290,72 @@ namespace Symphony_LTD.Controllers
                 var stream = new FileStream(filepath, FileMode.Create);
                 _img.CopyTo(stream);
                 string? filename = _img.FileName;
-                data.Img = filename;                
+                data.Img = filename;
             }
+            else
+            {
+                string defaultFilename = existing_data.Img;
+                
+                string extension = Path.GetExtension(defaultFilename)?.ToLowerInvariant();
+               
+                string contentType;
+                switch (extension)
+                {
+                    case ".svg":
+                        contentType = "image/svg+xml";
+                        break;
+                    case ".png":
+                        contentType = "image/png";
+                        break;
+                    case ".jpg":
+                    case ".jpeg":
+                        contentType = "image/jpeg";
+                        break;
+                    default:
+                        contentType = "application/octet-stream";
+                        break;
+                }
+
+                _img = new FormFile(null, 0, 0, "Img", defaultFilename)
+                {
+                    Headers = new HeaderDictionary(),
+                    ContentType = contentType,
+                };
+
+            }
+
+
+
+
+            if (existing_data != null)
+            {
+                existing_data.H5 = data.H5 ?? existing_data.H5;
+                existing_data.H2 = data.H2 ?? existing_data.H2;
+                existing_data.Paragraph = data.Paragraph ?? existing_data.Paragraph;
+                existing_data.BtnVal = data.BtnVal ?? existing_data.BtnVal;
+                existing_data.BtnAction = data.BtnAction ?? existing_data.BtnAction;
+                existing_data.Img = data.Img ?? existing_data.Img;
+
+                    _db._HomeSectionOne.Update(existing_data);
+                    _db.SaveChanges();
+                    TempData["success"] = "Successfully Modified Home Page.";
+                    return RedirectToAction("Home");
+                
+
+            }
+
 
             if (ModelState.IsValid)
             {
-                var existing_data = _db._HomeSectionOne.FirstOrDefault();
-
-                if(existing_data != null) {
-                    existing_data.H5 = data.H5 ?? existing_data.H5;
-                    existing_data.H2 = data.H2 ?? existing_data.H2;
-                    existing_data.Paragraph = data.Paragraph ?? existing_data.Paragraph;
-                    existing_data.BtnVal = data.BtnVal ?? existing_data.BtnVal;
-                    existing_data.BtnAction = data.BtnAction ?? existing_data.BtnAction;
-                    existing_data.Img = data.Img ?? existing_data.Img;
-
-                    if (data != null)
-                    {
-                        _db._HomeSectionOne.Update(existing_data);
-                        _db.SaveChanges();
-                        TempData["success"] = "Successfully Modified Home Page.";
-                        return RedirectToAction("Home");
-                    }
-
-                }
-                else
-                {
+               
                     if (data != null)
                     {
                         _db._HomeSectionOne.Add(data);
                         _db.SaveChanges();
                         TempData["success"] = "Successfully Modified Home Page.";
                         return RedirectToAction("Home");
-                    }
-
-                    
-                }
+                    }                    
+               
                 TempData["failed"] = "Values are invalid, or you've have left some fields null.";
                 return RedirectToAction("Home");
                 
