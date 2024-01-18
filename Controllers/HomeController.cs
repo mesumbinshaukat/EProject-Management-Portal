@@ -21,7 +21,7 @@ namespace Symphony_LTD.Controllers
         {
             ViewBag.Courses = _db.Courses.ToList();
             var existing_content = _db._HomeSectionOne.ToList();
-            if(ViewBag.SectionOne != null)
+            if(existing_content != null)
             {
             foreach(var i in existing_content)
                 {
