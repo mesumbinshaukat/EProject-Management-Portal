@@ -1283,15 +1283,40 @@ namespace Symphony_LTD.Controllers
 
             if (ModelState.IsValid)
             {
-                if(data != null)
+                var existing_data = _db._HomeSectionOne.FirstOrDefault();
+
+                if(existing_data != null) {
+                    existing_data.H5 = data.H5 ?? existing_data.H5;
+                    existing_data.H2 = data.H2 ?? existing_data.H2;
+                    existing_data.Paragraph = data.Paragraph ?? existing_data.Paragraph;
+                    existing_data.BtnVal = data.BtnVal ?? existing_data.BtnVal;
+                    existing_data.BtnAction = data.BtnAction ?? existing_data.BtnAction;
+                    existing_data.Img = data.Img ?? existing_data.Img;
+
+                    if (data != null)
+                    {
+                        _db._HomeSectionOne.Update(existing_data);
+                        _db.SaveChanges();
+                        TempData["success"] = "Successfully Modified Home Page.";
+                        return RedirectToAction("Home");
+                    }
+
+                }
+                else
                 {
-                    _db._HomeSectionOne.Add(data);
-                    _db.SaveChanges();
-                    TempData["success"] = "Successfully Modified Home Page.";
-                    return RedirectToAction("Home");
+                    if (data != null)
+                    {
+                        _db._HomeSectionOne.Add(data);
+                        _db.SaveChanges();
+                        TempData["success"] = "Successfully Modified Home Page.";
+                        return RedirectToAction("Home");
+                    }
+
+                    
                 }
                 TempData["failed"] = "Values are invalid, or you've have left some fields null.";
                 return RedirectToAction("Home");
+                
             }
             TempData["failed"] = "Database Error!";
             return RedirectToAction("Home");
