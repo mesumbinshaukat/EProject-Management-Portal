@@ -77,7 +77,7 @@
                             <div class="card-body">
                                 <div>
                                     <label class="form-label" asp-for="ExamDate"></label>
-                                    <input type="text" id="inline-datepicker" asp-for="ExamDate" class="form-control" placeholder="Exam Date" required>
+                                    <input asp-for="ExamDate" class="form-control" placeholder="Exam Date" required>
                                 </div>
 
 
@@ -147,11 +147,28 @@
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    ...
-                                                                </div>
+                                                                    <form asp-action="UpdateExamSchedule">
+                                                                        @Html.AntiForgeryToken()
+                                                                        <div class="card-body">
+                                                                            <div class="card">
+                                                                                <input type="hidden" asp-for="Id" value="@i.Id"/>
+                                                                                <input type="hidden" asp-for="ExamName" value="@i.ExamName" />
+                                                                                <input type="hidden" asp-for="Detail" value="@i.Detail"/>
+                                                                                <input type="hidden" asp-for="Score" value="@i.Score"/>
+                                                                                <input type="hidden" asp-for="StudentId" value="@i.StudentId"/>
+                                                                                <input type="hidden" asp-for="CourseId" value="@i.CourseId"/>
+
+                                                                        <label class="form-label" asp-for="ExamDate"></label>
+                                                                                <input asp-for="ExamDate" class="form-control" />
+
+                                                                            </div>
+
+                                                                        </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                                    <button type="submit" class="btn btn-success">Update</button>
+                                                                </div>
+                                                                    </form>
                                                                 </div>
                                                             </div>
                                                         </div>
