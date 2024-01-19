@@ -41,8 +41,8 @@
                                                 <td>@i.ExamName</td>
                                                 <td>@i.TotalScore</td>
                                                 <td>@i.Description</td>
-                                                <td>@i.Date</td>                                              
-                                                <td>@x.Class</td>                                              
+                                                <td>@i.Date</td>
+                                                <td>@x._Class</td>
                                                 <td>
                                                     @if (i.Pending == true)
                                                     {
@@ -56,14 +56,14 @@
 
                                                 <!-- Action: Edit/Delete -->
                                                 <td>
-                                                    <form asp-action="EntranceExamSchedule">
+                                                    <form asp-action="CourseExamSchedule">
                                                         @Html.AntiForgeryToken()
                                                         <input type="hidden" asp-for="Id" value="@i.Id" />
                                                         <input type="hidden" asp-for="ExamName" value="@i.ExamName" />
-                                                        <input type="hidden" asp-for="TotalScore" value="@i.TotalMarks" />
+                                                        <input type="hidden" asp-for="TotalScore" value="@i.TotalScore" />
                                                         <input type="hidden" asp-for="Description" value="@i.Description" />
                                                         <input type="hidden" asp-for="Date" value="@i.Date" />
-                                                        <input type="hidden" asp-for="Class" value="@i.Course" />                                              <input type="hidden" asp-for="Pending" value="false" />
+                                                        <input type="hidden" asp-for="Class" value="@i.Class" />                                              <input type="hidden" asp-for="Pending" value="false" />
 
                                                         <input type="submit" class="btn btn-warning" value="Exam Conducted" />
                                                     </form>
