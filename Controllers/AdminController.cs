@@ -1360,5 +1360,64 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("Home");
         }
 
+        public IActionResult ExamEdit(int? id)
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+
+                var exam_details = _db.Exams.FirstOrDefault(x => x.Id == id);
+
+                if (exam_details != null)
+                {
+                    ViewBag.Id = exam_details.Id;                    
+                    ViewBag.ExamName = exam_details.ExamName;                    
+                    ViewBag.Score = exam_details.Score;
+                    ViewBag.StudentId = exam_details.StudentId;
+                    ViewBag.CourseId = exam_details.CourseId;
+                    ViewBag.Details = exam_details.Detail;
+
+                    ViewBag.Course = _db.Courses.ToList();
+                    ViewBag.Student = _db.Students.ToList();
+                    return View();
+                }
+                TempData["failed"] = "Invalid Id, can't find the the scheduled exam.";
+                return RedirectToAction("Exam");
+            }
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ExamEdit(Exam obj)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                var existing_exam = _db.Exams.FirstOrDefault(x => x.Id == obj.Id);
+
+                if(existing_exam != null)
+                {
+                    existing_exam.ExamName = obj.ExamName ?? existing_exam.ExamName;
+                    existing_exam.Score = obj.Score ?? existing_exam.Score;
+                    existing_exam.StudentId = obj.StudentId ?? existing_exam.StudentId;
+                    existing_exam.CourseId = obj.CourseId ?? existing_exam.CourseId;
+                    existing_exam.Detail = obj.Detail ?? existing_exam.Detail;
+
+                    _db.Exams.Update(existing_exam);
+                    _db.SaveChanges();
+
+                    TempData["success"] = "Updated Successfully!";
+                    return RedirectToAction("Exam");
+                }
+                TempData["failed"] = "Can't find the scheduled exam.";
+                return RedirectToAction("Exam");
+            }
+            TempData["failed"] = "Database Error! Model Is Not Valid.";
+            return RedirectToAction("Exam");
+        }
+
     }
 }

@@ -1,0 +1,84 @@
+﻿@model Symphony_LTD.Models.Exam
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Exam Edit";
+}
+
+<div class="content-page">
+     <div class="content">
+        <h1>Edit Exam</h1>
+
+        <h4>Exam</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="ExamEdit">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input asp-for="Id" type="hidden" value="@ViewBag.Id" />
+                    <div class="form-group">
+                        <label asp-for="ExamName" class="control-label"></label>
+                        <input asp-for="ExamName" value="@ViewBag.ExamName" class="form-control" />
+                        <span asp-validation-for="ExamName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Score" class="control-label"></label>
+                        <input asp-for="Score" value="@ViewBag.Score" class="form-control" />
+                        <span asp-validation-for="Score" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StudentId" class="control-label"></label>
+                        <select asp-for="StudentId" class="form-control" required>
+                            @foreach (var i in ViewBag.Student)
+                            {
+                                if (i.StudentId == ViewBag.StudentId)
+                                {
+                                    <option value="@i.StudentId">@i.FirstName @i.MiddleName @i.LastName | @i.RollNumber</option>
+                                }
+                                if (i.StudentId != ViewBag.StudentId)
+                                {
+                                    <option value="@i.StudentId">
+                                        @i.FirstName @i.MiddleName @i.LastName | @i.RollNumber
+                                    </option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="StudentId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CourseId" class="control-label"></label>
+                        <select class="form-control" asp-for="CourseId">
+                            @foreach (var i in ViewBag.Course)
+                            {
+                                if (i.Id == ViewBag.CourseId)
+                                {
+                                    <option value="@i.Id">@i.CourseName</option>
+                                }
+                                if (i.Id != ViewBag.CourseId)
+                                {
+                                    <option value="@i.Id">
+                                        @i.CourseName
+                                    </option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="CourseId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Detail" class="control-label"></label>
+                        <input asp-for="Detail" value="@ViewBag.Details" class="form-control" />
+                        <span asp-validation-for="Detail" class="text-danger"></span>
+                    </div>                   
+                    <div class="form-group text-center mt-3">
+                        <input type="submit" value="Update" class="btn btn-outline-success" />
+                    </div>
+                </form>
+            </div>
+        </div>
+</div>
+</div>
+
+
+
+

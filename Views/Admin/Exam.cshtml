@@ -23,6 +23,7 @@
             <h5 class="text-danger">This is only for those students who were unable to attempt the exam, because of a serious problem.</h5>
             <hr />
             <form method="post" asp-action="Exam">
+                @Html.AntiForgeryToken()
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="card">
@@ -31,17 +32,17 @@
 
                                 <div class="mb-3">
                                     <label asp-for="ExamName" class="form-label"></label>
-                                    <input type="text" asp-for="ExamName" class="form-control" placeholder="Exam Name">
+                                    <input type="text" asp-for="ExamName" class="form-control" placeholder="Exam Name" required>
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label" asp-for="Score"></label>
-                                    <input type="text" asp-for="Score" class="form-control" placeholder="Score">
+                                    <input type="text" asp-for="Score" class="form-control" placeholder="Score" required>
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label" asp-for="StudentId"></label>
-                                    <select asp-for="StudentId" class="form-control">
+                                    <select asp-for="StudentId" class="form-control" required>
                                         @foreach (var i in ViewBag.Student)
                                         {
                                             <option value="@i.StudentId">
@@ -54,7 +55,7 @@
                                   <div class="mb-3">
 
                                 <label class="form-label" asp-for="CourseId"></label>
-                                <select class="form-control" asp-for="CourseId">
+                                    <select class="form-control" asp-for="CourseId" required>
                                 @foreach (var i in ViewBag.Course)
                                 {
                                 <option value="@i.Id">@i.CourseName</option>
@@ -64,7 +65,7 @@
 
                                 <div class="mb-3">
                                     <label class="form-label" asp-for="Detail"></label>
-                                    <input type="text" asp-for="Detail" class="form-control" placeholder="Exam Detail">
+                                    <input type="text" asp-for="Detail" class="form-control" placeholder="Exam Detail" required>
                                 </div>
 
                             </div>
@@ -76,7 +77,7 @@
                             <div class="card-body">
                                 <div>
                                     <label class="form-label" asp-for="ExamDate"></label>
-                                    <input type="text" id="inline-datepicker" asp-for="ExamDate" class="form-control" placeholder="Exam Date">
+                                    <input type="text" id="inline-datepicker" asp-for="ExamDate" class="form-control" placeholder="Exam Date" required>
                                 </div>
 
 
@@ -147,19 +148,19 @@
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-lg-6 m-1">
-                                                            <a class="btn btn-warning" asp-action="EditCourse" asp-route-id="@i.Id">Edit</a>
+                                                            <a asp-action="ExamEdit" class="btn btn-outline-warning" asp-route-id="@i.Id">Edit</a>
                                                         </div>
                                                         <div class="col-lg-6 m-1">
 
                                                             @* Modal *@
 
-                                                            <!-- Button trigger modal -->
-                                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                            <!--Button trigger modal -->
+                                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_@i.Id">
                                                                 Delete
                                                             </button>
 
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal fade" id="delete_@i.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
