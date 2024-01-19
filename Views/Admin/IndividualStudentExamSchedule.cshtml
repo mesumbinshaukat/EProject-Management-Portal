@@ -34,6 +34,8 @@
                         <tbody>
                             @foreach (var i in ViewBag.Exams)
                             {
+                                if (i.Pending)
+                                {
                                 <tr>
 
                                     <td>@i.ExamName</td>
@@ -44,7 +46,7 @@
                                     {
                                             @if (x.StudentId == i.StudentId)
                                             {
-                                                @i.FirstName @i.MiddleName @i.LastName
+                                                @x.FirstName @x.MiddleName @x.LastName
                                             }                                        
                                     }
                                     </td>
@@ -53,7 +55,7 @@
                                         {
                                             @if (x.Id == i.CourseId)
                                             {
-                                                @i.CourseName
+                                                @x.CourseName
                                             }
                                         }
                                     </td>
@@ -86,7 +88,8 @@
                                         </form>                                       
 
                                     </td>
-                                </tr>
+                                </tr>                                    
+                                }
                             }
                         </tbody>
                     </table>
