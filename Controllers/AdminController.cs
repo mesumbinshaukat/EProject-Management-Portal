@@ -1653,7 +1653,9 @@ namespace Symphony_LTD.Controllers
             {
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
-                IEnumerable<Exam> obj = _db.Exams;
+                ViewBag.Exams = _db.Exams.ToList();
+                ViewBag.Student = _db.Students.ToList();
+                ViewBag.Course = _db.Courses.ToList();
 
                 var user_details = _db._Admin.FirstOrDefault();
 
@@ -1662,7 +1664,7 @@ namespace Symphony_LTD.Controllers
                     ViewBag.Username = user_details.Name;
 
                 }
-                return View(obj);
+                return View();
 
             }
             TempData["failed"] = "Please Log In!";
@@ -1671,15 +1673,21 @@ namespace Symphony_LTD.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-         public IActionResult IndividualStudentExamSchedule(int? id)
+         public IActionResult IndividualStudentExamSchedule(Exam data)
         {
             if (ModelState.IsValid)
             {
-                var existing_student_exam = _db.Exams.FirstOrDefault(x => x.Id == id);
+                var existing_student_exam = _db.Exams.FirstOrDefault(x => x.Id == data.Id);
 
                 if(existing_student_exam != null)
                 {
-                    existing_student_exam.Pending = false;
+                    existing_student_exam.ExamName = data.ExamName ?? existing_student_exam.ExamName;
+                    existing_student_exam.ExamDate = data.ExamDate ?? existing_student_exam.ExamDate;
+                    existing_student_exam.StudentId = data.StudentId ?? existing_student_exam.StudentId;
+                    existing_student_exam.CourseId = data.CourseId ?? existing_student_exam.CourseId;
+                    existing_student_exam.Score = data.Score ?? existing_student_exam.Score;
+                    existing_student_exam.Detail = data.Detail ?? existing_student_exam.Detail;
+                    existing_student_exam.Pending = data.Pending ?? existing_student_exam.Pending;
 
                     _db.Exams.Update(existing_student_exam);
                     _db.SaveChanges();

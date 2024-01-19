@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Exam>
+﻿@model Symphony_LTD.Models.Exam
 @{
     Layout = "_AdminLayout";
     ViewData["title"] = "Individual Student Exam Schedule";
@@ -32,15 +32,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var i in Model)
+                            @foreach (var i in ViewBag.Exams)
                             {
                                 <tr>
 
                                     <td>@i.ExamName</td>
                                     <td>@i.ExamDate</td>
                                     <td>@i.Score</td>
-                                    <td>$@i.StudentId</td>
-                                    <td>@i.CourseId</td>
+                                        <td>
+                                    @foreach (var x in ViewBag.Student)
+                                    {
+                                            @if (x.StudentId == i.StudentId)
+                                            {
+                                                @i.FirstName @i.MiddleName @i.LastName
+                                            }                                        
+                                    }
+                                    </td>
+                                    <td>
+                                        @foreach (var x in ViewBag.Course)
+                                        {
+                                            @if (x.Id == i.CourseId)
+                                            {
+                                                @i.CourseName
+                                            }
+                                        }
+                                    </td>
                                     <td>@i.Detail</td>
                                     <td>
                                         @if (i.Pending == true)
@@ -55,7 +71,19 @@
 
                                     <td>
 
-                                        <a class="btn btn-warning" asp-action="EditCourse" asp-route-id="@i.Id">Edit</a>
+                                        <form asp-action="IndividualStudentExamSchedule">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" asp-for="Id" value="@i.Id" />
+                                            <input type="hidden" asp-for="ExamName" value="@i.ExamName" />
+                                            <input type="hidden" asp-for="ExamDate" value="@i.ExamDate" />
+                                            <input type="hidden" asp-for="Score" value="@i.Score" />
+                                            <input type="hidden" asp-for="StudentId" value="@i.StudentId" />
+                                            <input type="hidden" asp-for="CourseId" value="@i.CourseId" />
+                                            <input type="hidden" asp-for="Detail" value="@i.Detail" />
+                                            <input type="hidden" asp-for="Pending" value="false" />
+
+                                            <input type="submit" class="btn btn-warning" value="Exam Conducted"/>
+                                        </form>                                       
 
                                     </td>
                                 </tr>
