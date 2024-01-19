@@ -27,7 +27,6 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
 
-
                 var adminData = _db._Admin.ToList();
                 var contactData = _db._Contact.ToList();
 
@@ -67,6 +66,13 @@ namespace Symphony_LTD.Controllers
 
                 ViewBag.TotalRevenue = total;
 
+                var user_details = _db._Admin.FirstOrDefault();
+
+                if(user_details != null)
+                {
+                ViewBag.Username = user_details.Name;
+
+                }
 
                 return View("Index", viewModel);
 
@@ -154,6 +160,13 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
                 IEnumerable<Course> courses = _db.Courses;
+                var user_details = _db._Admin.FirstOrDefault();
+
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
                 return View(courses);
 
             }
@@ -167,7 +180,13 @@ namespace Symphony_LTD.Controllers
             {
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                var user_details = _db._Admin.FirstOrDefault();
 
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
                 return View();
 
             }
@@ -209,6 +228,13 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
                 ViewBag.Course = _db.Courses.ToList();
+                var user_details = _db._Admin.FirstOrDefault();
+
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
                 return View(studentFromDb);
 
 
@@ -257,7 +283,13 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Exam = _db.Exams.ToList();
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                var user_details = _db._Admin.FirstOrDefault();
 
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
                 return View();
             }
             TempData["failed"] = "Please Log In!";
@@ -288,6 +320,13 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
                 ViewBag.Classes = _db._Class.ToList();
+                var user_details = _db._Admin.FirstOrDefault();
+
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
                 return View();
             }
             TempData["failed"] = "Please Log In!";
@@ -357,7 +396,13 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
                 ViewBag.Student = _db.Students.ToList();
                 ViewBag.Password = _db.Students.FirstOrDefault(x => x.StudentId == id).Password;
+                var user_details = _db._Admin.FirstOrDefault();
 
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
                 ViewBag.Classes = _db._Class.ToList();
                 return View(studentData);
             }
@@ -453,6 +498,13 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
                 ViewBag.Student = _db.Students.ToList();
+                var user_details = _db._Admin.FirstOrDefault();
+
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
                 return View();
             }
             TempData["failed"] = "Please Log In!";
@@ -504,6 +556,13 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
                 IEnumerable<Contact> data = _db._Contact.ToList();
+                var user_details = _db._Admin.FirstOrDefault();
+
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
                 return View(data);
             }
             TempData["failed"] = "Please Log In!";
@@ -538,7 +597,13 @@ namespace Symphony_LTD.Controllers
             {
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                var user_details = _db._Admin.FirstOrDefault();
 
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
                 return View();
             }
             TempData["failed"] = "Please Log In!";
@@ -568,6 +633,13 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
                 ViewBag.Branch = _db.Branches.ToList();
+                var user_details = _db._Admin.FirstOrDefault();
+
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
                 return View();
             }
             TempData["failed"] = "Please Log In!";
@@ -632,6 +704,13 @@ namespace Symphony_LTD.Controllers
                 {
                     ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                     ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                    var user_details = _db._Admin.FirstOrDefault();
+
+                    if (user_details != null)
+                    {
+                        ViewBag.Username = user_details.Name;
+
+                    }
                     return View();
 
                 }
@@ -708,6 +787,13 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Content = _db._AboutUs.FirstOrDefault();
                 ViewBag.ImageOne = _db._AboutUs.FirstOrDefault().ImageOne;
                 ViewBag.ImageTwo = _db._AboutUs.FirstOrDefault().ImageTwo;
+                var user_details = _db._Admin.FirstOrDefault();
+
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
                 return View();
             }
             TempData["failed"] = "Please Log In!";
@@ -826,7 +912,13 @@ namespace Symphony_LTD.Controllers
             {
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                var user_details = _db._Admin.FirstOrDefault();
 
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
                 ViewBag.Faculty = _db._Faculty.ToList();
 
                 return View();
@@ -989,7 +1081,13 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
 
                 var fetch_individual_exam = _db.Exams.ToList();
+                var user_details = _db._Admin.FirstOrDefault();
 
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
                 ViewBag.Exam = fetch_individual_exam;
 
 
@@ -1021,7 +1119,13 @@ namespace Symphony_LTD.Controllers
             {
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                var user_details = _db._Admin.FirstOrDefault();
 
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
                 var resultDetails = _db.Results.ToList();
 
                 if (resultDetails != null && resultDetails.Any())
@@ -1066,6 +1170,13 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
                 ViewBag.Courses = _db.Courses.ToList();
                 ViewBag.Classes = _db._Class.ToList();
+                var user_details = _db._Admin.FirstOrDefault();
+
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
                 return View();
             }
             TempData["failed"] = "Please Log In!";
@@ -1096,6 +1207,13 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Courses = _db.Courses.ToList();
                 ViewBag.Classes = _db._Class.ToList();
                 ViewBag.ScheduledExams = _db._CourseExam.ToList();
+                var user_details = _db._Admin.FirstOrDefault();
+
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
                 return View();
             }
             TempData["failed"] = "Please Log In!";
@@ -1153,6 +1271,13 @@ namespace Symphony_LTD.Controllers
             {
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                var user_details = _db._Admin.FirstOrDefault();
+
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
 
                 if (id != null)
                 {
@@ -1171,6 +1296,7 @@ namespace Symphony_LTD.Controllers
                         ViewBag.Courses = _db.Courses.ToList();
                         ViewBag.Classes = _db._Class.ToList();
                         ViewBag.ScheduledExams = _db._CourseExam.ToList();
+
                         return View();
 
                     }
@@ -1221,6 +1347,13 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
                 ViewBag.Courses = _db.Courses.ToList();
                 ViewBag.EntranceExam = _db._EntranceExam.ToList();
+                var user_details = _db._Admin.FirstOrDefault();
+
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
                 return View();
             }
             TempData["failed"] = "Please Log In!";
@@ -1263,7 +1396,14 @@ namespace Symphony_LTD.Controllers
                 }
 
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
-                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();                
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                var user_details = _db._Admin.FirstOrDefault();
+
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
                 return View();
             }
             TempData["failed"] = "Please Log In!";
@@ -1340,8 +1480,7 @@ namespace Symphony_LTD.Controllers
             }
 
             if (ModelState.IsValid)
-            {
-               
+            {               
                     if (data != null)
                     {
                         _db._HomeSectionOne.Add(data);
@@ -1366,6 +1505,12 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
 
                 var exam_details = _db.Exams.FirstOrDefault(x => x.Id == id);
+                var user_details = _db._Admin.FirstOrDefault();
+
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+                }
 
                 if (exam_details != null)
                 {
@@ -1435,7 +1580,14 @@ namespace Symphony_LTD.Controllers
             {
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
-                
+                var user_details = _db._Admin.FirstOrDefault();
+
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
+
                 var existing_data = _db.Exams.FirstOrDefault(x => x.Id == id);
 
                 if(existing_data != null)
