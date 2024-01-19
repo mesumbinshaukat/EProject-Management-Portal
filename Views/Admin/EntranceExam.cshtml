@@ -105,7 +105,16 @@
                                                 <td>@x.TopicsCovered</td>
                                                 <td>@x.CourseFee</td>
                                                 <td>@x.CourseDetails</td>
-                                                <td>@i.Pending</td>
+                                                <td>
+                                                    @if (i.Pending == true)
+                                                    {
+                                                        <p class="text-danger fw-bold">Not Done</p>
+                                                    }
+                                                    else if (i.Pending == false && i.Pending != null)
+                                                    {
+                                                        <p class="text-success fw-bold">Done</p>
+                                                    }
+                                                </td>
 
                                             <!-- Action: Edit/Delete -->
                                         <td>

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Symphony_LTD.Data
+<!DOCTYPE html>
 <html lang="en">
 <head>
 
@@ -49,18 +50,15 @@
     @if (ViewBag.Email != null && ViewBag.Pass != null)
     {
         <header>
+                
+
             <!-- Topbar Start -->
             <div class="navbar-custom">
                 <ul class="list-unstyled topnav-menu float-end mb-0">
                     <li class="dropdown d-inline-block d-lg-none">
                         <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                             <i class="fe-search noti-icon"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-lg dropdown-menu-end p-0">
-                            <form class="p-3">
-                                <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
-                            </form>
-                        </div>
+                        </a>                       
                     </li>
 
                     <li class="dropdown notification-list topbar-dropdown">
@@ -80,9 +78,7 @@
                             <div class="noti-scroll" data-simplebar>
 
                                 <!-- item-->
-                                    @await Component.InvokeAsync("DynamicDataComponent")
-
-                               
+                                    @await Component.InvokeAsync("DynamicDataComponent")                               
 
                             <!-- All-->
                                     <a href="/Admin/Index/#contact-details" class="dropdown-item text-center text-primary notify-item notify-all">
@@ -202,20 +198,6 @@
                     </div>
 
                     <p class="text-muted left-user-info">Only Admin</p>
-
-                    <ul class="list-inline">
-                        <li class="list-inline-item">
-                            <a href="#" class="text-muted left-user-info">
-                                <i class="mdi mdi-cog"></i>
-                            </a>
-                        </li>
-
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="mdi mdi-power"></i>
-                            </a>
-                        </li>
-                    </ul>
                 </div>
 
                 <!--- Sidemenu -->

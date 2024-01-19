@@ -46,13 +46,10 @@
                     <div class="form-group">
                         <label asp-for="CourseId" class="control-label"></label>
                         <select class="form-control" asp-for="CourseId">
+                            <option value="@ViewBag.CourseId">@ViewBag.CourseName</option>
                             @foreach (var i in ViewBag.Course)
                             {
-                                if (i.Id == ViewBag.CourseId)
-                                {
-                                    <option value="@i.Id">@i.CourseName</option>
-                                }
-                                if (i.Id != ViewBag.CourseId)
+                              if (i.Id != ViewBag.CourseId)
                                 {
                                     <option value="@i.Id">
                                         @i.CourseName

@@ -143,7 +143,17 @@
                                                     }
                                                 }
                                                 <td>@i.Detail</td>
-                                                <td>@i.Pending</td>
+                                                <td>
+                                                    @if(i.Pending == true)
+                                                    {
+                                                        <p class="text-danger fw-bold">Not Done</p>
+                                                    }else if (i.Pending == false && i.Pending != null)
+                                                    {
+                                                    <p class="text-success fw-bold">Done</p>
+                                                    }
+
+
+                                                </td>
                                                 <!-- Action: Edit/Delete -->
                                                 <td>
                                                     <div class="row">
@@ -172,7 +182,7 @@
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                                            <a class="btn btn-primary" asp-action="DeleteCourse" asp-route-id="@i.Id">Delete</a>
+                                                                            <a class="btn btn-primary" asp-action="DeleteExam" asp-route-id="@i.Id">Delete</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>

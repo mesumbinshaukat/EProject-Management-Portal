@@ -20,8 +20,6 @@ namespace Symphony_LTD.Controllers
             _db = db;
         }
 
-
-
         public IActionResult Index()
         {
             if (HttpContext.Session.GetString("s_email") != null)
@@ -1383,7 +1381,12 @@ namespace Symphony_LTD.Controllers
                     ViewBag.StudentFName = student.FirstName;
                     ViewBag.StudentMName = student.MiddleName;
                     ViewBag.StudentLName = student.LastName;
-                    ViewBag.RollNo = student.RollNumber;                    
+                    ViewBag.RollNo = student.RollNumber;
+
+                    var course = _db.Courses.FirstOrDefault(x => x.Id == exam_details.CourseId);
+
+                    ViewBag.CourseId = course.Id;
+                    ViewBag.CourseName = course.CourseName;
 
                     ViewBag.Course = _db.Courses.ToList();
                     ViewBag.Student = _db.Students.ToList();
@@ -1424,6 +1427,31 @@ namespace Symphony_LTD.Controllers
             }
             TempData["failed"] = "Database Error! Model Is Not Valid.";
             return RedirectToAction("Exam");
+        }
+        
+        public IActionResult DeleteExam(int? id)
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                
+                var existing_data = _db.Exams.FirstOrDefault(x => x.Id == id);
+
+                if(existing_data != null)
+                {
+                    _db.Exams.Remove(existing_data);
+                    _db.SaveChanges();
+                    TempData["success"] = "Successfully deleted.";
+                    return RedirectToAction("Exam");
+                }
+
+                TempData["failed"] = "Can't delete, because scheduled exam can't be found.";
+                return RedirectToAction("Exam");
+
+            }
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
         }
 
     }
