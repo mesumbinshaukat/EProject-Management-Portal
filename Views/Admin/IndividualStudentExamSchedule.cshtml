@@ -6,17 +6,12 @@
 
 <div class="content-page">
     <div class="content">
-        <h1>Pending Student Exam</h1>
+        <h1><span class="text-danger">Pending</span> Student Exam</h1>
         <h3>These Are The Schedule Of Individual Student Exams</h3>
         <hr />
 
-        <div class="row" style="background-color:white !important; border-radius: 25px !important;">
-            <div class="col-lg-12 text-end p-2">
-                @* <button class="btn btn-outline-success" asp-action="AddCourse">Add Course</button> *@
-                <a asp-controller="Admin" asp-action="AddCourse" class="btn btn-outline-success">Add Course</a>
-
-            </div>
-
+        <div class="row p-3" style="background-color:white !important; border-radius: 25px !important;">
+           
             <div class="col-lg-12">
                 <div class="table-responsive">
                     <table class="table text-center">
@@ -42,11 +37,21 @@
                                 <tr>
 
                                     <td>@i.ExamName</td>
+                                    <td>@i.ExamDate</td>
                                     <td>@i.Score</td>
                                     <td>$@i.StudentId</td>
                                     <td>@i.CourseId</td>
                                     <td>@i.Detail</td>
-                                    <td>@i.Pending</td>
+                                    <td>
+                                        @if (i.Pending == true)
+                                        {
+                                            <p class="text-danger fw-bold">Not Done</p>
+                                        }
+                                        else if (i.Pending == false && i.Pending != null)
+                                        {
+                                            <p class="text-success fw-bold">Done</p>
+                                        }
+                                    </td>
 
                                     <td>
 
