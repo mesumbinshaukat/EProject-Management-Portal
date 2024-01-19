@@ -256,6 +256,7 @@ namespace Symphony_LTD.Controllers
             {
                 ViewBag.Course = _db.Courses.ToList();
                 ViewBag.Student = _db.Students.ToList();
+                ViewBag.Exam = _db.Exams.ToList();
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
 
@@ -274,12 +275,11 @@ namespace Symphony_LTD.Controllers
             {
                 _db.Exams.Add(obj);
                 _db.SaveChanges();
-                return RedirectToAction("Index");
+                TempData["success"] = "Exam Scheduled!";
+                return RedirectToAction("Exam");
             }
 
-
             return View();
-
 
         }
 
@@ -1324,9 +1324,6 @@ namespace Symphony_LTD.Controllers
 
             }
 
-
-
-
             if (existing_data != null)
             {
                 existing_data.H5 = data.H5 ?? existing_data.H5;
@@ -1343,7 +1340,6 @@ namespace Symphony_LTD.Controllers
                 
 
             }
-
 
             if (ModelState.IsValid)
             {
