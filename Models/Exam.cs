@@ -10,7 +10,6 @@ namespace Symphony_LTD.Models
         [Required]
         [DisplayName("Exam Name")]
         public string? ExamName { get; set; }
-        [Required]
         [DisplayName("Date")]
         public DateTime? ExamDate { get; set; }
         [Required]

@@ -1378,6 +1378,13 @@ namespace Symphony_LTD.Controllers
                     ViewBag.CourseId = exam_details.CourseId;
                     ViewBag.Details = exam_details.Detail;
 
+                    var student = _db.Students.FirstOrDefault(x => x.StudentId == exam_details.StudentId);
+
+                    ViewBag.StudentFName = student.FirstName;
+                    ViewBag.StudentMName = student.MiddleName;
+                    ViewBag.StudentLName = student.LastName;
+                    ViewBag.RollNo = student.RollNumber;                    
+
                     ViewBag.Course = _db.Courses.ToList();
                     ViewBag.Student = _db.Students.ToList();
                     return View();
