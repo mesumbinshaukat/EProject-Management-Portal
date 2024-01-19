@@ -1,7 +1,7 @@
-﻿@model Symphony_LTD.Models.EntranceExam
+﻿@model Symphony_LTD.Models.CourseExam
 @{
     Layout = "_AdminLayout";
-    ViewData["title"] = "Individual Student Exam Schedule";
+    ViewData["title"] = "Course Exam Schedule";
 }
 
 <div class="content-page">
@@ -21,35 +21,28 @@
                                 <th>Exam Name/Title</th>
                                 <th>Total Marks</th>
                                 <th>Exam Description/Detail</th>
-                                <th>Schedule Date</th>
-                                <th>Course</th>
-                                <th>Topics Covered In Course</th>
-                                <th>Course Fee</th>
-                                <th>Course Details</th>
+                                <th>Schedule Date</th>                                
+                                <th>Class</th>                                
                                 <th>Status</th>
-
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var i in ViewBag._EntranceExam)
+                            @foreach (var i in ViewBag._CourseExam)
                             {
                                 if (i.Pending)
                                 {
                                     <tr>
-                                        @foreach (var x in ViewBag.Courses)
+                                        @foreach (var x in ViewBag.Class)
                                         {
-                                            if (x.Id == i.Course)
+                                            if (x.Id == i.Class)
                                             {
 
                                                 <td>@i.ExamName</td>
-                                                <td>@i.TotalMarks</td>
+                                                <td>@i.TotalScore</td>
                                                 <td>@i.Description</td>
-                                                <td>@i.Date</td>
-                                                <td>@x.CourseName</td>
-                                                <td>@x.TopicsCovered</td>
-                                                <td>$@x.CourseFee</td>
-                                                <td>@x.CourseDetails</td>
+                                                <td>@i.Date</td>                                              
+                                                <td>@x.Class</td>                                              
                                                 <td>
                                                     @if (i.Pending == true)
                                                     {
@@ -67,10 +60,10 @@
                                                         @Html.AntiForgeryToken()
                                                         <input type="hidden" asp-for="Id" value="@i.Id" />
                                                         <input type="hidden" asp-for="ExamName" value="@i.ExamName" />
-                                                        <input type="hidden" asp-for="TotalMarks" value="@i.TotalMarks" />
+                                                        <input type="hidden" asp-for="TotalScore" value="@i.TotalMarks" />
                                                         <input type="hidden" asp-for="Description" value="@i.Description" />
                                                         <input type="hidden" asp-for="Date" value="@i.Date" />
-                                                        <input type="hidden" asp-for="Course" value="@i.Course" />                                              <input type="hidden" asp-for="Pending" value="false" />
+                                                        <input type="hidden" asp-for="Class" value="@i.Course" />                                              <input type="hidden" asp-for="Pending" value="false" />
 
                                                         <input type="submit" class="btn btn-warning" value="Exam Conducted" />
                                                     </form>

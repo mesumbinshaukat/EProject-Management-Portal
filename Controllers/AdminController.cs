@@ -1744,13 +1744,65 @@ namespace Symphony_LTD.Controllers
                     _db._EntranceExam.Update(existing_entrance_exam);
                     _db.SaveChanges();
                     TempData["success"] = "Successfully Updated!";
-                    return RedirectToAction("IndividualStudentExamSchedule");
+                    return RedirectToAction("EntranceExamSchedule");
                 }
                 TempData["failed"] = "No Scheduled Exam Found.";
-                return RedirectToAction("IndividualStudentExamSchedule");
+                return RedirectToAction("EntranceExamSchedule");
             }
             TempData["failed"] = "Database Error!";
-            return RedirectToAction("IndividualStudentExamSchedule");
+            return RedirectToAction("EntranceExamSchedule");
+        }
+
+        public IActionResult CourseExamSchedule ()
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                ViewBag._CourseExam = _db._CourseExam.ToList();
+                ViewBag.Class = _db._Class.ToList();
+
+                var user_details = _db._Admin.FirstOrDefault();
+
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
+                return View();
+
+            }
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CourseExamSchedule (CourseExam data)
+        {
+            if (ModelState.IsValid)
+            {
+                var existing_course_exam = _db._CourseExam.FirstOrDefault(x => x.Id == data.Id);
+
+                if (existing_course_exam != null)
+                {
+                    existing_course_exam.ExamName = data.ExamName ?? existing_course_exam.ExamName;
+                    existing_course_exam.Class = data.Class ?? existing_course_exam.Class;
+                    existing_course_exam.TotalScore = data.TotalScore ?? existing_course_exam.TotalScore;
+                    existing_course_exam.Description = data.Description ?? existing_course_exam.Description;
+                    existing_course_exam.Date = data.Date ?? existing_course_exam.Date;
+                    existing_course_exam.Pending = data.Pending ?? existing_course_exam.Pending;
+
+                    _db._CourseExam.Update(existing_course_exam);
+                    _db.SaveChanges();
+                    TempData["success"] = "Successfully Updated!";
+                    return RedirectToAction("CourseExamSchedule");
+                }
+                TempData["failed"] = "No Scheduled Exam Found.";
+                return RedirectToAction("CourseExamSchedule");
+            }
+            TempData["failed"] = "Database Error!";
+            return RedirectToAction("CourseExamSchedule");
         }
 
     }
