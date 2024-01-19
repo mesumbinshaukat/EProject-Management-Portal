@@ -1646,5 +1646,54 @@ namespace Symphony_LTD.Controllers
 
                  
         }
+
+        public IActionResult IndividualStudentExamSchedule()
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                IEnumerable<Exam> obj = _db.Exams;
+
+                var user_details = _db._Admin.FirstOrDefault();
+
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
+                return View(obj);
+
+            }
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+         public IActionResult IndividualStudentExamSchedule(int? id)
+        {
+            if (ModelState.IsValid)
+            {
+                var existing_student_exam = _db.Exams.FirstOrDefault(x => x.Id == id);
+
+                if(existing_student_exam != null)
+                {
+                    existing_student_exam.Pending = false;
+
+                    _db.Exams.Update(existing_student_exam);
+                    _db.SaveChanges();
+                    TempData["success"] = "Successfully Updated!";
+                    return RedirectToAction("IndividualStudentExamSchedule");
+                }
+                TempData["failed"] = "No Scheduled Exam Found.";
+                return RedirectToAction("IndividualStudentExamSchedule");
+            }
+            TempData["failed"] = "Database Error!";
+            return RedirectToAction("IndividualStudentExamSchedule");
+        }
+
+
+
     }
 }
