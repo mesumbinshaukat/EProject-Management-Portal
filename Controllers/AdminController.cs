@@ -1102,6 +1102,22 @@ namespace Symphony_LTD.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AddResult(Result data)
         {
+            if (data.SubjectId != null)
+            {
+                var student = _db.Exams.FirstOrDefault(x => x.StudentId == data.StudentId);
+
+                var course = _db.Courses.FirstOrDefault(x => x.Id == student.CourseId);
+
+                if(course != null)
+                {
+                    data.SubjectId = course.Id;
+                }
+                else
+                {
+                    TempData["failed"] = "Database Error";                    
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 _db.Results.Add(data);
