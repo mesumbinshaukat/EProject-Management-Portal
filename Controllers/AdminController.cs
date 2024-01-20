@@ -1102,7 +1102,7 @@ namespace Symphony_LTD.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AddResult(Result data)
         {
-            if (data.SubjectId != null)
+            if (data.SubjectId == null)
             {
                 var student = _db.Exams.FirstOrDefault(x => x.StudentId == data.StudentId);
 
@@ -1111,22 +1111,21 @@ namespace Symphony_LTD.Controllers
                 if(course != null)
                 {
                     data.SubjectId = course.Id;
-                }
-                else
-                {
-                    TempData["failed"] = "Database Error";                    
-                }
-            }
 
-            if (ModelState.IsValid)
-            {
-                _db.Results.Add(data);
-                _db.SaveChanges();
-                TempData["success"] = "Result Has Been Created!";
+                    if (ModelState.IsValid)
+                    {
+                        _db.Results.Add(data);
+                        _db.SaveChanges();
+                        TempData["success"] = "Result Has Been Created!";
+                        return RedirectToAction("AddResult");
+                    }
+                    TempData["failed"] = "Database Error!";
+                    return RedirectToAction("AddResult");
+                }
+                TempData["failed"] = "No Course Found For This Individual Student!";
                 return RedirectToAction("AddResult");
             }
-
-            TempData["failed"] = "Database Error";
+            TempData["failed"] = "Course Id Error!";
             return RedirectToAction("AddResult");
         }
 
