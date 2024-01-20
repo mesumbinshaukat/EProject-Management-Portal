@@ -29,7 +29,7 @@ namespace Symphony_LTD.Controllers
 
                 var adminData = _db._Admin.ToList();
                 var contactData = _db._Contact.ToList();
-
+                
                 var viewModel = new AdminAndContact
                 {
                     Admin = adminData,
@@ -1080,17 +1080,18 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
 
-                var fetch_individual_exam = _db.Exams.ToList();
+                ViewBag.IndividualStudentExam = _db.Exams.ToList();
+
+                ViewBag.Student = _db.Students.ToList();
+
                 var user_details = _db._Admin.FirstOrDefault();
 
+                var result = _db.Results.ToList();
                 if (user_details != null)
                 {
                     ViewBag.Username = user_details.Name;
 
                 }
-                ViewBag.Exam = fetch_individual_exam;
-
-
                 return View();
             }
             TempData["failed"] = "Please Log In!";
