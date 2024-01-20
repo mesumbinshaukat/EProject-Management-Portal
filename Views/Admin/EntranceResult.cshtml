@@ -1,8 +1,7 @@
-﻿@model Symphony_LTD.Models.Result
-
+﻿@model Symphony_LTD.Models.EntranceExamResult
 @{
-    ViewData["Title"] = "Add Result";
     Layout = "_AdminLayout";
+    ViewData["title"] = "Make Entrance Exam Result";
 }
 
 <div class="content-page">
@@ -13,18 +12,16 @@
         <hr />
         <div class="container-fluid">
 
-            <form method="post" asp-action="AddResult">
+            <form method="post" asp-action="EntranceResult">
                 @Html.AntiForgeryToken()
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-body">
-
-
                                 <div class="mb-3">
                                     <label asp-for="StudentId" class="form-label"></label>
                                     <select asp-for="StudentId" class="form-control">
-                                        @foreach (var i in ViewBag.IndividualStudentExam)
+                                        @foreach (var i in ViewBag.EntranceExam)
                                         {
                                             if (i.Pending == false)
                                             {
@@ -43,6 +40,14 @@
                                     </select>
                                 </div>
 
+                                <div class="mb-3">
+                                    <label class="form-label" asp-for="MarksObtained"></label>
+                                    <input asp-for="MarksObtained" class="form-control" placeholder="Exam Date" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" asp-for="MarksObtained"></label>
+                                    <input asp-for="MarksObtained" class="form-control" placeholder="Exam Date" required>
+                                </div>
                                 <div class="mb-3">
                                     <label class="form-label" asp-for="MarksObtained"></label>
                                     <input asp-for="MarksObtained" class="form-control" placeholder="Exam Date" required>

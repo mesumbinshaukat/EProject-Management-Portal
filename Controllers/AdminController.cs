@@ -99,7 +99,7 @@ namespace Symphony_LTD.Controllers
 
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public IActionResult LogIn(Admin data, string emailaddress, string password)
         {
             var check_user = _db._Admin.Where(i => i.Email == emailaddress).FirstOrDefault();
@@ -1102,6 +1102,14 @@ namespace Symphony_LTD.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AddResult(Result data)
         {
+            var existing_student_result = _db.Results.FirstOrDefault(x => x.StudentId == data.StudentId);
+
+            if(existing_student_result != null)
+            {
+                TempData["failed"] = "Result For This Student Is Already Created.";
+                return RedirectToAction("AddResult");
+            }
+
             if (data.SubjectId == null)
             {
                 var student = _db.Exams.FirstOrDefault(x => x.StudentId == data.StudentId);
@@ -1112,7 +1120,7 @@ namespace Symphony_LTD.Controllers
                 {
                     data.SubjectId = course.Id;
 
-                    if (ModelState.IsValid)
+                    if (data != null)
                     {
                         _db.Results.Add(data);
                         _db.SaveChanges();
@@ -1821,5 +1829,37 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("CourseExamSchedule");
         }
 
+        public IActionResult EntranceResult()
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+
+                ViewBag.EntranceExam = _db._EntranceExam.ToList();
+
+                ViewBag.Student = _db.Students.ToList();
+
+                var user_details = _db._Admin.FirstOrDefault();
+
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
+                return View();
+
+            }
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EntranceResult (EntranceExamResult data)
+        {
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("EntranceResult");
+        }
     }
 }
