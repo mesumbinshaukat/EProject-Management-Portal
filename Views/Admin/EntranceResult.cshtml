@@ -25,11 +25,18 @@
                                         {
                                             if (i.Pending == false)
                                             {
-                                                foreach (var x in ViewBag.Student)
+                                                foreach (var x in ViewBag.Courses)
                                                 {
-                                                    if (x.StudentId == i.StudentId)
+                                                    if (x.Id == i.Course)
                                                     {
-                                                        <option value="@i.StudentId">@x.FirstName @x.MiddleName @x.LastName | Roll No#-: @i.StudentId</option>
+                                                        foreach (var j in ViewBag.Student)
+                                                        {
+                                                            if(j.StudentId == x.Id)
+                                                            {
+                                                            <option value="@i.StudentId">@x.FirstName @x.MiddleName @x.LastName | Roll No#-: @i.StudentId</option>                                                                
+                                                            }
+                                                            
+                                                        }
                                                     }
 
                                                 }

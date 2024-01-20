@@ -24,6 +24,20 @@
                                 <span asp-validation-for="ExamName" class="text-danger"></span>
                             </div>
                         </div> 
+
+                        <div class="col-6 mb-3">
+                                <div class="form-group">
+                                    <label asp-for="StudentId" class="control-label"></label>
+                                    <select class="form-control" asp-for="StudentId">
+
+                            @foreach (var i in ViewBag.Student)
+                            {
+                                    <option value="@i.StudentId">Name: @i.FirstName @i.MiddleName @i.LastName | Roll No# @i.RollNumber</option>
+                            }
+                                    </select>
+                            <span asp-validation-for="StudentId" class="text-danger"></span>
+                                </div>
+                        </div>
                         <div class="col-6 mb-3">
                                 <div class="form-group">
                                     <label asp-for="TotalMarks" class="control-label"></label>
@@ -57,7 +71,7 @@
                                     <span asp-validation-for="Date" class="text-danger"></span>
                                 </div>
                         </div>
-                    <div class="col-6 mb-3">
+                    <div class="col-12 mb-3">
                                 <div class="form-group">
                                 <label class="control-label">Schedule Entrance Exam 👇</label>
                                     <input type="submit" value="Schedule Entrance Exam" class="btn btn-dark form-control" />
@@ -75,6 +89,7 @@
                         <table class="table text-center">
                             <thead>
                                 <tr>
+                                    <th>Student Name</th>
                                     <th>Exam Name/Title</th>
                                     <th>Total Marks</th>
                                     <th>Exam Description/Detail</th>
@@ -96,7 +111,16 @@
                                         {
                                             if (x.Id == i.Course)
                                             {
-                                                
+
+                                                    <td>
+                                                @foreach (var j in ViewBag.Student)
+                                                {
+                                                    if(j.StudentId == i.StudentId)
+                                                        {
+                                                        @j.FirstName @j.MiddleName @j.LastName                                                         
+                                                        }
+                                                }
+                                                    </td>
                                                 <td>@i.ExamName</td>
                                                 <td>@i.TotalMarks</td>
                                                 <td>@i.Description</td>

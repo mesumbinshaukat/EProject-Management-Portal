@@ -8,6 +8,9 @@ namespace Symphony_LTD.Models
         [Key]
         public int Id { get; set; }
         [Required]
+        [DisplayName("Student")]
+        public int? StudentId { get; set; }
+        [Required]
         [DisplayName("Exam Name")]
         public string? ExamName { get; set; }
         [Required]
