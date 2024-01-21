@@ -1901,6 +1901,8 @@ namespace Symphony_LTD.Controllers
 
                 ViewBag.Courses = _db.Courses.ToList();
 
+                ViewBag.Class = _db._Class.ToList();
+
                 ViewBag.Student = _db.Students.ToList();
 
                 var user_details = _db._Admin.FirstOrDefault();

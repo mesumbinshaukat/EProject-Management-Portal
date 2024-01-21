@@ -25,15 +25,15 @@
                                         {
                                             if (i.Pending == false)
                                             {
-                                                foreach (var x in ViewBag.Courses)
+                                                foreach (var x in ViewBag.Class)
                                                 {
-                                                    if (x.Id == i.Course)
+                                                    if (x._Class == i.Class)
                                                     {
                                                         foreach (var j in ViewBag.Student)
                                                         {
-                                                            if (j.StudentId == i.StudentId)
+                                                            if (j.Class == i.Class)
                                                             {
-                                                                <option value="@j.StudentId">Name-: @j.FirstName @j.MiddleName @j.LastName | Roll No#-: @j.RollNumber</option>
+                                                                <option value="@j.StudentId">Name-: @j.FirstName @j.MiddleName @j.LastName | Roll No#-: @j.RollNumber | Class-: @x.Class</option>
                                                             }
 
                                                         }
