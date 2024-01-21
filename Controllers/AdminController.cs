@@ -1143,6 +1143,11 @@ namespace Symphony_LTD.Controllers
             {
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+
+                ViewBag.IndividualExamResult = _db.Results.ToList();
+
+                ViewBag.IndividualExam = _db.Exams.ToList();
+
                 var user_details = _db._Admin.FirstOrDefault();
 
                 if (user_details != null)
@@ -1935,13 +1940,13 @@ namespace Symphony_LTD.Controllers
         {
             var student = _db.Students.FirstOrDefault(x => x.StudentId == data.StudentId);
 
-            if (student != null)
-            {
+            //if (student != null)
+            //{
                 var existing_data = _db._CourseExam.FirstOrDefault(x => x.Class == student.Class);
 
                 if (existing_data != null)
                 {
-                    var existing_student = _db.Students.FirstOrDefault(x => x.Class == existing_data.Class);
+                    var existing_student = _db.Students.FirstOrDefault(x => x.Class == existing_data.Class && x.StudentId == data.StudentId);
                     if (existing_student != null)
                     {
                         var course_exam_result = _db._CourseExamResult.FirstOrDefault(x => x.StudentId == existing_student.StudentId);
@@ -1972,9 +1977,9 @@ namespace Symphony_LTD.Controllers
                 }
                 TempData["failed"] = "No Existing Course/Cass Exam Found.";
                 return RedirectToAction("CourseResult");
-            }
-            TempData["failed"] = "No Student Found.";
-            return RedirectToAction("CourseResult");
+            //}
+            //TempData["failed"] = "No Student Found.";
+            //return RedirectToAction("CourseResult");
 
         }
 
