@@ -21,10 +21,7 @@ namespace Symphony_LTD.Models
         public decimal? MarksObtained { get; set; }               
         [Required]
         [DisplayName("Class")]
-        public int? Class { get; set; }
-        [Required]
-        [DisplayName("Date")]
-        public DateTime? Date { get; set; }
+        public int? Class { get; set; }        
 
     }
 }

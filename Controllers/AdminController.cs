@@ -1937,7 +1937,34 @@ namespace Symphony_LTD.Controllers
 
             if(existing_data != null)
             {
+                var existing_student = _db.Students.FirstOrDefault(x => x.Class == existing_data.Class);
+                if (existing_student != null)
+                {
+                    var course_exam_result = _db._CourseExamResult.FirstOrDefault(x => x.StudentId == existing_student.StudentId);
 
+                    if(course_exam_result != null)
+                    {
+                        TempData["failed"] = "Please select different student because result for this student, " + existing_student.FirstName + " is already created.";
+                        return RedirectToAction("CourseResult");
+                    }
+
+                    var existing_class = _db._Class.FirstOrDefault(x => x._Class == existing_student.Class);
+
+                    if( existing_class != null)
+                    {
+                        data.Course = existing_class.Course;
+                        data.Class = existing_class._Class;
+
+                        _db._CourseExamResult.Add(data);
+                        _db.SaveChanges();
+                        TempData["success"] = "Result Successfully Created.";
+                        return RedirectToAction("CourseResult");
+                    }
+                    TempData["failed"] = "No Class Found.";
+                    return RedirectToAction("CourseResult");
+                }
+                TempData["failed"] = "No Student Found.";
+                return RedirectToAction("CourseResult");
             }
             TempData["failed"] = "No Existing Course/Cass Exam Found.";
             return RedirectToAction("CourseResult");
