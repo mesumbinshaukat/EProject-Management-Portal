@@ -160,7 +160,7 @@
                                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            <form asp-action="EditEntranceExam">
+                                                                            <form asp-action="EditEntranceExam" method="post">
                                                                                 @Html.AntiForgeryToken()
                                                                                 <input type="hidden" value="@i.Id" asp-for="Id"/>
                                                                                 <label asp-for="ExamName" class="form-label"></label>

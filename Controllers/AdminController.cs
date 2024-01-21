@@ -1985,15 +1985,15 @@ namespace Symphony_LTD.Controllers
 
                     _db._EntranceExam.Update(existing_exam);
                     _db.SaveChanges();
-                    TempData["failed"] = "Modified!";
-                    return RedirectToAction("EditEntranceExam");
+                    TempData["success"] = "Modified!";
+                    return RedirectToAction("EntranceExam");
                 }
                 TempData["failed"] = "Can't modify because no data found.";
-                return RedirectToAction("EditEntranceExam");
+                return RedirectToAction("EntranceExam");
             }
             
             TempData["failed"] = "Can't modify because no existing exam found.";
-            return RedirectToAction("EditEntranceExam");
+            return RedirectToAction("EntranceExam");
         }
 
     }
