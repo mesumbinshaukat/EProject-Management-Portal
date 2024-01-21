@@ -1148,42 +1148,20 @@ namespace Symphony_LTD.Controllers
 
                 ViewBag.IndividualExam = _db.Exams.ToList();
 
+                ViewBag.Course = _db.Courses.ToList();
+
+                ViewBag.Student = _db.Students.ToList();
+
+                ViewBag.EntranceExamResult = _db._EntranceExamResult.ToList();
+
+                ViewBag.EntranceExam = _db._EntranceExam.ToList();
+
                 var user_details = _db._Admin.FirstOrDefault();
 
                 if (user_details != null)
                 {
                     ViewBag.Username = user_details.Name;
-
-                }
-                var resultDetails = _db.Results.ToList();
-
-                if (resultDetails != null && resultDetails.Any())
-                {
-                    var studentDetailsList = new List<Student>();
-
-                    foreach (var i in resultDetails)
-                    {
-                        var studentDetails = _db.Students.FirstOrDefault(x => x.StudentId == i.StudentId);
-
-                        if (studentDetails != null)
-                        {
-                            studentDetailsList.Add(studentDetails);
-                        }
-                        else
-                        {
-                            TempData["failed"] = "No Student";
-                        }
-                    }
-
-                    ViewBag.StudentDetailsList = studentDetailsList;
-                }
-                else
-                {
-                    TempData["failed"] = "No Results";
-                    // Add logging to help identify the issue
-                    Console.WriteLine("No results found or resultDetails is null.");
-                }
-
+                }     
                 return View();
             }
 
