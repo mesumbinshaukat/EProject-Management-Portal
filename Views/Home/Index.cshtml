@@ -97,8 +97,8 @@
                                     <h1></h1>
                                 </div>
                                 <div class="d-none d-lg-block me-4">
-                                    <h5 class="tab-title">Quality Code</h5>
-                                    <p>At vero eos et accusam et</p>
+                                    <h5 class="tab-title">Cheapest Course</h5>
+                                    <p>Under $800 Only</p>
                                 </div>
                             </div>
                         </a>
@@ -110,8 +110,8 @@
                                     <h1></h1>
                                 </div>
                                 <div class="d-none d-lg-block me-4">
-                                    <h5 class="tab-title">Easy to customize</h5>
-                                    <p>Sed ut unde iste error sit</p>
+                                    <h5 class="tab-title">Entrance Exam</h5>
+                                    <p>Upcoming Entrance Exam</p>
                                 </div>
                             </div>
                         </a>
@@ -122,8 +122,8 @@
                                 <h1></h1>
                             </div>
                             <div class="d-none d-lg-block me-4">
-                                <h5 class="tab-title">Awesome Support</h5>
-                                <p>It will be as simple as fact</p>
+                                <h5 class="tab-title">Top Asked Question</h5>
+                                <p>Frequently Asked Question</p>
                             </div>
                         </a>
                     </li>
@@ -139,24 +139,20 @@
                             <div class="col-lg-6 offset-lg-1">
                                 <div>
                                     
-                                    <h5 class="mb-3">Quality Code</h5>
-                                    <p class="text-muted">It will be as simple as Occidental in fact, it will be Occidental. To an English person it will seem like simplified English as a skeptical Cambridge.</p>
-                                    <p class="text-muted">If several languages coalesce the grammar of the resulting language </p>
-                                    <div class="row pt-4">
-                                        <div class="col-lg-6">
+                                    <h5 class="mb-3">Cheapest <span class="text-success">Course</span> Available</h5>
+                                    <h4 class="mb-3">@ViewBag.Course.CourseName</h4>
+                                    <p class="text-muted">@ViewBag.Course.CourseDetails</p>
+                                    <p class="text-muted">Topics Covered: @ViewBag.Course.TopicsCovered</p>
+                                    <div class="row">
+                                        <div class="col-lg-12">
                                             <div class="text-muted">
-                                                <p>Nemo enim ipsam quia</p>
-                                                <p>Ut enim ad minima</p>
+                                                <p>Course Fee: <span class="fw-bold text-warning">$@ViewBag.Course.CourseFee</span></p>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="text-muted">
-                                                <p>At vero eos accusamus et </p>
-                                            </div>
-                                        </div>
+                                       
                                     </div>
                                     <div class="mt-4">
-                                        <a asp-controller="Home" asp-action="Index" class="btn btn-custom">Learn More</a>
+                                        <a asp-controller="User" asp-action="Courses" class="btn btn-custom">Learn More</a>
                                     </div>
                                 </div>
 
@@ -175,24 +171,20 @@
                             <div class="col-lg-6 offset-lg-1">
                                 <div>
                                     
-                                    <h5 class="mb-3">Easy to customize</h5>
-                                    <p class="text-muted">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et</p>
-                                    <p class="text-muted">If several languages coalesce the grammar of the resulting language </p>
-                                    <div class="row pt-4">
-                                        <div class="col-lg-6">
+                                    <h5 class="mb-3">Upcomming Entrance <span class="text-danger">Exam</span></h5>
+                                    <h4 class="mb-3">@ViewBag.EntranceExam.Name</h4>
+                                    <p class="text-muted">@ViewBag.EntranceExam.Description</p>                                   
+                                    <div class="row">
+                                        <div class="col-lg-12">
                                             <div class="text-muted">
-                                                <p>Nemo enim ipsam quia</p>
-                                                <p>Ut enim ad minima</p>
+                                                <p><span class="fw-bold">Schedule Date:</span> @ViewBag.EntranceExam.Date</p>
+                                                <p><span class="fw-bold">Total Marks:</span> @ViewBag.EntranceExam.Marks</p>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="text-muted">
-                                                <p>At vero eos accusamus et </p>
-                                            </div>
-                                        </div>
+                                       
                                     </div>
                                     <div class="mt-4">
-                                        <a asp-controller="Home" asp-action="Index" class="btn btn-custom">Learn More</a>
+                                        <a asp-controller="User" asp-action="EntranceExam" class="btn btn-custom">Learn More</a>
                                     </div>
                                 </div>
 
@@ -211,24 +203,11 @@
                             <div class="col-lg-6 offset-lg-1">
                                 <div>
                                    
-                                    <h5 class="mb-3">Awesome Support</h5>
-                                    <p class="text-muted">It will be as simple as Occidental in fact, it will be Occidental. To an English person it will seem like simplified English as a skeptical Cambridge.</p>
-                                    <p class="text-muted">If several languages coalesce the grammar of the resulting language </p>
-                                    <div class="row pt-4">
-                                        <div class="col-lg-6">
-                                            <div class="text-muted">
-                                                <p>Nemo enim ipsam quia</p>
-                                                <p>Ut enim ad minima</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="text-muted">
-                                                <p>At vero eos accusamus et </p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <h5 class="mb-3">Frequently Asked Question & <span class="text-success">Answer</span></h5>
+                                    <h4 class="mb-3">@ViewBag.FAQ.Question</h4>
+                                    <p class="text-dark">@ViewBag.FAQ.Answer</p>
                                     <div class="mt-4">
-                                        <a asp-controller="Home" asp-action="Index" class="btn btn-custom">Learn More</a>
+                                        <a asp-controller="FAQ" asp-action="FAQS" class="btn btn-custom">Learn More</a>
                                     </div>
                                 </div>
 
@@ -288,173 +267,3 @@
 
 
 <!-- services end -->
-
-<!-- clients start -->
-<section class="section bg-light" id="clients">
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <div class="title text-center mb-4">
-                    <h6 class="text-primary small-title">Clients</h6>
-                    <h4>What our Users Says</h4>
-                    <p class="text-muted">At solmen va esser far uniform grammatica.</p>
-                </div>
-            </div>
-        </div>
-        <!-- end row -->
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="testi-box p-4 bg-white mt-4 text-center">
-                    <p class="text-muted mb-4">" The designer of this theme delivered a quality product. I am not a front-end developer and I hate when the theme I download has glitches or needs minor tweaks here and there. This worked for my needs just out of the boxes. Also, it is fast and elegant."</p>
-                    <div class="testi-img mb-4">
-                        <img src="~/landing_page_images/testi/img-1.png" alt="" class="rounded-circle img-thumbnail">
-                    </div>
-                    <p class="text-muted mb-1"> - Adminto User</p>
-                    <h5 class="font-18">Xpanta</h5>
-
-                    
-
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="testi-box p-4 bg-white mt-4 text-center">
-                    <p class="text-muted mb-4">"  Extremely well designed and the documentation is very well done. Super happy with the purchase and definitely recommend this! "</p>
-                    <div class="testi-img mb-4">
-                        <img src="~/landing_page_images/testi/img-2.png" alt="" class="rounded-circle img-thumbnail">
-                    </div>
-                    <p class="text-muted mb-1"> - Adminto User</p>
-                    <h5 class="font-18">G_Sam</h5>
-
-                   
-
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="testi-box p-4 bg-white mt-4 text-center">
-                    <p class="text-muted mb-4">"  We used this theme to save some design time but... wow it has everything you didn't realize you would need later. I highly recommend this template to get your web design headed in the right direction quickly.  "</p>
-                    <div class="testi-img mb-4">
-                        <img src="~/landing_page_images/testi/img-3.png" alt="" class="rounded-circle img-thumbnail">
-                    </div>
-                    <p class="text-muted mb-1"> - Adminto User</p>
-                    <h5 class="font-18">Isaacfab</h5>
-
-                   
-
-                </div>
-            </div>
-        </div>
-        <!-- end row -->
-
-        <div class="row mt-5 pt-5">
-            <div class="col-lg-3 col-sm-6">
-                <div class="client-images">
-                    <img src="~/landing_page_images/clients/1.png" alt="logo-img" class="mx-auto img-fluid d-block">
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="client-images">
-                    <img src="~/landing_page_images/clients/2.png" alt="logo-img" class="mx-auto img-fluid d-block">
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="client-images">
-                    <img src="~/landing_page_images/clients/3.png" alt="logo-img" class="mx-auto img-fluid d-block">
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="client-images">
-                    <img src="~/landing_page_images/clients/4.png" alt="logo-img" class="mx-auto img-fluid d-block">
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end container-fluid -->
-</section>
-<!-- clients end -->
-
-<!-- pricing start -->
-<section class="section bg-light" id="pricing">
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <div class="title text-center mb-4">
-                    <h6 class="text-primary small-title">Pricing</h6>
-                    <h4>Our Pricing plans</h4>
-                    <p class="text-muted">At solmen va esser far uniform grammatica.</p>
-                </div>
-            </div>
-        </div>
-        <!-- end row -->
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="pricing-plans bg-white text-center p-4 mt-4">
-                    <h5 class="plan-title mt-2 mb-4">Single</h5>
-
-                    <div class="plan-price">
-                        <h4 class="mb-3 price"><sup><small>$</small></sup>24</h4>
-                        <h5 class="plan-duration text-muted font-18">Per license</h5>
-                    </div>
-
-                    <div class="pricing-content p-4 text-muted mb-2">
-                        <p>Number of end products 1</p>
-                        <p>Customer support</p>
-                        <p>Free Updates</p>
-                        <p>Monthly updates</p>
-                        <p>24 x 7 Support</p>
-                    </div>
-
-                    <div class="pt-4">
-                        <a asp-controller="Home" asp-action="Index" class="btn btn-custom d-block">Purchase Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="pricing-plans bg-white text-center p-4 mt-4">
-                    <h5 class="plan-title mt-2 mb-4">Multiple</h5>
-
-                    <div class="plan-price">
-                        <h4 class="mb-3 price"><sup><small>$</small></sup>120</h4>
-                        <h5 class="plan-duration text-muted font-18">Per license</h5>
-                    </div>
-
-                    <div class="pricing-content p-4 text-muted mb-2">
-                        <p>Number of end products 1</p>
-                        <p>Customer support</p>
-                        <p>Free Updates</p>
-                        <p>Monthly updates</p>
-                        <p>24 x 7 Support</p>
-                    </div>
-
-                    <div class="pt-4">
-                        <a asp-controller="Home" asp-action="Index" class="btn btn-custom d-block">Purchase Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="pricing-plans bg-white text-center p-4 mt-4">
-                    <h5 class="plan-title mt-2 mb-4">Extended</h5>
-
-                    <div class="plan-price">
-                        <h4 class="mb-3 price"><sup><small>$</small></sup>999</h4>
-                        <h5 class="plan-duration text-muted font-18">Per license</h5>
-                    </div>
-
-                    <div class="pricing-content p-4 text-muted mb-2">
-                        <p>Number of end products 1</p>
-                        <p>Customer support</p>
-                        <p>Free Updates</p>
-                        <p>Monthly updates</p>
-                        <p>24 x 7 Support</p>
-                    </div>
-
-                    <div class="pt-4">
-                        <a asp-controller="Home" asp-action="Index" class="btn btn-custom d-block">Purchase Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end row -->
-    </div>
-    <!-- end container-fluid -->
-</section>
-<!-- pricing end -->

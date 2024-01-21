@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Symphony_LTD.Data;
 using Symphony_LTD.Models;
 using System.Diagnostics;
@@ -20,6 +21,9 @@ namespace Symphony_LTD.Controllers
         public IActionResult Index()
         {
             ViewBag.Courses = _db.Courses.ToList();
+            ViewBag.EntranceExam = _db._EntranceExamList.FirstOrDefault(x => x.Availablity == true);
+            ViewBag.Course = _db.Courses.FirstOrDefault(x => x.CourseFee <= 800);
+            ViewBag.FAQ = _db.FAQS.FirstOrDefault();
             var existing_content = _db._HomeSectionOne.ToList();
             if(existing_content != null)
             {
