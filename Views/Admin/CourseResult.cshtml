@@ -12,7 +12,7 @@
         <hr />
         <div class="container-fluid">
 
-            <form method="post" asp-action="EntranceResult">
+            <form method="post" asp-action="CourseResult">
                 @Html.AntiForgeryToken()
                 <div class="row">
                     <div class="col-lg-6">
@@ -33,7 +33,7 @@
                                                         {
                                                             if (j.Class == i.Class)
                                                             {
-                                                                <option value="@j.StudentId">Name-: @j.FirstName @j.MiddleName @j.LastName | Roll No#-: @j.RollNumber | Class-: @x._Class</option>
+                                                                <option value="@j.StudentId">Name-: @j.FirstName @j.MiddleName @j.LastName | Roll No#-: @j.RollNumber | Class-: @x._Class | Total Exam Marks: @i.TotalScore</option>
                                                             }
 
                                                         }
