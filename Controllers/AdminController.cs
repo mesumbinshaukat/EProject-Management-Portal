@@ -1996,5 +1996,37 @@ namespace Symphony_LTD.Controllers
             return RedirectToAction("EntranceExam");
         }
 
+        public IActionResult EntranceExamList()
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                var user_details = _db._Admin.FirstOrDefault();
+
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
+                return View();
+
+            }
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EntranceExamList (EntranceExamList data)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
+            TempData["failed"] = "Database Error! Model Not Valid";
+            return RedirectToAction("EntranceExamList");
+        }
+
     }
 }

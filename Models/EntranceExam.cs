@@ -10,10 +10,10 @@ namespace Symphony_LTD.Models
         [Required]
         [DisplayName("Student")]
         public int? StudentId { get; set; }
-        [Required]
+        
         [DisplayName("Exam Name")]
         public string? ExamName { get; set; }
-        [Required]
+        
         [DisplayName("Total Marks")]
         public string? TotalMarks { get; set; }
         [Required]
@@ -28,5 +28,6 @@ namespace Symphony_LTD.Models
         [DisplayName("Status")]
         [DefaultValue(true)]
         public bool? Pending { get; set; } = true;
+        
     }
 }
