@@ -1924,8 +1924,6 @@ namespace Symphony_LTD.Controllers
         {
             var student = _db.Students.FirstOrDefault(x => x.StudentId == data.StudentId);
 
-            //if (student != null)
-            //{
                 var existing_data = _db._CourseExam.FirstOrDefault(x => x.Class == student.Class);
 
                 if (existing_data != null)
@@ -1961,10 +1959,41 @@ namespace Symphony_LTD.Controllers
                 }
                 TempData["failed"] = "No Existing Course/Cass Exam Found.";
                 return RedirectToAction("CourseResult");
-            //}
-            //TempData["failed"] = "No Student Found.";
-            //return RedirectToAction("CourseResult");
+            
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditEntranceExam(EntranceExam data)
+        {
+            var existing_exam = _db._EntranceExam.FirstOrDefault(x => x.Id == data.Id);
+            if (existing_exam != null)
+            {
+                if (data.Date == null)
+                {
+                    data.Date = existing_exam.Date;
+                }
+
+                if (data != null)
+                {
+                    existing_exam.ExamName = data.ExamName ?? existing_exam.ExamName;
+                    existing_exam.TotalMarks = data.TotalMarks ?? existing_exam.TotalMarks;
+                    existing_exam.StudentId = data.StudentId ?? existing_exam.StudentId;
+                    existing_exam.Course = data.Course ?? existing_exam.Course;
+                    existing_exam.Date = data.Date ?? existing_exam.Date;
+                    existing_exam.Description = data.Description ?? existing_exam.Description;
+
+                    _db._EntranceExam.Update(existing_exam);
+                    _db.SaveChanges();
+                    TempData["failed"] = "Modified!";
+                    return RedirectToAction("EditEntranceExam");
+                }
+                TempData["failed"] = "Can't modify because no data found.";
+                return RedirectToAction("EditEntranceExam");
+            }
+            
+            TempData["failed"] = "Can't modify because no existing exam found.";
+            return RedirectToAction("EditEntranceExam");
         }
 
     }

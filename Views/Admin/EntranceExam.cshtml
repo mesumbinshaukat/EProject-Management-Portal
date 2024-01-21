@@ -144,7 +144,81 @@
                                         <td>
                                             <div class="row">
                                                 <div class="col-lg-6 m-1">
-                                                    <a class="btn btn-warning" asp-action="EditCourse" asp-route-id="@i.Id">Edit</a>
+                                                            @* Modal *@
+
+                                                            <!-- Button trigger modal -->
+                                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit_@i.Id">
+                                                                Edit
+                                                            </button>
+
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="edit_@i.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm</h1>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <form asp-action="EditEntranceExam">
+                                                                                @Html.AntiForgeryToken()
+                                                                                <input type="hidden" value="@i.Id" asp-for="Id"/>
+                                                                                <label asp-for="ExamName" class="form-label"></label>
+                                                                                <input asp-for="ExamName" value="@i.ExamName" class="form-control" />
+                                                                                <label asp-for="StudentId" class="form-label"></label>
+                                                                                <select class="form-control" asp-for="StudentId">
+                                                                                    @foreach (var a in ViewBag.Student)
+                                                                                    {
+                                                                                        if (a.StudentId == i.StudentId)
+                                                                                        {
+                                                                                            <option value="@a.StudentId">Name: @a.FirstName @a.MiddleName @a.LastName | Roll No# @a.RollNumber</option>
+                                                                                        }
+                                                                                       
+                                                                                    }
+                                                                                    @foreach (var a in ViewBag.Student)
+                                                                                    {
+                                                                                        if(a.StudentId != i.StudentId)
+                                                                                        {
+                                                                                        <option value="@a.StudentId">Name: @a.FirstName @a.MiddleName @a.LastName | Roll No# @a.RollNumber</option>
+                                                                                            
+                                                                                        }
+                                                                                    }
+                                                                                </select>
+                                                                                <label asp-for="TotalMarks" class="form-label"></label>
+                                                                                <input asp-for="TotalMarks" value="@i.TotalMarks" class="form-control"/>
+                                                                                <label asp-for="Course" class="form-label"></label>
+                                                                                <select asp-for="Course" class="form-control" required>
+                                                                                    @foreach (var a in ViewBag.Courses)
+                                                                                    {
+                                                                                        if (a.Id == i.Course)
+                                                                                        {
+                                                                                            <option value="@a.Id">Course Name: <b>@a.CourseName</b> | Course Details: <b>@a.CourseDetails</b></option>
+                                                                                        }
+                                                                                       
+                                                                                    }
+                                                                                    @foreach (var a in ViewBag.Courses)
+                                                                                    {
+                                                                                        if(a.Id != i.Course)
+                                                                                        {
+                                                                                        <option value="@a.Id">Course Name: <b>@a.CourseName</b> | Course Details: <b>@a.CourseDetails</b></option>
+                                                                                            
+                                                                                        }
+                                                                                    }
+                                                                                </select>
+                                                                                <label asp-for="Description" class="form-label"></label>
+                                                                                <input asp-for="Description" value="@i.Description" class="form-control" />
+                                                                                <label asp-for="Date" class="form-label"></label>
+                                                                                <input asp-for="Date" value="@i.Date" class="form-control"/>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                            <input type="submit" class="btn btn-outline-success" value="Modify"/>
+                                                                        </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
                                                 </div>
                                                         <div class="col-lg-6 m-1">
 
