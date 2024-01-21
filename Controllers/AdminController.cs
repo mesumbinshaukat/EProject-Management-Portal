@@ -1306,23 +1306,33 @@ namespace Symphony_LTD.Controllers
                 if (id != null)
                 {
                     var existing_details = _db._CourseExam.FirstOrDefault(x => x.Id == id);
-                    var exisitng_class = _db._Class.FirstOrDefault(x => x.Id == existing_details.Class);
-                    var existing_course = _db.Courses.FirstOrDefault(x => x.Id == exisitng_class.Course);
-                    if (existing_details != null)
+                    if(existing_details != null)
                     {
-                        ViewBag.Id = existing_details.Id;
-                        ViewBag.ExamName = existing_details.ExamName;
-                        ViewBag.Class = existing_details.Class;
-                        ViewBag.TotalScore = existing_details.TotalScore;
-                        ViewBag.Description = existing_details.Description;
-                        ViewBag.Date = existing_details.Date;
-                        ViewBag.Course = existing_course.CourseName;
-                        ViewBag.Courses = _db.Courses.ToList();
-                        ViewBag.Classes = _db._Class.ToList();
-                        ViewBag.ScheduledExams = _db._CourseExam.ToList();
+                        var exisitng_class = _db._Class.FirstOrDefault(x => x._Class == existing_details.Class);
+                        if(exisitng_class != null)
+                        {
+                            var existing_course = _db.Courses.FirstOrDefault(x => x.Id == exisitng_class.Course);
+                            if (existing_details != null)
+                            {
+                                ViewBag.Id = existing_details.Id;
+                                ViewBag.ExamName = existing_details.ExamName;
+                                ViewBag.Class = existing_details.Class;
+                                ViewBag.TotalScore = existing_details.TotalScore;
+                                ViewBag.Description = existing_details.Description;
+                                ViewBag.Date = existing_details.Date;
+                                ViewBag.Course = existing_course.CourseName;
+                                ViewBag.Courses = _db.Courses.ToList();
+                                ViewBag.Classes = _db._Class.ToList();
+                                ViewBag.ScheduledExams = _db._CourseExam.ToList();
 
-                        return View();
+                                return View();
+                            }
+                            TempData["failed"] = "Can't find the course.";
+                            return RedirectToAction("CourseExam");
 
+                        }
+                        TempData["failed"] = "Can't find the course exam.";
+                        return RedirectToAction("CourseExam");
                     }
                     TempData["failed"] = "Can't edit because there's no matching id.";
                     return RedirectToAction("CourseExam");
