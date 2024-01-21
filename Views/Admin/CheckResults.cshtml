@@ -190,15 +190,15 @@
                                                         <tr>
                                                         @foreach (var t in ViewBag.CourseExam)
                                                                 {
-                                                            if (i.Course == t.Class)
+                                                            if (i.Class == t.Class)
                                                             {
                                                             @foreach (var x in ViewBag.Student)
                                                                 {                                                            
-                                                                @if (t.StudentId == x.StudentId)
+                                                                @if (i.StudentId == x.StudentId)
                                                                 {
                                                                         @foreach (var a in ViewBag.Class)
                                                                         {
-                                                                            if (a._Class == i.Course)
+                                                                            if (a._Class == i.Class)
                                                                             {
                                                                                 <td>@x.RollNumber</td>
                                                                                 <td>@x.FirstName @x.MiddleName @x.LastName</td>
@@ -208,13 +208,13 @@
                                                                                 <td>@a._Class</td>
                                                                                 @foreach (var j in ViewBag.Course)
                                                                                 {
-                                                                                    if (j.Id == t.Course)
+                                                                                    if (j.Id == a.Course)
                                                                                     {
                                                                                         <td>@j.CourseName</td>
                                                                                     }
                                                                                 }
                                                                                 <td>@i.Comments</td>
-                                                                                <td>@t.TotalMarks</td>
+                                                                                <td>@t.TotalScore</td>
                                                                                 <td>@i.MarksObtained</td>
                                                                             }
                                                                             
