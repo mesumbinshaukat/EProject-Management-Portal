@@ -156,6 +156,92 @@
             <!-- end row -->
 
         </div> <!-- container -->
+         <!-- Start Content-->
+        <div class="container-fluid">
+            <h1>Course/Class Exam Result</h1>
+            <h3>Course/Class - Student Exam Results</h3>
+            <hr />
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="responsive-table-plugin">
+                                <div class="table-rep-plugin">
+                                    <div class="table-responsive" data-pattern="priority-columns">
+                                        <table id="tech-companies-1" class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th data-priority="1">Roll No#</th>
+                                                    <th data-priority="2">Student Full Name</th>
+                                                    <th data-priority="3">Exam Name</th>
+                                                    <th data-priority="4">Attemp Date</th>
+                                                    <th data-priority="5">Description</th>
+                                                    <th data-priority="6">Class</th>
+                                                    <th data-priority="7">Course Name</th>
+                                                    <th data-priority="8">Comments</th>
+                                                    <th data-priority="9">Total Marks</th>
+                                                    <th data-priority="10">Obtained Marks</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                
+                                                @foreach (var i in ViewBag.CourseExamResult)
+                                                {
+                                                        <tr>
+                                                        @foreach (var t in ViewBag.CourseExam)
+                                                                {
+                                                            if (i.Course == t.Class)
+                                                            {
+                                                            @foreach (var x in ViewBag.Student)
+                                                                {                                                            
+                                                                @if (t.StudentId == x.StudentId)
+                                                                {
+                                                                        @foreach (var a in ViewBag.Class)
+                                                                        {
+                                                                            if (a._Class == i.Course)
+                                                                            {
+                                                                                <td>@x.RollNumber</td>
+                                                                                <td>@x.FirstName @x.MiddleName @x.LastName</td>
+                                                                                <td>@t.ExamName</td>
+                                                                                <td>@t.Date</td>
+                                                                                <td>@t.Description</td>
+                                                                                <td>@a._Class</td>
+                                                                                @foreach (var j in ViewBag.Course)
+                                                                                {
+                                                                                    if (j.Id == t.Course)
+                                                                                    {
+                                                                                        <td>@j.CourseName</td>
+                                                                                    }
+                                                                                }
+                                                                                <td>@i.Comments</td>
+                                                                                <td>@t.TotalMarks</td>
+                                                                                <td>@i.MarksObtained</td>
+                                                                            }
+                                                                            
+                                                                        }
+                                                                       
+                                                                }
+
+                                                                }
+                                                                
+                                                            }
+                                                        }
+                                                        </tr>
+                                                 }                                               
+
+                                            </tbody>
+                                        </table>
+                                    </div> <!-- end .table-responsive -->
+
+                                </div> <!-- end .table-rep-plugin-->
+                            </div> <!-- end .responsive-table-plugin-->
+                        </div>
+                    </div> <!-- end card -->
+                </div> <!-- end col -->
+            </div>
+            <!-- end row -->
+
+        </div> <!-- container -->
 
     </div> <!-- content -->
 </div>

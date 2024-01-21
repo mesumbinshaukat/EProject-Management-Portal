@@ -1156,6 +1156,12 @@ namespace Symphony_LTD.Controllers
 
                 ViewBag.EntranceExam = _db._EntranceExam.ToList();
 
+                ViewBag.CourseExamResult = _db._CourseExamResult.ToList();
+
+                ViewBag.CourseExam = _db._CourseExam.ToList();
+
+                ViewBag.Class = _db._Class.ToList();
+
                 var user_details = _db._Admin.FirstOrDefault();
 
                 if (user_details != null)
