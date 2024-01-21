@@ -16,5 +16,11 @@ namespace Symphony_LTD.Models
         [DisplayName("Entrance Exam Availablity")]
         [DefaultValue(true)]
         public bool? Availablity { get; set; } = true;
+        [Required]
+        [DisplayName("Exam Description")]
+        public string? Description { get; set; }
+        [DisplayName("Exam Schedule Date")]
+        public DateTime? Date { get; set; }
+
     }
 }

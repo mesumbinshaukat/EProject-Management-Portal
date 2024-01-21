@@ -7,29 +7,39 @@
 
 <div class="content-page">
     <div class="content">
-        <div class="container-fluid">
+        <div class="container">
             <h1>Entrance Exam List</h1>
 
             <h3>Create Entrance Exam List</h3>
             <hr />
-            <div class="row bg-white">
-                <div class="col-md-4">
-                    <form asp-action="EntranceExamList">
+            <div class="row p-3">
+                <div class="col-md-4 ">
+                    <form asp-action="_EntranceExamList" method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         @Html.AntiForgeryToken()
-                        <div class="form-group">
+                        <div class="form-group mb-2">
                             <label asp-for="Name" class="control-label"></label>
-                            <input asp-for="Name" class="form-control" />
+                            <input asp-for="Name" class="form-control" required placeholder="Entrance Exam Name"/>
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-2">
                             <label asp-for="Marks" class="control-label"></label>
-                            <input asp-for="Marks" class="form-control" />
+                            <input asp-for="Marks" class="form-control" placeholder="Total Marks" required/>
                             <span asp-validation-for="Marks" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="Availablity" class="control-label"></label>
-                            <select asp-for="Availablity" class="form-control">
+                        <div class="form-group mb-2">
+                            <label asp-for="Description" class="control-label"></label>
+                            <input asp-for="Description" class="form-control" placeholder="Exam Detail/ Short Description" required />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label asp-for="Date" class="control-label"></label>
+                            <input asp-for="Date" class="form-control" placeholder="Exam Schedule Date" required />
+                            <span asp-validation-for="Date" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label asp-for="Availablity" class="control-label" ></label>
+                            <select asp-for="Availablity" class="form-control" required>
                                 <option value="true">Default</option>
                                 <option value="true">Available</option>
                                 <option value="false">Not Available</option>
@@ -37,7 +47,7 @@
                             <span asp-validation-for="Availablity" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="Create" class="btn btn-primary" />
+                            <input type="submit" value="Create" class="btn btn-outline-success" />
                         </div>
                     </form>
                 </div>

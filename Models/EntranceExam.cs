@@ -19,10 +19,10 @@ namespace Symphony_LTD.Models
         [Required]
         [DisplayName("Course Exam")]
         public int? Course {  get; set; }
-        [Required]
+        
         [DisplayName("Exam Description")]
         public string? Description { get; set; }
-        [Required]
+        
         [DisplayName("Date")]
         public DateTime? Date { get; set; }
         [DisplayName("Status")]

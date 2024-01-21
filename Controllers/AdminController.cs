@@ -2018,14 +2018,34 @@ namespace Symphony_LTD.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EntranceExamList (EntranceExamList data)
+        public IActionResult _EntranceExamList (EntranceExamList data)
         {
-            if (ModelState.IsValid)
+            if (HttpContext.Session.GetString("s_email") != null)
             {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+                var user_details = _db._Admin.FirstOrDefault();
+
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
+                if (ModelState.IsValid)
+                {
+                    _db._EntranceExamList.Add(data);
+                    _db.SaveChanges();
+                    TempData["success"] = "Entrance Exam Created!";
+                    return RedirectToAction("EntranceExamList");
+                }
+                TempData["failed"] = "Database Error! Model Not Valid";
+                return RedirectToAction("EntranceExamList");
 
             }
-            TempData["failed"] = "Database Error! Model Not Valid";
-            return RedirectToAction("EntranceExamList");
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
+
+            
         }
 
     }
