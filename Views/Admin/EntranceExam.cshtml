@@ -20,7 +20,12 @@
                         <div class="col-6 mb-3">
                             <div class="form-group">
                                 <label asp-for="ExamName" class="control-label"></label>
-                                <input asp-for="ExamName" class="form-control" placeholder="Entrance Exam Name/Title" required/>
+                                <select>
+                                @foreach(var i in ViewBag.EntranceExamList)
+                                {
+                                    <option value="@i.Id">Exam Name: @i.Name | Schedule Date: @i.Date | Total Marks: @i.Marks | Details: @i.Description</option>
+                                }
+                            </select>
                                 <span asp-validation-for="ExamName" class="text-danger"></span>
                             </div>
                         </div> 
@@ -38,13 +43,7 @@
                             <span asp-validation-for="StudentId" class="text-danger"></span>
                                 </div>
                         </div>
-                        <div class="col-6 mb-3">
-                                <div class="form-group">
-                                    <label asp-for="TotalMarks" class="control-label"></label>
-                                    <input asp-for="TotalMarks" class="form-control" placeholder="Total Score/Marks"/>
-                                    <span asp-validation-for="TotalMarks" class="text-danger"></span>
-                                </div>
-                        </div>
+                       
                         <div class="col-6 mb-3">
                                 <div class="form-group">
                                     <label asp-for="Course" class="control-label"></label>
@@ -57,20 +56,7 @@
                                     <span asp-validation-for="Course" class="text-danger"></span>
                                 </div>
                         </div>
-                    <div class="col-6 mb-3">
-                                <div class="form-group">
-                                    <label asp-for="Description" class="control-label"></label>
-                                    <input asp-for="Description" class="form-control" placeholder="Entrance Exam Details" required/>
-                                    <span asp-validation-for="Description" class="text-danger"></span>
-                                </div>
-                        </div>
-                    <div class="col-6 mb-3">
-                                <div class="form-group">
-                                    <label asp-for="Date" class="control-label"></label>
-                                    <input asp-for="Date" class="form-control" required/>
-                                    <span asp-validation-for="Date" class="text-danger"></span>
-                                </div>
-                        </div>
+                   
                     <div class="col-12 mb-3">
                                 <div class="form-group">
                                 <label class="control-label">Schedule Entrance Exam 👇</label>

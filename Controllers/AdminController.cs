@@ -1371,6 +1371,7 @@ namespace Symphony_LTD.Controllers
                 ViewBag.Courses = _db.Courses.ToList();
                 ViewBag.EntranceExam = _db._EntranceExam.ToList();
                 ViewBag.Student = _db.Students.ToList();
+                ViewBag.EntranceExamList = _db._EntranceExamList.ToList();
                 var user_details = _db._Admin.FirstOrDefault();
 
                 if (user_details != null)
@@ -2002,6 +2003,11 @@ namespace Symphony_LTD.Controllers
             {
                 ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
                 ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+
+                ViewBag.Exam = _db._EntranceExamList.ToList();
+
+                ViewBag.CurrentDate = DateTime.Now;
+
                 var user_details = _db._Admin.FirstOrDefault();
 
                 if (user_details != null)
