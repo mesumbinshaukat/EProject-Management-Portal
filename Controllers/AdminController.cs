@@ -1862,7 +1862,23 @@ namespace Symphony_LTD.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult EntranceResult (EntranceExamResult data)
         {
-            TempData["failed"] = "Please Log In!";
+            var existing_data = _db._EntranceExam.FirstOrDefault(i => i.StudentId == data.StudentId);
+
+            if (existing_data != null)
+            {
+                data.Course = existing_data.Course;
+
+                if (data != null)
+                {
+                    _db._EntranceExamResult.Add(data);
+                    _db.SaveChanges();
+                    TempData["success"] = "Result Created Successfully";
+                    return RedirectToAction("EntranceResult");
+                }
+                TempData["failed"] = "No Existing Course Data Found.";
+                return RedirectToAction("EntranceResult");
+            }
+            TempData["failed"] = "No Existing Data Found.";
             return RedirectToAction("EntranceResult");
         }
     }
