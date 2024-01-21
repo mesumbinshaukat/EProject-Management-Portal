@@ -1760,6 +1760,7 @@ namespace Symphony_LTD.Controllers
                 if (existing_entrance_exam != null)
                 {
                     existing_entrance_exam.ExamName = data.ExamName ?? existing_entrance_exam.ExamName;
+                    existing_entrance_exam.StudentId = data.StudentId ?? existing_entrance_exam.StudentId;
                     existing_entrance_exam.TotalMarks = data.TotalMarks ?? existing_entrance_exam.TotalMarks;
                     existing_entrance_exam.Course = data.Course ?? existing_entrance_exam.Course;
                     existing_entrance_exam.Description = data.Description ?? existing_entrance_exam.Description;

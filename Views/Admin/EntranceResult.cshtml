@@ -31,9 +31,9 @@
                                                     {
                                                         foreach (var j in ViewBag.Student)
                                                         {
-                                                            if(j.StudentId == x.Id)
+                                                            if(j.StudentId == i.StudentId)
                                                             {
-                                                            <option value="@i.StudentId">@x.FirstName @x.MiddleName @x.LastName | Roll No#-: @i.StudentId</option>                                                                
+                                                            <option value="@j.StudentId">Name-: @j.FirstName @j.MiddleName @j.LastName | Roll No#-: @j.RollNumber</option>                                                                
                                                             }
                                                             
                                                         }
@@ -45,16 +45,8 @@
 
                                         }
                                     </select>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label" asp-for="MarksObtained"></label>
-                                    <input asp-for="MarksObtained" class="form-control" placeholder="Exam Date" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label" asp-for="MarksObtained"></label>
-                                    <input asp-for="MarksObtained" class="form-control" placeholder="Exam Date" required>
-                                </div>
+                                </div>                             
+                               
                                 <div class="mb-3">
                                     <label class="form-label" asp-for="MarksObtained"></label>
                                     <input asp-for="MarksObtained" class="form-control" placeholder="Exam Date" required>
