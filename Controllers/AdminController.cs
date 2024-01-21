@@ -1868,6 +1868,14 @@ namespace Symphony_LTD.Controllers
             {
                 data.Course = existing_data.Course;
 
+                var already_existed_result = _db._EntranceExamResult.FirstOrDefault(x => x.StudentId == data.StudentId) ?? null;
+
+                if(already_existed_result != null)
+                {
+                    TempData["failed"] = "Result Has Already Created. Please Select Other Student.";
+                    return RedirectToAction("EntranceResult");
+                }
+
                 if (data != null)
                 {
                     _db._EntranceExamResult.Add(data);
@@ -1881,5 +1889,47 @@ namespace Symphony_LTD.Controllers
             TempData["failed"] = "No Existing Data Found.";
             return RedirectToAction("EntranceResult");
         }
+
+        public IActionResult CourseResult ()
+        {
+            if (HttpContext.Session.GetString("s_email") != null)
+            {
+                ViewBag.Email = HttpContext.Session.GetString("s_email").ToString();
+                ViewBag.Pass = HttpContext.Session.GetString("s_pass_verify").ToString();
+
+                ViewBag.CourseExam = _db._CourseExam.ToList();
+
+                ViewBag.Courses = _db.Courses.ToList();
+
+                ViewBag.Student = _db.Students.ToList();
+
+                var user_details = _db._Admin.FirstOrDefault();
+
+                if (user_details != null)
+                {
+                    ViewBag.Username = user_details.Name;
+
+                }
+                return View();
+
+            }
+            TempData["failed"] = "Please Log In!";
+            return RedirectToAction("LogIn");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CourseResult (CourseExamResult data)
+        {
+            var existing_data = _db._CourseExam.FirstOrDefault(x => x.Class == data.Class);
+
+            if(existing_data != null)
+            {
+
+            }
+            TempData["failed"] = "No Existing Course/Cass Exam Found.";
+            return RedirectToAction("CourseResult");
+        }
+
     }
 }
