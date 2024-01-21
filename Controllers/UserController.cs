@@ -37,8 +37,9 @@ namespace Symphony_LTD.Controllers
 
         public IActionResult EntranceExam ()
         {            
-            ViewBag.EntranceExam = _db._EntranceExam.ToList();
+            ViewBag.EntranceExam = _db._EntranceExamList.ToList();
             ViewBag.TotalCourses = _db.Courses.ToList();
+            ViewBag.CurrentDate = DateTime.Now;
             return View();
         }
 

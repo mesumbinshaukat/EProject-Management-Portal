@@ -33,11 +33,7 @@
                             <th>Exam Name/Title</th>
                             <th>Total Marks</th>
                             <th>Exam Description/Detail</th>
-                            <th>Schedule Date</th>
-                            <th>Course</th>
-                            <th>Topics Covered In Course</th>
-                            <th>Course Fee</th>
-                            <th>Course Details</th>
+                            <th>Schedule Date</th>                            
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -48,33 +44,21 @@
                             @foreach (var i in ViewBag.EntranceExam)
                             {
                                 <tr>
-                                    @if (ViewBag.TotalCourses != null)
-                                    {
-                                        @foreach (var x in ViewBag.TotalCourses)
-                                        {
-                                            if (x.Id == i.Course)
-                                            {
-
-                                                <td>@i.ExamName</td>
-                                                <td>@i.TotalMarks</td>
+                                                <td>@i.Name</td>
+                                                <td>@i.Marks</td>
                                                 <td>@i.Description</td>
                                                 <td>@i.Date</td>
-                                                <td>@x.CourseName</td>
-                                                <td>@x.TopicsCovered</td>
-                                                <td>@x.CourseFee</td>
-                                                <td>@x.CourseDetails</td>
-                                                @if (i.Pending == true)
-                                                {
-                                                    <td class="text-success">Available</td>
-                                                }
-                                                else
-                                                {
-                                                    <td class="text-danger">Not Available</td>
-                                                }
-                                            }
-                                        }
+                                                <td>
+                                    @if (i.Availablity == true && i.Date >= ViewBag.CurrentDate)
+                                    {
+                                        <p class="text-success fw-bold">Available</p>
                                     }
-
+                                    else if (i.Availablity == false || i.Date <= ViewBag.CurrentDate)
+                                    {
+                                        <p class="text-danger fw-bold">Not Available</p>
+                                    }
+                                    </td>
+                                          
                                 </tr>
                             }
                         }                       
