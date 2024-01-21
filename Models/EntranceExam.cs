@@ -15,7 +15,7 @@ namespace Symphony_LTD.Models
         public string? ExamName { get; set; }
         
         [DisplayName("Total Marks")]
-        public string? TotalMarks { get; set; }
+        public int? TotalMarks { get; set; }
         [Required]
         [DisplayName("Course Exam")]
         public int? Course {  get; set; }

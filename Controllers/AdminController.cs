@@ -1389,17 +1389,29 @@ namespace Symphony_LTD.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult EntranceExam (EntranceExam data)
         {
-            if (ModelState.IsValid)
+            var convertToInt = int.Parse(data.ExamName);
+
+            var fetch_entrance_exam_list = _db._EntranceExamList.FirstOrDefault(x => x.Id == convertToInt);
+
+            if (fetch_entrance_exam_list != null)
             {
-                if(data != null)
-                {
+                data.ExamName = fetch_entrance_exam_list.Name;
+                data.TotalMarks = fetch_entrance_exam_list.Marks;
+                data.Description = fetch_entrance_exam_list.Description;
+                data.Date = fetch_entrance_exam_list.Date;
+            }
+            else
+            {
+                TempData["failed"] = "No Entrance Exam Found";
+                return RedirectToAction("EntranceExam");
+            }
+
+            if (data != null)
+            {                
                     _db._EntranceExam.Add(data);
                     _db.SaveChanges();
                     TempData["success"] = "Entrance Exam Scheduled Successfully.";
-                    return RedirectToAction("EntranceExam");
-                }
-                TempData["failed"] = "Error: Empty Field!";
-                return RedirectToAction("EntranceExam");
+                    return RedirectToAction("EntranceExam"); 
             }
             TempData["failed"] = "Can't schedule Exam Due To Database Error!";
             return RedirectToAction("EntranceExam");
@@ -1967,6 +1979,23 @@ namespace Symphony_LTD.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult EditEntranceExam(EntranceExam data)
         {
+            var convertToInt = int.Parse(data.ExamName);
+
+            var fetch_entrance_exam_list = _db._EntranceExamList.FirstOrDefault(x => x.Id == convertToInt);
+
+            if (fetch_entrance_exam_list != null)
+            {
+                data.ExamName = fetch_entrance_exam_list.Name;
+                data.TotalMarks = fetch_entrance_exam_list.Marks;
+                data.Description = fetch_entrance_exam_list.Description;
+                data.Date = fetch_entrance_exam_list.Date;
+            }
+            else
+            {
+                TempData["failed"] = "No Entrance Exam Found";
+                return RedirectToAction("EntranceExam");
+            }
+
             var existing_exam = _db._EntranceExam.FirstOrDefault(x => x.Id == data.Id);
             if (existing_exam != null)
             {

@@ -20,7 +20,7 @@
                         <div class="col-6 mb-3">
                             <div class="form-group">
                                 <label asp-for="ExamName" class="control-label"></label>
-                                <select>
+                                <select asp-for="ExamName" class="form-control">
                                 @foreach(var i in ViewBag.EntranceExamList)
                                 {
                                     <option value="@i.Id">Exam Name: @i.Name | Schedule Date: @i.Date | Total Marks: @i.Marks | Details: @i.Description</option>
@@ -57,7 +57,7 @@
                                 </div>
                         </div>
                    
-                    <div class="col-12 mb-3">
+                    <div class="col-6 mb-3">
                                 <div class="form-group">
                                 <label class="control-label">Schedule Entrance Exam 👇</label>
                                     <input type="submit" value="Schedule Entrance Exam" class="btn btn-dark form-control" />
@@ -150,7 +150,12 @@
                                                                                 @Html.AntiForgeryToken()
                                                                                 <input type="hidden" value="@i.Id" asp-for="Id"/>
                                                                                 <label asp-for="ExamName" class="form-label"></label>
-                                                                                <input asp-for="ExamName" value="@i.ExamName" class="form-control" />
+                                                                                <select asp-for="ExamName" class="form-control">
+                                                                                    @foreach (var s in ViewBag.EntranceExamList)
+                                                                                    {
+                                                                                        <option value="@s.Id">Exam Name: @s.Name | Schedule Date: @s.Date | Total Marks: @s.Marks | Details: @s.Description</option>
+                                                                                    }
+                                                                                </select>
                                                                                 <label asp-for="StudentId" class="form-label"></label>
                                                                                 <select class="form-control" asp-for="StudentId">
                                                                                     @foreach (var a in ViewBag.Student)
@@ -170,8 +175,7 @@
                                                                                         }
                                                                                     }
                                                                                 </select>
-                                                                                <label asp-for="TotalMarks" class="form-label"></label>
-                                                                                <input asp-for="TotalMarks" value="@i.TotalMarks" class="form-control"/>
+                                                                               
                                                                                 <label asp-for="Course" class="form-label"></label>
                                                                                 <select asp-for="Course" class="form-control" required>
                                                                                     @foreach (var a in ViewBag.Courses)
@@ -191,10 +195,7 @@
                                                                                         }
                                                                                     }
                                                                                 </select>
-                                                                                <label asp-for="Description" class="form-label"></label>
-                                                                                <input asp-for="Description" value="@i.Description" class="form-control" />
-                                                                                <label asp-for="Date" class="form-label"></label>
-                                                                                <input asp-for="Date" value="@i.Date" class="form-control"/>
+                                                                                
                                                                         <div class="modal-footer">
                                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                                                             <input type="submit" class="btn btn-outline-success" value="Modify"/>
