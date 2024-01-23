@@ -92,7 +92,7 @@ namespace Symphony_LTD.Controllers
                             TempData["course_topics"] = "No Course Found";
                         }
                         TempData["course"] = fetch_course.CourseName;
-                        TempData["course_fee"] = fetch_course.CourseFee;
+                        TempData["course_fee"] = fetch_course.CourseFee.ToString();
                         TempData["course_detail"] = fetch_course.CourseDetails;
                         TempData["course_topics"] = fetch_course.TopicsCovered;
                         if (fetch_student.MiddleName != null)
@@ -100,8 +100,8 @@ namespace Symphony_LTD.Controllers
                             TempData["student"] = fetch_student.FirstName + " " + fetch_student.MiddleName + " " + fetch_student.LastName;
                         }
                         TempData["student"] = fetch_student.FirstName + " " + fetch_student.LastName;
-                        TempData["roll"] = roll;
-                        TempData["class"] = fetch_student.Class;
+                        TempData["roll"] = roll.ToString();
+                        TempData["class"] = fetch_student.Class.ToString();
 
                         if (fetch_entrance_exam == null || fetch_entrance_exam.TotalMarks == null)
                         {
@@ -109,10 +109,10 @@ namespace Symphony_LTD.Controllers
                         }
                         TempData["exam"] = fetch_entrance_exam.ExamName;
                         TempData["exam_detail"] = fetch_entrance_exam.Description;
-                        TempData["total_marks"] = fetch_entrance_exam.TotalMarks;
-                        TempData["date"] = fetch_entrance_exam.Date;
+                        TempData["total_marks"] = fetch_entrance_exam.TotalMarks.ToString();
+                        TempData["date"] = fetch_entrance_exam.Date.ToString();
 
-                        TempData["marks_obtained"] = fetch_result.MarksObtained;
+                        TempData["marks_obtained"] = fetch_result.MarksObtained.ToString();
                         TempData["comment"] = fetch_result.Comments;
                         TempData["validate"] = "true";
                         return RedirectToAction("EntranceExam");
