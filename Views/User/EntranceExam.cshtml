@@ -41,6 +41,8 @@
             }
 
 
+                        @if (TempData["validate"] != null)
+                        {
             <div class="col-12">
                 <table class="table text-center">
                     <thead>
@@ -63,21 +65,29 @@
                     </thead>
                     <tbody>
 
-                        @if (TempData["validate"] != null)
-                        {
                                 <tr>
                                 <td>@TempData["exam"]</td>
-                                <td>@TempData["total_marks"]</td>
                                 <td>@TempData["exam_detail"]</td>
-                                    <td>@i.Date</td>
+                                <td>@TempData["course"]</td>
+                                <td>@TempData["course_detail"]</td>
+                                <td>@TempData["course_fee"]</td>
+                                <td>@TempData["course_topics"]</td>
+                                <td>@TempData["class"]</td>
+                                <td>@TempData["roll"]</td>
+                                <td>@TempData["student"]</td>
+                                <td>@TempData["total_marks"]</td>
+                                <td>@TempData["marks_obtained"]</td>
+                                <td>@TempData["comment"]</td>
+                                <td>@TempData["date"]</td>
+                                <td class="text-success">Exam Has Been Conducted.</td>
                                    
                                 </tr>
                             
-                        }
 
                     </tbody>
                 </table>
             </div>
+                        }
 
 
             <div class="col-12">
