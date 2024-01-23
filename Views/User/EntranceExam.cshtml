@@ -24,48 +24,31 @@
             </div>
         </div>
         <div class="row text-center">
-            <h3>Exams</h3>
-            <!-- Button trigger modal -->
-            <div class="text-end">
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#result">
-                Last Exam Result
-            </button>
-
-            </div>
-            
-            @if (TempData["invalid_roll"] != null)
+            @if (TempData["validate"] != null)
             {
-            <div class="alert alert-danger m-2" role="alert">
-                    @TempData["invalid_roll"]
-            </div>
-            }
+                <div class="col-12 mb-3">
+                    <table class="table text-center">
+                        <thead>
+                            <tr>
+                                <th>Exam Name/Title</th>
+                                <th>Exam Description</th>
+                                <th>Course</th>
+                                <th>Course Detail</th>
+                                <th>Course Fee</th>
+                                <th>Covered Topics In Course</th>
+                                <th>Class</th>
+                                <th>Roll No#</th>
+                                <th>Student Full Name</th>
+                                <th>Total Marks</th>
+                                <th>Obtained Marks</th>
+                                <th>Comment</th>
+                                <th>Schedule Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-
-                        @if (TempData["validate"] != null)
-                        {
-            <div class="col-12">
-                <table class="table text-center">
-                    <thead>
-                        <tr>
-                            <th>Exam Name/Title</th>
-                            <th>Exam Description</th>
-                            <th>Course</th>
-                            <th>Course Detail</th>
-                            <th>Course Fee</th>
-                            <th>Covered Topics In Course</th>
-                            <th>Class</th>
-                            <th>Roll No#</th>
-                            <th>Student Full Name</th>
-                            <th>Total Marks</th>
-                            <th>Obtained Marks</th>
-                            <th>Comment</th>
-                            <th>Schedule Date</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                                <tr>
+                            <tr>
                                 <td>@TempData["exam"]</td>
                                 <td>@TempData["exam_detail"]</td>
                                 <td>@TempData["course"]</td>
@@ -80,15 +63,30 @@
                                 <td>@TempData["comment"]</td>
                                 <td>@TempData["date"]</td>
                                 <td class="text-success">Exam Has Been Conducted.</td>
-                                   
-                                </tr>
-                            
 
-                    </tbody>
-                </table>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            }
+
+            <h3>Exams</h3>
+            <!-- Button trigger modal -->
+            <div class="text-end">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#result">
+                Last Exam Result
+            </button>
+
             </div>
-                        }
-
+            
+            @if (TempData["invalid_roll"] != null)
+            {
+            <div class="alert alert-danger m-2" role="alert">
+                    @TempData["invalid_roll"]
+            </div>
+            }                      
 
             <div class="col-12">
                 <table class="table text-center">
