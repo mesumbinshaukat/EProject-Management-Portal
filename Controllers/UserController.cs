@@ -62,5 +62,70 @@ namespace Symphony_LTD.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public IActionResult GetResult(int? roll)
+        {
+            if(roll != null)
+            {
+                var fetch_student = _db.Students.FirstOrDefault(x => x.RollNumber == roll);
+
+                if(fetch_student != null)
+                {
+                var fetch_result = _db._EntranceExamResult.FirstOrDefault(x => x.StudentId == fetch_student.StudentId);
+
+                    var fetch_entrance_exam = _db._EntranceExam.FirstOrDefault(x => x.StudentId == fetch_student.StudentId);
+
+                    if(fetch_entrance_exam != null && fetch_entrance_exam.Pending == true)
+                    {
+                        TempData["invalid_roll"] = "Exam is scheduled but it is still not conducted yet, please contact the examination department for further details or wait at least 24 hours.";
+                        return RedirectToAction("EntranceExam");
+                    }
+                    if(fetch_result != null)
+                    {
+                        var fetch_course = _db.Courses.FirstOrDefault(x => x.Id == fetch_result.Course);
+                        if(fetch_course == null)
+                        {
+                            TempData["course"] = "No Course Found";
+                            TempData["course_fee"] = "No Course Found";
+                            TempData["course_detail"] = "No Course Found";
+                            TempData["course_topics"] = "No Course Found";
+                        }
+                        TempData["course"] = fetch_course.CourseName;
+                        TempData["course_fee"] = fetch_course.CourseFee;
+                        TempData["course_detail"] = fetch_course.CourseDetails;
+                        TempData["course_topics"] = fetch_course.TopicsCovered;
+                        if (fetch_student.MiddleName != null)
+                        {
+                            TempData["student"] = fetch_student.FirstName + " " + fetch_student.MiddleName + " " + fetch_student.LastName;
+                        }
+                        TempData["student"] = fetch_student.FirstName + " " + fetch_student.LastName;
+                        TempData["roll"] = roll;
+                        TempData["class"] = fetch_student.Class;
+
+                        if (fetch_entrance_exam == null || fetch_entrance_exam.TotalMarks == null)
+                        {
+                            TempData["total_marks"] = "Total marks not defined.";
+                        }
+                        TempData["exam"] = fetch_entrance_exam.ExamName;
+                        TempData["exam_detail"] = fetch_entrance_exam.Description;
+                        TempData["total_marks"] = fetch_entrance_exam.TotalMarks;
+                        TempData["date"] = fetch_entrance_exam.Date;
+
+                        TempData["marks_obtained"] = fetch_result.MarksObtained;
+                        TempData["comment"] = fetch_result.Comments;
+                        TempData["validate"] = "true";
+                        return RedirectToAction("EntranceExam");
+                    }
+                    TempData["invalid_roll"] = "Result Not Found.";
+                    return RedirectToAction("EntranceExam");
+
+                }
+                TempData["invalid_roll"] = "Student Not Found.";
+                return RedirectToAction("EntranceExam");
+            }
+            TempData["invalid_roll"] = "Invalid Roll Number.";
+            return RedirectToAction("EntranceExam");
+        }
     }
 }
